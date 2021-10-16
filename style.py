@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pygments import highlight
 from pygments.formatters import LatexFormatter
 from pygments.lexers.c_cpp import CppLexer
