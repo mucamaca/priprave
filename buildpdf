@@ -1,0 +1,30 @@
+#!/bin/sh -ue
+
+scriptname=$0
+
+usage () {
+	printf "Usage: %s <output> <preamble> [snippets] ...\n", "$scriptname"
+}
+
+[ -z "$1" ] && usage && exit 1
+output=$1
+[ -z "$2" ] && usage && exit 1
+preamble=$2
+shift 2
+
+tmp=$(
+  echo 'mkstemp(template)' |
+    m4 -D template="${TMPDIR:-/tmp}/tmpXXXXXX"
+)
+
+cat "$preamble" > "$tmp"
+
+for file in "$@"
+do
+	python3 style.py < "$file" >> "$tmp"
+	printf "%svskip 3em\n" '\' >> "$tmp"
+done
+
+printf "%send{document}\n" '\' >> "$tmp"
+
+mv "$tmp" "$output"
