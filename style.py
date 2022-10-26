@@ -4,7 +4,7 @@ from pygments import highlight
 from pygments.formatters import LatexFormatter
 from pygments.lexers.c_cpp import CppLexer
 from pygments.style import Style
-from pygments.token import (Keyword, Name, Comment, String, 
+from pygments.token import (Keyword, Name, Comment, String,
      Number, Operator, Punctuation)
 
 import sys

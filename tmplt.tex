@@ -1,8 +1,10 @@
-\documentclass[a4paper, 12pt]{article}
+\documentclass{article}
 \usepackage{fancyvrb}
 \usepackage{color}
 \usepackage[utf8]{inputenc}
-
+\usepackage[a4paper, total={6.2in, 9in}]{geometry}
+\usepackage[many]{tcolorbox}
+\usetikzlibrary{calc}
 
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
@@ -96,8 +98,84 @@
 \def\PYZrb{]}
 \makeatother
 
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{myred}{RGB}{243, 10, 25}
+
+\tcbset{examplestyle/.style={
+  breakable,
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\tcbset{errorstyle/.style={
+  breakable,
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myred,
+  colback=myred!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myred,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{examples}[1][]{
+  examplestyle,
+  colback=white,
+  title=Dodatni primeri,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\newtcolorbox[auto counter]{errors}[1][]{
+  errorstyle,
+  colback=white,
+  title=Pogoste napake,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
 
 \begin{document}
+\\
+\begin{examples}
+test
+\the\textwidth
+\end{examples}
+\begin{errors}[neki]
+test
+\end{errors}
 
-\section*{}
-
+\end{document}
