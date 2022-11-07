@@ -4,7 +4,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, total={6.2in, 9in}]{geometry}
 \usepackage[many]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+
 \usetikzlibrary{calc}
+
+\setlength\parindent{0pt}
 
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
@@ -100,9 +105,12 @@
 
 \definecolor{myblue}{RGB}{0,163,243}
 \definecolor{myred}{RGB}{243, 10, 25}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+
+\newcommand{\fon}[1]{\fontfamily{#1}\selectfont}
+
 
 \tcbset{examplestyle/.style={
-  breakable,
   enhanced,
   outer arc=4pt,
   arc=4pt,
@@ -120,8 +128,27 @@
   }
 }
 
+\tcbset{inoutstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=mygreen,
+  colback=mygreen!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=mygreen,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily,
+  fontupper=\ttfamily,
+  fontlower=\ttfamily,
+  }
+}
+
 \tcbset{errorstyle/.style={
-  breakable,
   enhanced,
   outer arc=4pt,
   arc=4pt,
@@ -142,7 +169,7 @@
 \newtcolorbox[auto counter,number within=section]{examples}[1][]{
   examplestyle,
   colback=white,
-  title=Dodatni primeri,
+  title=Primer,
   overlay unbroken and first={
       \path
         let
@@ -168,14 +195,44 @@
   }
 }
 
+\newtcolorbox[auto counter]{inout}[1][]{
+  inoutstyle,
+  colback=white,
+  title=Primer vhoda in izhoda,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\title{Naslov/tema ure}
+\date{}
+
 \begin{document}
-\\
+\maketitle
+
+\section{Poglavje, če ima ta tema poglavja}
+
+Nek tekst o temi poglavja in recimo \emph{novi pojmi}.
+
 \begin{examples}
-test
-\the\textwidth
+\verb+Primer kode in lahko tudi obrazložitev+
+%(Sem notri nalepiš kar izpljune style.py)
+
+\begin{inout}
+Primer vhodnih podatkov.
+\tcblower
+Primer izhodnih podatkov.
+\end{inout}
+
 \end{examples}
-\begin{errors}[neki]
-test
+
+\begin{errors}
+Pogoste napake/opozorila pri tej temi.
 \end{errors}
 
 \end{document}
