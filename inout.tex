@@ -1,0 +1,370 @@
+\documentclass{article}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.2in, 9in}]{geometry}
+\usepackage[many]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+
+\usetikzlibrary{calc}
+
+\setlength\parindent{0pt}
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@c}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.19,0.51,0.25}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@p}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@n}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ni}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ne}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@py}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nn}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nx}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nt}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sd}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@se}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@si}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@ow}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@ch}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cm}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cpf}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@c1}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cs}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{myred}{RGB}{243, 10, 25}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+
+\newcommand{\fon}[1]{\fontfamily{#1}\selectfont}
+
+
+\tcbset{examplestyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\tcbset{inoutstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=mygreen,
+  colback=mygreen!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=mygreen,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily,
+  fontupper=\ttfamily,
+  fontlower=\ttfamily,
+  }
+}
+
+\tcbset{errorstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myred,
+  colback=myred!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myred,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{examples}[1][]{
+  examplestyle,
+  colback=white,
+  title=Primer,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\newtcolorbox[auto counter]{errors}[1][]{
+  errorstyle,
+  colback=white,
+  title=Pogoste napake,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter]{inout}[1][]{
+  inoutstyle,
+  colback=white,
+  title=Primer vhoda in izhoda,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\title{Branje in pisanje}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Vhod in izhod}
+Programi za svoje delovanje potrebujejo način za komunikacijo z
+uporabnikom. Kompleksnejši programi v ta namen uporabljajo ekran, miško
+in tipkovnico. Pri tekmovalnem programiranju pa najpogosteje uporabljamo najpreprostejši način za komunikacijo: pisanje in branje s \emph{standardnega vhoda in izhoda}. Običajno to pomeni, da se nam ob zagonu programa odpre okno, kamor lahko pišemo programu in kamor program izpisuje stvari.\\
+Ko želimo, da naš program kaj izpiše, uporabimo \emph{funkcijo} \verb+printf+.
+\begin{examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include}\PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int}\PY{+w}{ }\PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+\PY{+w}{	}\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Hello World!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{k}{return}\PY{+w}{ }\PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+\tcblower
+Hello World!
+\end{inout}
+
+
+\end{examples}
+
+\verb+printf+ - funkcija, ki ji v dvojnih narekovajih damo besedilo ali števila, ki jih želimo izpisati\\
+\verb+\n+ - znak za novo vrstico
+\\\\
+Stvari, ki jih mora vsebovati (skoraj) vsak program:
+\begin{itemize}
+	\item \verb+stdio.h+ - \emph{knjižnica} (datoteka), ki vsebuje funkcije, ki jih bomo uporabljali v programu (kot npr. \verb+printf+ in \verb+scanf+)
+	\item \verb+#include<>+ - ukaz, s katerim našemu programu povemo, katere knjižnice potrebuje
+	\item \verb+int main(){}+ - telo našega programa - večino kode v programu napišemo med zavite oklepaje
+	\item \verb+return 0+ - zadnja vrstica v programu, ki sporoča računalniku, da se je pravilno zaključil
+\end{itemize}
+
+\noindent V program lahko dodamo \emph{komentarje}. To je takšno besedilo, ki je napisano v kodi, a vsebinsko ne vpliva na program.
+\begin{itemize}
+	\item \verb+//+ - s tem zakomentiramo vse od poševnic do konca vrstice
+	\item \verb+/* */+ - s tem lahko zakomentiramo več vrstic ali del znotraj vrstice
+\end{itemize}
+
+\begin{examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include}\PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int}\PY{+w}{ }\PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}\PY{c+c1}{ //komentar do konca vrstice}
+\PY{+w}{	}\PY{n}{printf}\PY{+w}{ }\PY{c+cm}{/*komentar znotraj vrstice*/}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Zivjo svet!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{c+cm}{/*}
+\PY{c+cm}{	komentar}
+\PY{c+cm}{	čez}
+\PY{c+cm}{	več}
+\PY{c+cm}{	vrstic}
+\PY{c+cm}{	*/}
+\PY{+w}{	}\PY{k}{return}\PY{+w}{ }\PY{l+m+mi}{0}\PY{p}{;}\PY{+w}{ }
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+\tcblower
+Zivjo svet!
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+Zadnji znak, ki ga program izpiše, mora biti \verb+\n+.
+\end{errors}
+
+\begin{errors}
+Večina vrstic v programu se konča s podpičjem (\verb+;+) (skoraj vse razen tistih, ki se končajo z oklepaji  ali zavitimi zaklepaji). Brez tega program ne bo delal.
+\end{errors}
+
+\pagebreak
+\section{Branje}
+Program za branje stvari, ki mu jih sporočamo, uporablja funkcijo \verb+scanf+. 
+
+\begin{examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include}\PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int}\PY{+w}{ }\PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+\PY{+w}{	}\PY{k+kt}{char}\PY{+w}{ }\PY{n}{ime}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{;}
+\PY{+w}{	}\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Kako ti je ime?}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}s}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{+w}{ }\PY{n}{ime}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Zivjo, \PYZpc{}s!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{+w}{ }\PY{n}{ime}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{k}{return}\PY{+w}{ }\PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+{\color{blue} \bf output:} Kako ti je ime?\\
+{\color{blue} \bf input:} Tinka \\
+{\color{blue} \bf output:} Zivjo, Tinka! 
+\end{inout}
+
+\end{examples}
+
+
+Če želimo, da program lahko kaj počne s podatki, ki jih je prebral, moramo najprej to shraniti na neko mesto v spominu. Temu mestu rečemo \emph{spremenljivka}, saj lahko s programom spreminjamo, kaj je tam shranjeno. Spremenljivke v svojem programu poimenujemo, v našem primeru ji rečemo \verb+ime+. Vsaki spremenljivki moramo določiti \emph{podatkovni tip}, saj lahko beremo in pišemo več različnih vrst podatkov, npr. besede ali števila. \\\\
+\verb+char+ - s tem povemo, da je naša spremenljivka besedilo oz. \emph{niz} \\\\
+\verb+[...]+ - številka v oglatih oklepajih za besedo pove največjo dolžino niza, ki ga lahko program prebere.
+
+\begin{errors} %CHECK
+Ko določamo največjo dolžino niza, vedno vzamemo večjo številko, kot jo bomo potrebovali. O tem bomo več govorili v kasnejših poglavjih.
+\end{errors}
+
+
+Funkciji \verb+scanf+ podamo dva ali več \emph{parametrov}:
+\begin{itemize}
+	\item kaj naj prebere, torej kakšne tipe spremenljivk. To podamo s \emph{formatnikom} (v našem primeru \verb+%s+, ki pomeni niz (\emph{string}). \verb+%s+ prebere vse znake do prvega presledka ali nove vrstice)
+	\item ostali parametri povejo, kam naj funkcija shrani stvari, ki jih je prebrala (torej v spremenljivke, ki smo jih naredili prej)
+\end{itemize}
+
+
+%CHECK
+Do zdaj smo funkciji \verb+printf+ podali samo točno določeno besedilo, ki smo ga želeli izpisati. Izpisujemo pa lahko tudi spremenljivke, kot smo to naredili v tem zadnjem primeru. Znotraj besedila dodamo formatnike na mesta, kjer želimo, da so spremenljivke, potem pa izven narekovajev naštejemo imena spremenljivk, ki jih želimo izpisati (tako kot pri funkciji \verb+scanf+).
+
+\pagebreak
+\section{Branje števil}
+%CHECK
+Poleg nizov lahko programi delajo tudi s števili. Števila beremo in izpisujemo z istima funkcijama kot nize, vendar moramo uporabiti drug formatnik.
+
+\begin{examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include}\PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int}\PY{+w}{ }\PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+\PY{+w}{	}\PY{k+kt}{int}\PY{+w}{ }\PY{n}{razred}\PY{p}{;}
+\PY{+w}{	}\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Kateri razred si?}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{+w}{ }\PY{o}{\PYZam{}}\PY{n}{razred}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d. razred je najboljši.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{+w}{ }\PY{n}{razred}\PY{p}{)}\PY{p}{;}
+\PY{+w}{	}\PY{k}{return}\PY{+w}{ }\PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+{\color{blue} \bf output:} Kateri razred si?\\
+{\color{blue} \bf input :} 7\\
+{\color{blue} \bf output:} 7. razred je najboljši.
+\end{inout}
+
+\end{examples}
+
+%CHECK
+\verb+&+ - znak, ki ga moramo dati pred ime spremenljivke vedno, kadar beremo števila.
+\verb+int+ - podatkovni tip število \\
+Pri številih za imenom spremenljivke ne povemo, kako velika so lahko. \\\\
+Za branje in pisanje števil uporabimo formatnik \verb+%d+.
+
+\begin{errors}
+Ko beremo števila, moramo pred ime spremenljivke dati znak \verb+&+, česar pri branju nizov ne delamo. Prav tako tega ne delamo pri izpisovanju števil.
+\end{errors}
+
+\end{document}
