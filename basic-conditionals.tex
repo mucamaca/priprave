@@ -210,12 +210,19 @@
   }
 }
 \title{Pogojni stavki}
-\date{8. 11. 2022}
+\date{}
 
 \begin{document}
 \maketitle
 
-Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali večih spremenljivk, npr. da nam pokaže drugačno vsebino, če smo napisali pravilno ali napačno geslo, da računalo sešteva, če smo stisnili gumb za seštevanje, oz. odšteva, če smo stisnili gumb za odštevanje, ipd. Z drugimi besedami, želimo upravljati potek programa (torej izbrati, katera koda naj se izvede) glede na vrednosti spremenljivk. Angleško takemu upravljanju pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i. \emph{pogojnimi} ali \emph{if stavki}. Osnovna sintaksa je sledeča:
+Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali
+večih spremenljivk, npr. da nam pokaže drugačno vsebino, če smo napisali
+pravilno ali napačno geslo, da računalo sešteva, če smo stisnili gumb za
+seštevanje, oz. odšteva, če smo stisnili gumb za odštevanje, ipd. Z drugimi
+besedami, želimo upravljati potek programa (torej izbrati, katera koda naj
+se izvede) glede na vrednosti spremenljivk. Angleško takemu upravljanju
+pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i. \emph{pogojnimi}
+ali \emph{if stavki}. Osnovna sintaksa je sledeča:
 
 \begin{examples}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -227,18 +234,31 @@ Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali 
 \end{Verbatim}
 \end{examples}
 
-\emph{Pogoj} je nov pojem. Označuje neke vrste račun, katerega rezultat ni številka, vendar \emph{logična vrednost}. Tu sta možni vrednosti le dve: pravilno (angl.~\verb+true+) in napačno (angl.~\verb+false+). Če bo rezultat računa, navedenega v običajnih oklepajih v zgornjem \verb+if+ stavku, pravilno, se bo izvedla koda znotraj prvih zavitih oklepajev, če pa je rezultat računa napačno, pa se bo izvedla koda v drugih zavitih oklepajih (tistih za besedo \verb+else+). Drugi del, t.j. \verb+else+ in oklepaji za njim, ni potrebno pisati, če ga ne želimo.
+\emph{Pogoj} je nov pojem. Označuje neke vrste račun, katerega rezultat ni
+število, vendar \emph{logična vrednost}. Tu sta možni vrednosti le dve:
+pravilno (angl.~\verb+true+) in napačno (angl.~\verb+false+). Če bo rezultat
+računa, navedenega v običajnih oklepajih v zgornjem \verb+if+ stavku, pravilno,
+se bo izvedla koda znotraj prvih zavitih oklepajev, če pa je rezultat računa
+napačno, pa se bo izvedla koda v drugih zavitih oklepajih (tistih za besedo
+\verb+else+). Drugi del, t.j. \verb+else+ in oklepaji za njim, ni potrebno
+pisati, če ga ne želimo.
 
-Kako pa zapišemo pogoj? Za to uporabimo posebne logične operatorje. Pri delu s številkami so nam na voljo naslednji:
+Kako pa zapišemo pogoj? Za to uporabimo posebne logične operatorje. Pri delu s
+številkami so nam na voljo naslednji:
 \begin{itemize}
-  \item \verb+==+: primerja dve številski vrednosti. Rezultat je pravilen, če sta vrednosti enaki.
-  \item \verb+!=+: primerja dve številski vrednosti. Rezultat je pravilen, če sta vrednosti različni.
-  \item \verb+<+: primerja dve številski vrednosti. Rezultat je pravilen, če je vrednost na levi manjša od vrednosti na desni.
-  \item \verb+>+: deluje podobno kot \verb+<+, le da v drugo smer; rezultat je pravilen, če je vrednost na desni manjša od vrednosti na levi.
-  \item \verb+<=+: primerja dve številski vrednosti. Rezultat je pravilen, če sta vrednosti enaki, ali če je vrednost na levi manjša od vrednosti na desni.
+  \item \verb+==+: primerja dve številski vrednosti.
+	Rezultat je pravilen, če sta vrednosti enaki.
+  \item \verb+!=+: primerja dve številski vrednosti.
+	Rezultat je pravilen, če sta vrednosti različni.
+  \item \verb+<+: primerja dve številski vrednosti.
+	Rezultat je pravilen, če je vrednost na levi manjša od vrednosti na desni.
+  \item \verb+>+: deluje podobno kot \verb+<+, le da v drugo smer;
+	rezultat je pravilen, če je vrednost na desni manjša od vrednosti na levi.
+  \item \verb+<=+: primerja dve številski vrednosti.
+	Rezultat je pravilen, če sta vrednosti enaki, ali če je vrednost
+	na levi manjša od vrednosti na desni.
   \item \verb+>=+ deluje podobno kot \verb+<=+, le da v drugo smer.
 \end{itemize}
-
 
 \begin{examples}
 
@@ -252,22 +272,22 @@ Poglejmo si primer uporabe pogojnega stavka.
     \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{a}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{b}\PY{p}{)}\PY{p}{;}
         
     \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{=}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevilki sta enaki.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevili sta enaki.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{!}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevilki sta razlicni.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevili sta razlicni.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZlt{}} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prva stevilka je manjsa od druge.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je manjse od drugega.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prva stevilka je vecja od druge.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je vecje od drugega.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prva stevilka je manjsa ali enaka drugi.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je manjse ali enako drugemu.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prva stevilka je vecja ali enaka drugi.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je vecje ali enako drugemu.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
 \PY{p}{\PYZcb{}}
@@ -276,78 +296,89 @@ Poglejmo si primer uporabe pogojnega stavka.
 \begin{inout}
 12 12
 \tcblower
-Stevilki sta enaki.\\
-Prva stevilka je manjsa ali enaka drugi.\\
-Prva stevilka je vecja ali enaka drugi.
+Stevili sta enaki.\\
+Prvo stevilo je manjse ali enako drugemu.\\
+Prvo stevilo je vecje ali enako drugemu.
 \end{inout}
 
 \begin{inout}
 3 7
 \tcblower
-Stevilki sta razlicni.\\
-Prva stevilka je manjsa od druge.\\
-Prva stevilka je majnsa ali enaka drugi.
+Stevili sta razlicni.\\
+Prvo stevilo je manjse od drugega.\\
+Prvo stevilo je majnse ali enako drugemu.
 \end{inout}
 
 \end{examples}
 
 
 \begin{errors}
-  Pri primerjavi moramo uporabiti dva enačaja (\verb+==+). Če uporabimo samo en enačaj, kot v matematiki (torej \verb+=+), se bo program sicer zagnal, vendar ne bo deloval pravilno.
-  Enojni enačaj uporabljamo samo pri nastavljanju vrednosti neki spremenljivki, in nikoli v običajnih oklepajih v \verb+if+ stavku.
+  Pri primerjavi moramo uporabiti dva enačaja (\verb+==+). Če uporabimo samo
+  en enačaj, kot v matematiki (torej \verb+=+), se bo program sicer zagnal,
+  vendar ne bo deloval pravilno.
+  Enojni enačaj uporabljamo samo pri nastavljanju vrednosti neki spremenljivki,
+  in nikoli v običajnih oklepajih v \verb+if+ stavku.
 \end{errors}
 
 \begin{errors}
-  Taka primerjava deluje samo na številkah. Če želimo primerjati med dvema besediloma, za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo podrobneje spoznali, ko bomo govorili o besedilu.
+  % Pri predelavi v učbenik: pogovor, če je smiselno že tu omenjati strcmp
+  Taka primerjava deluje samo na številkah. Če želimo primerjati med dvema
+  besediloma, za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo
+  podrobneje spoznali, ko bomo govorili o besedilu.
 \end{errors}
 
 \begin{examples}
 
-Primer uporabe stavka \verb+else+.
+Primer uporabe stavka \verb+else+. Program bo uporabnika vprašal za PIN,
+in mu napisal, če je bil PIN pravilen oziroma napačen.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
 
 \PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
-    \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Vpisi PIN:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{c+c1}{// Vprasaj uporabnika za PIN, in preveri, ce je pravilen}
     \PY{k+kt}{int} \PY{n}{pin}\PY{p}{;}
     \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{pin}\PY{p}{)}\PY{p}{;}
     \PY{k}{if} \PY{p}{(}\PY{n}{pin} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{42}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PIN je pravilen.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PIN je pravilen!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PIN je napacen.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PIN je napacen!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
 \PY{p}{\PYZcb{}}
 \end{Verbatim}
 
 \begin{inout}
-Vpisi PIN: \\
-42 \\
-PIN je pravilen.
+42
+\tcblower
+PIN je pravilen!
 \end{inout}
 
 \begin{inout}
-Vpisi PIN: \\
-7 \\
-PIN je napacen.
+7
+\tcblower
+PIN je napacen!
 \end{inout}
 
 \end{examples}
 
 \begin{examples}
 \verb+if+ stavke lahko tudi gnezdimo; torej vstavimo enega v drugega.
+Spodnji program od uporabnika sprejme naročilo v restavraciji, kjer ponujajo
+dve vrsti hrane; juhe in sendviče. Na voljo sta dve vrsti juhe, in dve vrsti
+sendvičev.
 
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
 
 \PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// Uporabnik naj napise 1, ce zeli juho, in 2, ce zeli sendvic.}
     \PY{k+kt}{int} \PY{n}{zelja}\PY{p}{;}
-    \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Napisi 1, ce zelis juho, in 2, ce zelis sendvic.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
     \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{zelja}\PY{p}{)}\PY{p}{;}
 
     \PY{k}{if} \PY{p}{(}\PY{n}{zelja} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Kaksno juho zelis? Napisi 1 za govejo in 2 za paradiznikovo.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{c+c1}{// Uporabnik naj napise 1, ce zeli govejo juho,}
+        \PY{c+c1}{// in 2, ce zeli paradiznikovo.}
         \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{zelja}\PY{p}{)}\PY{p}{;}
         \PY{k}{if} \PY{p}{(}\PY{n}{zelja} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
             \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ena goveja juha. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
@@ -355,7 +386,8 @@ PIN je napacen.
             \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ena paradiznikova juha. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
         \PY{p}{\PYZcb{}}
     \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
-        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Kaksen sendvic zelis? Napisi 1 za sunko, in 2 za vegi.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{c+c1}{// Uporabnik naj napise 1, ce zeli sendvic s sunko,}
+        \PY{c+c1}{// in 2, ce zeli vegeterjanski sendvic.}
         \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{zelja}\PY{p}{)}\PY{p}{;}
         \PY{k}{if} \PY{p}{(}\PY{n}{zelja} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
             \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{En sendvic s sunko. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
@@ -368,19 +400,25 @@ PIN je napacen.
 \end{Verbatim}
 
 \begin{inout}
-Napisi 1, ce zelis juho, in 2, ce zelis sendvic.\\
 2\\
-Kaksen sendvic zelis? Napisi 1 za sunko, in 2 za vegi.\\
-2\\
-En vegeterjanski sendvic. Dober tek!
+1
+\tcblower
+En sendvic s sunko. Dober tek!
 \end{inout}
 \end{examples}
 
-\pagebreak
-Pozorni bodimo tudi na postavitev kode. Običajno kodo znotraj zavitih oklepajev \verb+if+ stavka pišemo tako, da je poravnana za štiri presledke desno od kode zunaj \verb+if+ stavka. V nekaterih programskih jezikih je taka poravnava obvezna, v C/C++ pa ne, vendar nezamaknjena koda že v zelo majhnih programih postane popolnoma nepregledna. Branje in popravljanje kode je veliko lažje, če del kode znotraj zavitih oklepajev zamaknemo za štiri presledke. Za to lahko uporabimo tudi tipko Tab, ki se na tipkovnici nahaja levo od tipke Q.
 
 \begin{errors}
 
+Pozorni bodimo tudi na postavitev kode. Običajno kodo znotraj zavitih oklepajev
+\verb+if+ stavka pišemo tako, da je poravnana štiri presledke bolj desno od
+kode zunaj \verb+if+ stavka. V nekaterih programskih jezikih je taka poravnava
+obvezna, v C/C++ pa ne, vendar nezamaknjena koda že v zelo majhnih programih
+postane popolnoma nepregledna. Branje in popravljanje kode je veliko lažje, če
+del kode znotraj zavitih oklepajev zamaknemo za štiri presledke. Za to lahko
+uporabimo tudi tipko Tab, ki se na tipkovnici nahaja levo od tipke Q.
+
+\vspace{0.3cm}
 Tako \textbf{nikoli} ne pišemo:
 
 \begin{Verbatim}[commandchars=\\\{\}]
