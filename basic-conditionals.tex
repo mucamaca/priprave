@@ -217,8 +217,8 @@
 
 Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali
 večih spremenljivk, npr. da nam pokaže drugačno vsebino, če smo napisali
-pravilno ali napačno geslo, da računalo sešteva, če smo stisnili gumb za
-seštevanje, oz. odšteva, če smo stisnili gumb za odštevanje, ipd. Z drugimi
+pravilno ali napačno geslo, da računalo sešteva, če smo pritisnili gumb za
+seštevanje, oz. odšteva, če smo pritisnili gumb za odštevanje, ipd. Z drugimi
 besedami, želimo upravljati potek programa (torej izbrati, katera koda naj
 se izvede) glede na vrednosti spremenljivk. Angleško takemu upravljanju
 pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i. \emph{pogojnimi}
@@ -237,9 +237,10 @@ ali \emph{if stavki}. Osnovna sintaksa je sledeča:
 \emph{Pogoj} je nov pojem. Označuje neke vrste račun, katerega rezultat ni
 število, vendar \emph{logična vrednost}. Tu sta možni vrednosti le dve:
 pravilno (angl.~\verb+true+) in napačno (angl.~\verb+false+). Če bo rezultat
-računa, navedenega v običajnih oklepajih v zgornjem \verb+if+ stavku, pravilno,
+računa, navedenega v običajnih oklepajih v zgornjem \verb+if+ stavku,
+\verb+true+,
 se bo izvedla koda znotraj prvih zavitih oklepajev, če pa je rezultat računa
-napačno, pa se bo izvedla koda v drugih zavitih oklepajih (tistih za besedo
+\verb+false+, pa se bo izvedla koda v drugih zavitih oklepajih (tistih za besedo
 \verb+else+). Drugega dela, t.j. \verb+else+ in oklepaji za njim, ni treba
 pisati, če ga ne želimo.
 
@@ -247,15 +248,15 @@ Kako pa zapišemo pogoj? Za to uporabimo posebne logične operatorje. Pri delu s
 številkami so nam na voljo naslednji:
 \begin{itemize}
   \item \verb+==+: primerja dve številski vrednosti.
-	Rezultat je pravilen, če sta vrednosti enaki.
+	Rezultat je \verb+true+, če sta vrednosti enaki.
   \item \verb+!=+: primerja dve številski vrednosti.
-	Rezultat je pravilen, če sta vrednosti različni.
+	Rezultat je \verb+true+, če sta vrednosti različni.
   \item \verb+<+: primerja dve številski vrednosti.
-	Rezultat je pravilen, če je vrednost na levi manjša od vrednosti na desni.
+	Rezultat je \verb+true+, če je vrednost na levi manjša od vrednosti na desni.
   \item \verb+>+: deluje podobno kot \verb+<+, le da v drugo smer;
-	rezultat je pravilen, če je vrednost na desni manjša od vrednosti na levi.
+	rezultat je \verb+true+, če je vrednost na desni manjša od vrednosti na levi.
   \item \verb+<=+: primerja dve številski vrednosti.
-	Rezultat je pravilen, če sta vrednosti enaki, ali če je vrednost
+	Rezultat je \verb+true+, če sta vrednosti enaki, ali če je vrednost
 	na levi manjša od vrednosti na desni.
   \item \verb+>=+ deluje podobno kot \verb+<=+, le da v drugo smer.
 \end{itemize}
@@ -316,14 +317,13 @@ Prvo stevilo je majnse ali enako drugemu.
   Pri primerjavi moramo uporabiti dva enačaja (\verb+==+). Če uporabimo samo
   en enačaj, kot v matematiki (torej \verb+=+), se bo program sicer zagnal,
   vendar ne bo deloval pravilno.
-  Enojni enačaj uporabljamo samo pri nastavljanju vrednosti neki spremenljivki,
-  in nikoli v običajnih oklepajih v \verb+if+ stavku.
+  Enojnega enačaja nikoli ne uporabljamo v pogoju \verb+if+ stavka.
 \end{errors}
 
 \begin{errors}
   % Pri predelavi v učbenik: pogovor, če je smiselno že tu omenjati strcmp
-  Taka primerjava deluje samo na številkah. Če želimo primerjati med dvema
-  besediloma, za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo
+  Taka primerjava deluje samo na številih. Če želimo primerjati dve besedili,
+  za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo
   podrobneje spoznali, ko bomo govorili o besedilu.
 \end{errors}
 
