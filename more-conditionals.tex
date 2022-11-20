@@ -1,0 +1,421 @@
+\documentclass{article}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.2in, 9in}]{geometry}
+\usepackage[many]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+
+\usetikzlibrary{calc}
+
+\setlength\parindent{0pt}
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@c}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.19,0.51,0.25}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@p}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@n}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ni}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ne}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@py}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nn}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nx}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nt}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sd}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@se}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@si}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@ow}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@ch}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cm}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cpf}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@c1}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cs}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{myred}{RGB}{243, 10, 25}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+
+\newcommand{\fon}[1]{\fontfamily{#1}\selectfont}
+
+
+\tcbset{examplestyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\tcbset{inoutstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=mygreen,
+  colback=mygreen!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=mygreen,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily,
+  fontupper=\ttfamily,
+  fontlower=\ttfamily,
+  }
+}
+
+\tcbset{errorstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myred,
+  colback=myred!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myred,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{examples}[1][]{
+  examplestyle,
+  colback=white,
+  title=Primer,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\newtcolorbox[auto counter]{errors}[1][]{
+  errorstyle,
+  colback=white,
+  title=Pogoste napake,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter]{inout}[1][]{
+  inoutstyle,
+  colback=white,
+  title=Primer vhoda in izhoda,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+
+\title{Pogojni stavki: 2. del}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Nizanje pogojev}
+
+Pogosto se srečamo s problemi, kjer je za rešitev potrebno upoštevati več kot
+en pogoj. V takih primerih želimo združiti več pogojnih stavkov tako, da se
+nek del kode izvede, če velja prvi pogoj, drugi del kode pa, če prvi pogoj
+ne velja, velja pa drugi pogoj. Z gnezdenjem stavkov lahko to v kodo vključimo
+na naslednji način:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{if} \PY{p}{(}\PY{n}{prvi} \PY{n}{pogoj}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// koda, ki se izvede, če velja prvi pogoj}
+\PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{drugi} \PY{n}{pogoj}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{c+c1}{// koda, ki se izvede, če prvi pogoj ne velja,}
+        \PY{c+c1}{// velja pa drugi pogoj}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{c+c1}{// koda, ki se izvede, če ne veljata ne prvi ne drugi pogoj}
+    \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+V takem primeru nam je na voljo bližnjica \verb+else if+. Zgornja koda deluje
+popolnoma enako kot spodnja:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{if} \PY{p}{(}\PY{n}{prvi} \PY{n}{pogoj}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// koda, ki se izvede, če velja prvi pogoj}
+\PY{p}{\PYZcb{}} \PY{k}{else} \PY{k}{if} \PY{p}{(}\PY{n}{drugi} \PY{n}{pogoj}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// koda, ki se izvede, če prvi pogoj ne velja,}
+    \PY{c+c1}{// velja pa drugi pogoj}
+\PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// koda, ki se izvede, če ne veljata ne prvi ne drugi pogoj}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+Prednost te bližnjice je, da je naša koda krajša in bolj razumljiva.
+Stavke \verb+else if+ lahko tudi verižimo; enemu \verb+if+ stavku lahko sledi
+poljubno mnogo stavkov \verb+else if+. Pri tem bo računalnik pogoje preverjal po
+vrsti. Pri prvem veljavnem pogoju se bo ustavil in izvedel kodo v pripadajočih
+zavitih oklepajih, za čimer ne bo več preverjal pogojev, temveč bo izvajanje
+nadaljeval za zaključkom vseh nanizanih stavkov.
+
+Kakor nam v osnovnem \verb+if+ stavku ni bilo treba pisati dela z \verb+else+,
+če ga nismo potrebovali, nam ga tudi pri uporabi \verb+else if+ ni treba.
+
+\pagebreak
+\begin{examples}
+Naslednji program prebere število in pove, če je večje, manjše ali enako 0.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{stevilo}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{stevilo}\PY{p}{)}\PY{p}{;}
+    \PY{k}{if} \PY{p}{(}\PY{n}{stevilo} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevilo je manjse od nic.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{k}{if} \PY{p}{(}\PY{n}{stevilo} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevilo je enako 0.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{k}{if} \PY{p}{(}\PY{n}{stevilo} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevilo je vecje od 0.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+3
+\tcblower
+Stevilo je vecje od 0.
+\end{inout}
+
+\end{examples}
+
+\begin{examples}
+Pogoji se preverjajo po vrsti; izvede se samo koda pri prvem veljavnem pogoju,
+ne glede na to, koliko pogojev za njim je tudi veljavnih.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{7}\PY{p}{;}
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a je manjsi od 3.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{7}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a je 7.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{4}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a je 4.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a je vecji od 1.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Nic od nastetega ne velja.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+Program izpiše le eno stvar - \verb+a je 7.+, kljub temu, da velja tudi
+\verb+a > 1+.
+
+\end{examples}
+
+\section{Logični operatorji}
+
+Osnovni operatorji za primerjavo pogosto niso dovolj, da izrazimo željen pogoj.
+Če na primer želimo pogledati, ali je neko število med dvema drugima, tega ne
+moramo narediti samo z eno primerjavo.
+
+Pogoje združujemo s t.i. \emph{logični operatorji}. Poznamo tri osnovne take
+operatorje:
+\begin{itemize}
+  \item \verb+and+ oz.~\verb+&&+ združi dva pogoja tako, da združeni pogoj velja
+	samo v primeru, da veljata oba hkrati.
+  \item \verb+or+ oz.~\verb+||+ združi dva pogoja tako, da združeni pogoj velja
+	v primeru, da velja katerikoli od dveh, ali da veljata oba
+  \item \verb+not+ oz.~\verb+!+ sprejme samo en pogoj. Nov pogoj velja samo
+	takrat, ko originalni pogoj ne velja.
+\end{itemize}
+
+\begin{examples}
+
+Če želimo preveriti, ali je dano število med dvema drugima, uporabimo
+logični operator \verb+&&+.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{n}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{n}\PY{p}{)}\PY{p}{;}
+    \PY{k}{if} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{\PYZlt{}} \PY{n}{n} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{n}{n} \PY{o}{\PYZlt{}} \PY{l+m+mi}{9}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{n je med 3 in 9.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+5
+\tcblower
+n je med 3 in 9.
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+  V matematiki pogosto napišemo dvojno primerjavo: \verb+a < b < c+.
+  Če nekaj podobnega napišemo v C++ program, se bo le-ta sicer zagnal, vendar
+  ne bo deloval pravilno. Kaj pričakujemo, da se zgodi, če v tako primerjavo
+  zapišemo \verb+3 < 2 < 1+? Kaj pa se dejansko zgodi?
+\end{errors}
+
+Pri kombiniranju pogojev bodimo previdni glede pravil prednosti. Negacija
+(operator \verb+not+ oz.~\verb+!+) ima namreč prednost pred veliko večino
+drugih operatorjev - to vključuje matematične operatorje
+(\verb|+, -, *, /, \%|), primerjalne operatorje (\verb|==, <, ...|) in tudi
+ostala logična operatorja. Če v takem primeru uporabljamo negacijo, moramo
+negiran izraz postaviti v oklepaje.
+
+\begin{examples}
+  Negiranje se lahko v večini primerov zapiše tudi na krajši način.
+
+  \begin{tabular}{|c|c|c|}
+	\hline
+	Izraz & Ekvivalenten izraz & Komentar \\
+	\hline
+	\verb+!(a == b)+ & \verb+a != b+ & \\
+	\verb+!(a < b)+ & \verb+a >= b + & Če sta \verb+a+ in \verb+b+ enaka, bo prvi izraz veljaven. \\
+	\verb+!(a <= b)+ & \verb+a > b+ & \\
+	\hline
+  \end{tabular}
+\end{examples}
+
+\begin{examples}
+Napišimo program, ki preveri, ali je uporabnik vpisal prestopno leto.
+Leto je prestopno, če je deljivo s 4; razen, če je hkrati deljivo s 100. Izjema so leta, deljiva
+s 400, ki so prestopna kljub temu, da so deljiva s 100.
+
+Kako te pogoje zapišemo v program? Opazimo, da so leta, deljiva s 400, prestopna ne glede na druga
+pogoja. Če leto ni deljivo s 400, potem mora biti hkrati deljivo s 4, ampak ne deljivo s 100.
+Povedano na krajše; leto mora biti deljivo s 400, ali pa s 4 in ne hkrati s 100. Tak pogoj lahko
+zapišemo z logičnimi operatorji.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{leto}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{leto}\PY{p}{)}\PY{p}{;}
+    \PY{k}{if} \PY{p}{(}\PY{n}{leto} \PY{o}{\PYZpc{}} \PY{l+m+mi}{400} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{0} \PY{o}{|}\PY{o}{|} \PY{p}{(}\PY{n}{leto} \PY{o}{\PYZpc{}} \PY{l+m+mi}{4} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{0} \PY{o}{\PYZam{}}\PY{o}{\PYZam{}} \PY{o}{!}\PY{p}{(}\PY{n}{leto} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Leto je prestopno.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Leto ni prestopno.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\end{examples}
+
+\end{document}
