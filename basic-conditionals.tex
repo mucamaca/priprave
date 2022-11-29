@@ -1,0 +1,438 @@
+\documentclass{article}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.2in, 9in}]{geometry}
+\usepackage[many]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+
+\usetikzlibrary{calc}
+
+\setlength\parindent{0pt}
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@c}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.19,0.51,0.25}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@p}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@n}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ni}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ne}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@py}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nn}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nx}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nt}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sd}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@se}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@si}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@ow}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@ch}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cm}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cpf}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@c1}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cs}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{myred}{RGB}{243, 10, 25}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+
+\newcommand{\fon}[1]{\fontfamily{#1}\selectfont}
+
+
+\tcbset{examplestyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\tcbset{inoutstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=mygreen,
+  colback=mygreen!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=mygreen,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily,
+  fontupper=\ttfamily,
+  fontlower=\ttfamily,
+  }
+}
+
+\tcbset{errorstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myred,
+  colback=myred!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myred,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{examples}[1][]{
+  examplestyle,
+  colback=white,
+  title=Primer,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\newtcolorbox[auto counter]{errors}[1][]{
+  errorstyle,
+  colback=white,
+  title=Pogoste napake,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter]{inout}[1][]{
+  inoutstyle,
+  colback=white,
+  title=Primer vhoda in izhoda,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\title{Pogojni stavki}
+\date{}
+
+\begin{document}
+\maketitle
+
+Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali
+večih spremenljivk, npr. da nam pokaže drugačno vsebino, če smo napisali
+pravilno ali napačno geslo, da računalo sešteva, če smo pritisnili gumb za
+seštevanje, oz. odšteva, če smo pritisnili gumb za odštevanje, ipd. Z drugimi
+besedami, želimo upravljati potek programa (torej izbrati, katera koda naj
+se izvede) glede na vrednosti spremenljivk. Angleško takemu upravljanju
+pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i. \emph{pogojnimi}
+ali \emph{if stavki}. Osnovna struktura je sledeča:
+
+\begin{examples}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{if} \PY{p}{(}\PY{n}{pogoj}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// koda, ki se izvede, ce pogoj velja}
+\PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// koda, ki se izvede, ce pogoj ne velja}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{examples}
+
+\emph{Pogoj} je nov pojem. Označuje neke vrste račun, katerega rezultat ni
+število, vendar \emph{logična vrednost}. Tu sta možni vrednosti le dve:
+pravilno (angl.~\verb+true+) in napačno (angl.~\verb+false+). Če bo rezultat
+računa, navedenega v običajnih oklepajih v zgornjem \verb+if+ stavku,
+\verb+true+,
+se bo izvedla koda znotraj prvih zavitih oklepajev, če pa je rezultat računa
+\verb+false+, pa se bo izvedla koda v drugih zavitih oklepajih (tistih za besedo
+\verb+else+). Drugega dela, t.j. \verb+else+ in oklepaji za njim, ni treba
+pisati, če ga ne želimo.
+
+Kako pa zapišemo pogoj? Za to uporabimo posebne logične operatorje. Pri delu s
+številkami so nam na voljo naslednji:
+\begin{itemize}
+  \item \verb+==+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če sta vrednosti enaki.
+  \item \verb+!=+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če sta vrednosti različni.
+  \item \verb+<+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če je vrednost na levi manjša od vrednosti na desni.
+  \item \verb+>+: deluje podobno kot \verb+<+, le da v drugo smer;
+	rezultat je \verb+true+, če je vrednost na desni manjša od vrednosti na levi.
+  \item \verb+<=+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če sta vrednosti enaki, ali če je vrednost
+	na levi manjša od vrednosti na desni.
+  \item \verb+>=+ deluje podobno kot \verb+<=+, le da v drugo smer.
+\end{itemize}
+
+\begin{examples}
+
+Poglejmo si primer uporabe pogojnega stavka.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{a}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{b}\PY{p}{)}\PY{p}{;}
+        
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{=}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevili sta enaki.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{!}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stevili sta razlicni.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZlt{}} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je manjse od drugega.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je vecje od drugega.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je manjse ali enako drugemu.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{a} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Prvo stevilo je vecje ali enako drugemu.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+12 12
+\tcblower
+Stevili sta enaki.\\
+Prvo stevilo je manjse ali enako drugemu.\\
+Prvo stevilo je vecje ali enako drugemu.
+\end{inout}
+
+\begin{inout}
+3 7
+\tcblower
+Stevili sta razlicni.\\
+Prvo stevilo je manjse od drugega.\\
+Prvo stevilo je majnse ali enako drugemu.
+\end{inout}
+
+\end{examples}
+
+
+\begin{errors}
+  Pri primerjavi moramo uporabiti dva enačaja (\verb+==+). Če uporabimo samo
+  en enačaj, kot v matematiki (torej \verb+=+), se bo program sicer zagnal,
+  vendar ne bo deloval pravilno.
+  Enojnega enačaja nikoli ne uporabljamo v pogoju \verb+if+ stavka.
+\end{errors}
+
+\begin{errors}
+  % Pri predelavi v učbenik: pogovor, če je smiselno že tu omenjati strcmp
+  Taka primerjava deluje samo na številih. Če želimo primerjati dve besedili,
+  za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo
+  podrobneje spoznali, ko bomo govorili o besedilu.
+\end{errors}
+
+\begin{examples}
+
+Primer uporabe stavka \verb+else+. Program bo uporabnika vprašal za PIN,
+in mu napisal, če je bil PIN pravilen oziroma napačen.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// Vprasaj uporabnika za PIN, in preveri, ce je pravilen}
+    \PY{k+kt}{int} \PY{n}{pin}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{pin}\PY{p}{)}\PY{p}{;}
+    \PY{k}{if} \PY{p}{(}\PY{n}{pin} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{42}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PIN je pravilen!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PIN je napacen!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+42
+\tcblower
+PIN je pravilen!
+\end{inout}
+
+\begin{inout}
+7
+\tcblower
+PIN je napacen!
+\end{inout}
+
+\end{examples}
+
+\begin{examples}
+\verb+if+ stavke lahko tudi gnezdimo; torej vstavimo enega v drugega.
+Spodnji program od uporabnika sprejme naročilo v restavraciji, kjer ponujajo
+dve vrsti hrane; juhe in sendviče. Na voljo sta dve vrsti juhe, in dve vrsti
+sendvičev.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// Uporabnik naj napise 1, ce zeli juho, in 2, ce zeli sendvic.}
+    \PY{k+kt}{int} \PY{n}{zelja}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{zelja}\PY{p}{)}\PY{p}{;}
+
+    \PY{k}{if} \PY{p}{(}\PY{n}{zelja} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{c+c1}{// Uporabnik naj napise 1, ce zeli govejo juho,}
+        \PY{c+c1}{// in 2, ce zeli paradiznikovo.}
+        \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{zelja}\PY{p}{)}\PY{p}{;}
+        \PY{k}{if} \PY{p}{(}\PY{n}{zelja} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ena goveja juha. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+            \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ena paradiznikova juha. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+        \PY{c+c1}{// Uporabnik naj napise 1, ce zeli sendvic s sunko,}
+        \PY{c+c1}{// in 2, ce zeli vegeterjanski sendvic.}
+        \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{zelja}\PY{p}{)}\PY{p}{;}
+        \PY{k}{if} \PY{p}{(}\PY{n}{zelja} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{En sendvic s sunko. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+            \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{En vegeterjanski sendvic. Dober tek!}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+2\\
+1
+\tcblower
+En sendvic s sunko. Dober tek!
+\end{inout}
+\end{examples}
+
+
+\begin{errors}
+
+Pozorni bodimo tudi na postavitev kode. Običajno kodo znotraj zavitih oklepajev
+\verb+if+ stavka pišemo tako, da je poravnana štiri presledke bolj desno od
+kode zunaj \verb+if+ stavka. V nekaterih programskih jezikih je taka poravnava
+obvezna, v C/C++ pa ne, vendar nezamaknjena koda že v zelo majhnih programih
+postane popolnoma nepregledna. Branje in popravljanje kode je veliko lažje, če
+del kode znotraj zavitih oklepajev zamaknemo za štiri presledke. Za to lahko
+uporabimo tudi tipko Tab, ki se na tipkovnici nahaja levo od tipke Q.
+
+\vspace{0.3cm}
+Tako \textbf{nikoli} ne pišemo:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+\PY{k}{if} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{)} \PY{p}{\PYZob{}}
+\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Velja}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}} \PY{k}{else} \PY{p}{\PYZob{}}
+\PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Ne velja}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\end{errors}
+
+\end{document}
