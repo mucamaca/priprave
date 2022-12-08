@@ -1,0 +1,394 @@
+\documentclass{article}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.2in, 9in}]{geometry}
+\usepackage[many]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+
+\usetikzlibrary{calc}
+
+\setlength\parindent{0pt}
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@c}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.19,0.51,0.25}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@p}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@n}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ni}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ne}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@py}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nn}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nx}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nt}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sd}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@se}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@si}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@ow}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@ch}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cm}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cpf}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@c1}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cs}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{myred}{RGB}{243, 10, 25}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+
+\newcommand{\fon}[1]{\fontfamily{#1}\selectfont}
+
+
+\tcbset{examplestyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\tcbset{inoutstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=mygreen,
+  colback=mygreen!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=mygreen,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily,
+  fontupper=\ttfamily,
+  fontlower=\ttfamily,
+  }
+}
+
+\tcbset{errorstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myred,
+  colback=myred!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myred,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{examples}[1][]{
+  examplestyle,
+  colback=white,
+  title=Primer,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\newtcolorbox[auto counter]{errors}[1][]{
+  errorstyle,
+  colback=white,
+  title=Pogoste napake,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter]{inout}[1][]{
+  inoutstyle,
+  colback=white,
+  title=Primer vhoda in izhoda,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\title{Urejanje}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Osnovno o urejanju}
+
+V programih pogosto želimo nek seznam števil urediti po vrsti.
+V ta namen lahko napišemo svojo funkcijo, ki implementira enega od znanih
+algoritmov za urejanje; npr.~\textit{bubble sort}, \textit{insertion sort},
+\textit{quick sort}, ipd. Ker pa so učinkovite implementacije pogosto komplicirane
+in se pri pisanju hitro zmotimo, je bolje, da uporabimo funkcije, ravno v ta
+namen vključene v standardno knjižnjico. Za to bomo potrebovali na začetek
+programa dodati še dve vrstici:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}algorithm\PYZgt{}}
+  \PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+\end{Verbatim}
+
+Ukaz \verb+#include+ že poznamo, opazimo pa, da tokrat za spremembo nima končnice
+\verb+.h+. To je zato, ker funkcije, ki smo jih uporabljali do sedaj, izvirajo
+iz jezika C, tokrat pa potrebujemo funkcijo, napisano posebaj za C++. To razloži
+tudi drugo vrstico; vse funkcije v standardni knjižnjici v C++ so vključene
+v imenski prostor \verb+std+. Če jih želimo klicati, moramo pred ime funkcije
+vedno napisati \verb+std::+, ali pa na začetek programa vključiti vrstico
+\verb+using namespace std+.
+
+Sedaj lahko uporabimo funkcijo \verb+sort+, ki sprejme dva argumenta;
+začetek in konec predela spomina, ki ga želimo urediti. Poglejmo si enostavni
+primer.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}algorithm\PYZgt{}}
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+\PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{1000003}\PY{p}{]}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{n}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{n}\PY{p}{)}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{n}{sort}\PY{p}{(}\PY{n}{arr}\PY{p}{,} \PY{n}{arr}\PY{o}{+}\PY{n}{n}\PY{p}{)}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+Program prebere število \(n\), za njim pa še \(n\) števil, jih uredi naraščajoče,
+in jih izpiše. Funkcijo \verb+sort+ smo poklicali tako, da smo kot prvi argument
+podali seznam \verb+arr+, kot drugi argument pa konec predela seznama, ki ga
+želimo urediti; to zapišemo kot \verb|arr+n|. Točen pomen tega izraza bomo
+spoznali v prihodnje, za sedaj pa bomo kot drugi argument vedno podali seznam
+plus njegovo dolžino.
+
+Optimalna časovna zahtevnost algoritma za urejanje je \(O(n \log n)\). To v praksi
+pomeni, da bo urejanje delovalo dovolj hitro za \(n \le 10^6\). Če imamo več
+podatkov kot toliko, bo urejaje trajalo predolgo in naša rešitev ne bo sprejeta.
+
+\section{Primerjalna funkcija}
+
+Če želimo urediti seznam padajoče namesto naraščajoče, lahko seznam prvo uredimo
+naraščajoče, in ga nato obrnemo. Ker s tem dobimo veliko dodatnega dela, je
+bolje, da funkciji \verb+sort+ podamo lastno primerjalno funkcijo. Le-ta mora
+sprejeti dva argumenta ter vrniti \verb+bool+, in sicer; če mora biti prvi
+argument v urejenem seznamu levo od drugega, mora funkcija vrniti \verb+true+,
+sicer pa \verb+false+.
+
+Če ne podamo tretjega argumenta, se \verb+sort+ obnaša tako, kot da bi podali
+naslednjo funkcijo:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kt}{bool} \PY{n+nf}{compare}\PY{p}{(}\PY{k+kt}{int} \PY{n}{a}\PY{p}{,} \PY{k+kt}{int} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{return} \PY{n}{a} \PY{o}{\PYZlt{}} \PY{n}{b}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+Če želimo urediti seznam padajoče, moramo le podati nasprotno funkcijo:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}algorithm\PYZgt{}}
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+\PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{1000003}\PY{p}{]}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n+nf}{compare\PYZus{}padajoce}\PY{p}{(}\PY{k+kt}{int} \PY{n}{a}\PY{p}{,} \PY{k+kt}{int} \PY{n}{b}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{return} \PY{n}{a} \PY{o}{\PYZgt{}} \PY{n}{b}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{n}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{n}\PY{p}{)}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{n}{sort}\PY{p}{(}\PY{n}{arr}\PY{p}{,} \PY{n}{arr}\PY{o}{+}\PY{n}{n}\PY{p}{,} \PY{n}{compare\PYZus{}padajoce}\PY{p}{)}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\subsection{Urejanje sestavljenih podatkov}
+
+Recimo, da imamo v nalogi dana imena tekmovalcev ter točke, ki so jih ti
+tekmovalci dosegli na tekmovanju, naš cilj pa je, da izpišemo imena tekmovalcev
+po vrsti glede na doseženo število točk. Če bomo prebrali točke in imena v
+različna seznama, ter uredili seznam točk, bo seznam imen ostal nespremenjen in
+ne bomo več vedeli, katero ime pripada katerim točkam.
+
+Kako uredimo oba seznama hkrati? Bolj enostavna možnost je uporaba \verb+struct+,
+ki pa ga še ne poznamo. Namesto tega si lahko pripravimo seznam indeksov, ki
+na začetku na \verb+i+-tem mestu hrani številko \verb+i+. Če sestavimo funkcijo
+\verb+compare+ tako, da sprejme dva indeksa, ter ju uredi glede na vrednosti
+v tabeli s točkami na pripadajočih indeksih. Urejamo pa ne tabele s točkami,
+temveč novo tabelo indeksov.
+Na ta način se tabeli s točkami in z imeni ne bosta spreminjali,
+in bodo točke pripadale imenu na istem indeksu.
+
+\begin{examples}
+
+Primer implementacije opisane rešitve:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}algorithm\PYZgt{}}
+\PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZlt{}stdio.h\PYZgt{}}
+\PY{k}{using} \PY{k}{namespace} \PY{n}{std}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n}{tocke}\PY{p}{[}\PY{l+m+mi}{100003}\PY{p}{]}\PY{p}{;}
+\PY{k+kt}{char} \PY{n}{imena}\PY{p}{[}\PY{l+m+mi}{100003}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{30}\PY{p}{]}\PY{p}{;}
+\PY{k+kt}{int} \PY{n}{idxs}\PY{p}{[}\PY{l+m+mi}{100003}\PY{p}{]}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n+nf}{compare}\PY{p}{(}\PY{k+kt}{int} \PY{n}{i}\PY{p}{,} \PY{k+kt}{int} \PY{n}{j}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{return} \PY{n}{tocke}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{tocke}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+
+\PY{k+kt}{int} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{n}\PY{p}{;}
+    \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{n}\PY{p}{)}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{scanf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}s\PYZpc{}d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{imena}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZam{}}\PY{n}{tocke}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+
+    \PY{c+c1}{// pripravimo tabelo indeksov}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)}
+        \PY{n}{idxs}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{i}\PY{p}{;}
+
+    \PY{n}{sort}\PY{p}{(}\PY{n}{idxs}\PY{p}{,} \PY{n}{idxs}\PY{o}{+}\PY{n}{n}\PY{p}{,} \PY{n}{compare}\PY{p}{)}\PY{p}{;}
+
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{k+kt}{int} \PY{n}{idx} \PY{o}{=} \PY{n}{idxs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{;}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{imena}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+\begin{inout}
+5 \\
+France 37 \\
+Gregor 34 \\
+Julija 38 \\
+Matija 29 \\
+Urska 8 \\
+\tcblower
+Julija
+France
+Gregor
+Matija
+Urska
+\end{inout}
+
+\end{examples}
+
+\end{document}
