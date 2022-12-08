@@ -1,0 +1,422 @@
+\documentclass{article}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.2in, 9in}]{geometry}
+\usepackage[many]{tcolorbox}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+
+\usetikzlibrary{calc}
+
+\setlength\parindent{0pt}
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@c}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.19,0.51,0.25}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@p}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@n}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@kt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.67}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ni}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@ne}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@py}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nn}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nx}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nt}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.05,0.05,0.05}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sd}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@se}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@si}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.16,0.16,1.00}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.94,0.03,0.94}{##1}}}
+\@namedef{PY@tok@ow}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.02,0.02}{##1}}}
+\@namedef{PY@tok@ch}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cm}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cpf}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@c1}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+\@namedef{PY@tok@cs}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.88}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+\definecolor{myblue}{RGB}{0,163,243}
+\definecolor{myred}{RGB}{243, 10, 25}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+
+\newcommand{\fon}[1]{\fontfamily{#1}\selectfont}
+
+
+\tcbset{examplestyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\tcbset{inoutstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=mygreen,
+  colback=mygreen!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=mygreen,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily,
+  fontupper=\ttfamily,
+  fontlower=\ttfamily,
+  }
+}
+
+\tcbset{errorstyle/.style={
+  enhanced,
+  outer arc=4pt,
+  arc=4pt,
+  colframe=myred,
+  colback=myred!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myred,
+    outer arc=4pt,
+    arc=4pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox[auto counter,number within=section]{examples}[1][]{
+  examplestyle,
+  colback=white,
+  title=Primer,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\newtcolorbox[auto counter]{errors}[1][]{
+  errorstyle,
+  colback=white,
+  title=Pogoste napake,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter]{inout}[1][]{
+  inoutstyle,
+  colback=white,
+  title=Primer vhoda in izhoda,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1]
+        at (title.east) {#1};
+  }
+}
+\title{Efektivnost programov in asimptotična notacija}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Merjenje efektivnosti programa}
+
+Pogosto obstaja več možnosti, kako se lahko lotimo reševanja danega problema.
+Če želimo najti najmanjši element v seznamu, lahko pregledamo celoten seznam in
+si beležimo najmanjšega, ki smo ga našli do sedaj, lahko pa celoten seznam
+uredimo po vrsti in nato izberemo prvi element, na primer.
+Pričakujemo lahko, da se bodo različni algoritmi za reševanje istega problema
+razlikovali tudi po tem, kako hitro problem rešijo.
+Kako pa v računalništvu izmerimo hitrost? Če delamo samo na enem računalniku,
+lahko izmerimo, konkretno koliko časa je program potreboval, da je zaključil
+z delovanjem. Na ta način lahko na primerih demonstriramo, da je nek algoritem
+boljši od drugega; ko pa želimo naše rezultate deliti in primerjati z drugimi,
+pa se ne moramo zanašati, da bodo imeli enako močen računalnik kot mi, in da
+bodo njihovi testni primeri primerljivo zahtevni z našimi. Dejansko so težave
+pri tem še hujše; na hitrost delovanja našega programa ne vpliva samo strojna
+oprema računalnika (torej, kakšen procesor ima, koliko ima spomina itd.), temveč
+tudi ostali programi, ki jih imamo hkrati odprte.
+Če se želimo pogovarjati o hitrosti algoritmov, potrebujemo bolj abstraktno
+orodje. Na pomoč pride asimptotična zahtevnost.
+
+Da določimo hitrost našega programa, moramo prvo določiti, katere spremenljivke
+vplivajo na čas delovanja, ter kako je čas od njih odvisen.
+Rezultat take analize zapišemo kot izraz v oklepaje, pred katere zapišemo
+veliko črko O: \(O(\ldots)\)
+Poglejmo si primer.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kt}{int} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{100002}\PY{p}{]}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n+nf}{poisci\PYZus{}najmanjsega}\PY{p}{(}\PY{k+kt}{int} \PY{n}{n}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// Poišči najmanjše število v seznamu, dolgemu n}
+    \PY{k+kt}{int} \PY{n}{min\PYZus{}idx} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{k}{if} \PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{min\PYZus{}idx}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{min\PYZus{}idx} \PY{o}{=} \PY{n}{i}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+    \PY{k}{return} \PY{n}{arr}\PY{p}{[}\PY{n}{min\PYZus{}idx}\PY{p}{]}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+Funkcija \verb+poisci_najmanjsega+ sprejme število \(n\), ki pove dolžino seznama
+\verb+arr+. Po seznamu se nato enkrat sprehodi, in si ob tem beleži indeks
+najmanjšega elementa, ki ga je do sedaj našla.
+
+Razmislimo, katere vse različne operacije program opravi.
+\begin{itemize}
+  \item 
+	Večkrat med programom nastavimo neki spremenljivki novo vrednost.
+  \item
+	V vsaki iteraciji zanke prištejemo 1 spremenljivki \verb+i+.
+  \item
+	Poleg tega v vsaki iteraciji zanke tudi primerjamo \verb+i+ z \verb+n+,
+  \item
+	dvakrat dostopamo do nekega elementa v seznamu,
+  \item
+	ter ju primerjamo.
+  \item
+	Na koncu še enkrat dostopamo do elementa v seznamu, ter ga vrnemo.
+\end{itemize}
+
+Vse naštete operacije same po sebi \emph{trajajo} \(O(1)\) časa. To pomeni, da
+se vedno izvajajo enako hitro, neodvisno od parametrov, ki jim podamo. Rečemo
+tudi, da porabijo \emph{konstantno mnogo} časa.
+
+Kolikokrat pa izvedemo te operacije? Analizirajmo najslabši primer za naš
+program; če je seznam \verb+arr+ padajoče urejen. Tedaj bomo v vsaki iteraciji
+zanke enkrat primerjali \verb+i < n+, dvakrat dostopali do elementov seznama,
+enkrat primerjali \verb+arr[min_idx] > arr[i]+, enkrat nastavili \verb+min_idx+,
+ter enkrat povečali \verb+i+. Zunaj zanke bomo nastavili \verb+min_idx+ ter
+\verb+i+ na začetni vrednosti, ter še enkrat dostopali do elementa v seznamu.
+Zanka se vedno izvaja za natanko \verb+n+ iteracij; vedno vsak element pregledamo
+enkrat. Torej je celotna časovna zahtevnost našega programa \(O(3 + 6n)\).
+Ker pa za velike \(n\) del zunaj zanke hitro postane nepomemben, ga ignoriramo.
+Poleg tega ignoriramo tudi faktor pred členom \(n\) -- ker tako in tako ne moramo
+vedeti, kako hitre so operacije v zanki v primerjavi druga z drugo, te konstante
+ne moramo natančno določiti. Končna časovna zahtevnost našega programa je torej
+\(O(n)\).
+
+To je tudi najboljši možni algoritem za iskanje najmanjšega elementa v seznamu.
+Če bi nek algoritem namreč deloval v hitrejšem času kot \(O(n)\), bi moral
+nekatera mesta v seznamu izpustiti; če tedaj algoritmu podamo seznam, ki ima
+najmanjši element ravno na takem mestu, ga algoritem ne bo našel, in bo podal
+napačen odgovor.
+
+Pomembna opazka je, da hitrost našega algoritma ni odvisna od velikosti števil
+v seznamu, temveč le od velikosti seznama. Naslednji program prav tako poišče
+najmanjše število v seznamu, vendar je konkretno počasnejši od zgornjega:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kt}{int} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{100002}\PY{p}{]}\PY{p}{;}
+
+\PY{k+kt}{int} \PY{n+nf}{poisci\PYZus{}najmanjsega\PYZus{}slabsi}\PY{p}{(}\PY{k+kt}{int} \PY{n}{n}\PY{p}{,} \PY{k+kt}{int} \PY{n}{m}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{c+c1}{// Poišči najmanjše število v seznamu, dolgemu n,}
+    \PY{c+c1}{// kjer je največje število veliko največ m}
+
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{zelja} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{zelja} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{m}\PY{p}{;} \PY{n}{zelja}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{c+c1}{// zelja nam pove, kateri element si v tej iteraciji želimo}
+        \PY{c+c1}{// najti. Pogledati moramo še, da ta element dejansko je v seznamu;}
+        \PY{c+c1}{// ko pa najdemo enega, bo to najmanjši (ker zelja v vsaki iteraciji}
+        \PY{c+c1}{// narasca)}
+
+        \PY{k+kt}{bool} \PY{n}{je\PYZus{}v\PYZus{}seznamu} \PY{o}{=} \PY{n+nb}{false}\PY{p}{;}
+        \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{k}{if} \PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=}\PY{o}{=} \PY{n}{zelja}\PY{p}{)}
+                \PY{n}{je\PYZus{}v\PYZus{}seznamu} \PY{o}{=} \PY{n+nb}{true}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+
+        \PY{k}{if} \PY{p}{(}\PY{n}{je\PYZus{}v\PYZus{}seznamu}\PY{p}{)}
+            \PY{k}{return} \PY{n}{zelja}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+V tem programu imamo dve zanki; ena se sprehaja po vseh možnih vrednosti števil
+v seznamu, druga pa preverja, če je ta element dejansko v seznamu. Vsakič, ko se
+zunanja zanka izvede enkrat, se notranja izvede \verb+n+-krat (v najslabšem
+primeru), zunanja zanka pa se izvede \verb|m+1|-krat. Torej je zahtevnost
+\(O((m+1) \cdot n)\), oziroma \(O(mn + n)\). Člen \(n\) v vsoti pa je v vseh
+primerih manjši od člena \(mn\) ali njemu enako velik, zato ga izpustimo.
+Končna časovna zahtevnost drugega algoritma je torej \(O(mn)\).
+
+\verb+int+ lahko hrani števila, velika do približno dve milijardi -- najslabšem
+primeru je \(m\) torej približno \(2 \cdot 10^9\). Če prvi algoritem na nekem
+računalniku potrebuje eno sekundo, da se konča, bi drugi algoritem v najslabšem
+primeru na istem računalniku potreboval več kot šestdeset let.
+
+\begin{examples}
+
+Naslednji program za vsako število v seznamu \verb+arr+ poišče število števil desno od njega, ki so večja.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k+kt}{int} \PY{n}{stevilo} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+    \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{j} \PY{o}{=} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{;} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{j}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{k}{if} \PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{stevilo}\PY{o}{+}\PY{o}{+}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+    \PY{p}{\PYZcb{}}
+    \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{stevilo}\PY{p}{)}\PY{p}{;}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+Notranja zanka se v prvi iteraciji izvede \((n-1)\)-krat, v drugi iteraciji
+\((n-2)\)-krat, v tretji \((n-3)\)-krat, itd. V zadnji iteraciji se sploh ne
+izvede. Skupaj se koda znotraj druge zanke torej izvede
+\((n-1) + (n-2) + \ldots + 1 + 0 = \frac{n(n-1)}{2}\)-krat. Spet ignoriramo
+konstanto \(\frac{1}{2}\) ter člen samo z \(n\), in pridemo do zahtevnosti
+\(O(n^2)\).
+
+\end{examples}
+
+\begin{examples}
+
+Naslednji program preveri, če je število \(n\) praštevilo.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kt}{bool} \PY{n}{preklicano} \PY{o}{=} \PY{n+nb}{false}\PY{p}{;}
+\PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{;} \PY{n}{i} \PY{o}{*} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{k}{if} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZpc{}} \PY{n}{i} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)} \PY{p}{\PYZob{}}
+        \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d ni prastevilo}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{;}
+        \PY{n}{preklicano} \PY{o}{=} \PY{n+nb}{true}\PY{p}{;}
+        \PY{k}{break}\PY{p}{;}
+    \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\PY{k}{if} \PY{p}{(}\PY{o}{!}\PY{n}{preklicano}\PY{p}{)}
+    \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d je prastevilo}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+Program ima eno zanko, ki se sprehaja toliko časa, da kvadrat spremenljivke
+\(i\) postane večji kot \(n\), oz.~dokler je \(i < \sqrt{n}\). Zanka se torej
+izvede v \(O(\sqrt{n})\).
+
+\end{examples}
+
+\pagebreak
+\section{Klasifikacija}
+
+Računalnik lahko v eni sekundi opravi približno \(10^7\) operacij. Da določimo,
+kako dober algoritem potrebujemo za rešitev neke naloge, lahko preverimo
+omejitve vhodnih podatkov. Spodnja tabela prikazuje nekaj pogostih časovnih
+zahtevnosti, ter pripadajoče največje omejitve. Z uporabo te tabele lahko
+vnaprej določimo, kakšno največjo časovno zahtevnost mora imeti naš program,
+da reši določeno nalogo.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|c|c|c|}
+	\hline
+	Zahtevnost & Omejitev za \(n\) & Ime zahtevnosti \\
+	\hline
+	\(O(1)\) & brez & \emph{konstantna} \\
+	\(O(\log n)\) & zelo visoka & \emph{logaritemska} \\
+	\(O(\sqrt{n})\) & \(10^{14}\) & \emph{korenska} \\
+	\(O(n)\) & \(10^7\) & \emph{linearna} \\
+	\(O(n \log n)\) & \(10^6\) & \\
+	\(O(n^2)\) & \(10^4\) & \emph{kvadratna} \\
+	\(O(n^3)\) & \(300\) & \emph{kubična} \\
+	\(O(2^n)\) & \(20\) & \emph{eksponentna} \\
+	\hline
+  \end{tabular}
+\end{table}
+
+\end{document}
