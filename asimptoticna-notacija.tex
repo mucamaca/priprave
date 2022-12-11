@@ -372,9 +372,10 @@ konstanto \(\frac{1}{2}\) ter člen samo z \(n\), in pridemo do zahtevnosti
 
 Naslednji program preveri, če je število \(n\) praštevilo.
 
+% Zahvala Roku Lavriču za popravek v kodi
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kt}{bool} \PY{n}{preklicano} \PY{o}{=} \PY{n+nb}{false}\PY{p}{;}
-\PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{;} \PY{n}{i} \PY{o}{*} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+\PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{;} \PY{n}{i} \PY{o}{*} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{n}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
     \PY{k}{if} \PY{p}{(}\PY{n}{n} \PY{o}{\PYZpc{}} \PY{n}{i} \PY{o}{=}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)} \PY{p}{\PYZob{}}
         \PY{n}{printf}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}d ni prastevilo}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{;}
         \PY{n}{preklicano} \PY{o}{=} \PY{n+nb}{true}\PY{p}{;}
@@ -386,7 +387,7 @@ Naslednji program preveri, če je število \(n\) praštevilo.
 \end{Verbatim}
 
 Program ima eno zanko, ki se sprehaja toliko časa, da kvadrat spremenljivke
-\(i\) postane večji kot \(n\), oz.~dokler je \(i < \sqrt{n}\). Zanka se torej
+\(i\) postane večji kot \(n\), oz.~dokler je \(i \le \sqrt{n}\). Zanka se torej
 izvede v \(O(\sqrt{n})\).
 
 \end{examples}
