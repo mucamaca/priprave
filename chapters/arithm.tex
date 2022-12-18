@@ -1,0 +1,164 @@
+%#template templates/template.tex
+
+%#block title
+Računske operacije
+%#endblock
+
+%#block content
+\section{Seštevanje, odštevanje, množenje}
+Računalniki lahko s spremenljivkami počnejo veliko stvari. Najpreprostejše so  operacije na številih, kot so seštevanje, odštevanje in množenje. Račune zapisujemo tako kot v šoli, z \emph{operatorji}.
+\begin{itemize}
+	\item \verb-+- za seštevanje
+	\item \verb+-+ za odštevanje
+	\item \verb+*+ za množenje
+\end{itemize}
+
+Rezultat lahko izračunamo kar znotraj funkcije \verb+printf+:
+
+
+\begin{examples}
+
+%#insert python3 style.py < snippets/arithm/sestevanje.cpp
+
+\begin{inout}
+
+\tcblower
+12
+\end{inout}
+
+
+\end{examples}
+
+\pagebreak
+Rezultat lahko tudi shranimo v novo spremenljivko:
+\begin{examples}
+
+%#insert python3 style.py < snippets/arithm/nova-spremenljivka.cpp
+
+\begin{inout}
+3 7
+\tcblower
+12\\
+-4\\
+21
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+Spremenljivko \emph{inicializiramo} tako, da notri nekaj shranimo, bodisi kot \verb+a=5+, bodisi s tem, da vanjo nekaj napišemo s funkcijo \verb+scanf+.
+Če je ne inicializiramo, pozneje pa jo poskusimo uporabiti za izpisovanje, računanje ali kaj drugega, lahko dobimo zelo čudne rezultate, naš program se lahko celo sesuje.
+\end{errors}
+
+%CHECK
+V zgornjem programu tudi vidimo, da lahko z enim klicem funkcije \verb+scanf+ preberemo več spremenljivk.
+
+\subsection*{Negativna števila}
+Na meteorološki postaji Kredarica so leta 2014 izmerili povprečno januarsko temperaturo približno -5 °C, povprečno avgustovsko pa približno 6 °C.
+Med tema meritvama je 11 °C razlike. \\
+Pozimi lahko izmerimo temperature manjše od 0. Takšnim številom, kot je -5, rečemo \emph{negativna števila}. Lahko jih uporabimo tudi drugje, ne samo pri merjenju temperature. \\
+S pozitivnimi števili lahko štejemo od 0 do neskončno (1, 2, 3, ...), z negativnimi pa do - neskončno. (-1, -2, -3, ...). Tako kot pozitivna števila jih lahko seštevamo in odštevamo:
+
+\begin{examples}
+5 - 11 = -6 \\
+-6 + 11 = 5 \\
+5 -(-6) = 11 \\
+-2 - 1 = -3 \\ 
+-2 - (-1) = -1
+-2 + (-1) = -3 \\\\
+\emph{Pravila:}\\
+-(-6) = +6\\
++(-1) = -1 \\
+-(-(-(-1))) = -(-(+1)) = -(-1) = 1
+\end{examples}
+
+Lahko jih tudi množimo:
+
+\begin{examples}
+2 * (-5) = -10 \\
+(-5) * (-5) = 25 \\
+
+\emph{Pravila:}
+Če množimo dve pozitivni števili, je produkt pozitiven. \\
+Če množimo eno pozitivno in eno negativno število, je produkt negativen. \\
+Če množimo dve negativni števili, je produkt spet negativen. \\
+O negativnih številih lahko razmišljamo kot: -3 = (-1) * 3
+\end{examples}
+
+Računalniki z negativnimi števili računajo enako kot s pozitivnimi:
+
+\begin{examples}
+
+%#insert python3 style.py < snippets/arithm/negativna-stevila.cpp
+
+\begin{inout}
+3 7
+\tcblower
+Vsota: 10 \\
+Razlika: -4 \\
+Produkt: 21
+\end{inout}
+
+\end{examples}
+
+\pagebreak
+\section{Deljenje}
+Števila lahko tudi delimo. Za deljenje uporabljamo znak \verb+/+.
+Za razumevanje poglavja si bomo pomagali s formulo $a = k*b + o$, ki ponazarja deljenje z ostankom.
+
+\begin{examples}
+
+%#insert python3 style.py < snippets/arithm/deljenje.cpp
+
+\begin{inout}
+16 8
+\tcblower
+2
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+Deljenje v jezikih C in C++ je celoštevilsko. Deljenje z ostankom lahko zapišemo po formuli: $a = k*b + o$.
+
+16/8: 16 = 2*8 + 0 \\
+Ostanek je 0, ker je 16 deljivo z 8. \\\\
+
+16/5: 15 = 3*5 + 1 \\
+1 je ostanek. \\\\
+
+Celoštevilsko deljenje pomeni, da nam program vnre samo $k$. Primer vhoda in izhoda za zgornji program, kjer števili nista deljivi:
+
+\begin{inout}
+16 3
+\tcblower
+5
+\end{inout}
+
+Tudi, če bi bil rezultat deljenja 7.9, tega program ne zaokroži na 8, temveč nam vrne 7. \\
+Če manjše število delimo z večjim, zato vedno dobimo 0.
+
+\end{errors}
+
+\pagebreak
+Operator \verb+/+ nam torej iz pri deljenju \verb+a/b+ vrne \verb+k+. Lahko pa dobimo tudi ostanek \verb+o+. Do njega pridemo z operatorjem \verb+%+ (\emph{modulo}).
+
+\begin{examples}
+
+%#insert python3 style.py < snippets/arithm/modulo.cpp
+
+\begin{inout}
+25 7
+\tcblower
+25 = 3*7 + 4 \\
+Količnik: 3 \\
+Ostanek: 4
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+Deljenje z 0 v matematiki ni definirano in prav tako ne v programiranju. Če neko število delimo z 0, se nam bo program sesul. Prav tako, če poskušamo izračunati ostanek pri deljenju z 0. \\
+Ta napaka se pogosto zgodi v programih, kjer delimo z več števili, zato moramo biti na to pozorni.
+\end{errors}
+%#endblock
