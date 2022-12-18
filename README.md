@@ -28,6 +28,6 @@ Ne pozabiti
 Da prevedeš, poženi `./lp.py chapters/ime-datoteke.tex`.
 Končna PDF datoteka bo v `./ime-datoteke.p.pdf`.
 
-### dependencie
+### dependencies
 
 `pip3 install pygments`
