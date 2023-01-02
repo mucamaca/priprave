@@ -14,12 +14,12 @@ nek del kode izvede, če velja prvi pogoj, drugi del kode pa, če prvi pogoj
 ne velja, velja pa drugi pogoj. Z gnezdenjem stavkov lahko to v kodo vključimo
 na naslednji način:
 
-%#insert python3 style.py < snippets/more-conditionals/nizanje-narobe.cpp
+%#insert python3 style.py < chapters/more-conditionals/nizanje-narobe.cpp
 
 V takem primeru nam je na voljo bližnjica \verb+else if+. Zgornja koda deluje
 popolnoma enako kot spodnja:
 
-%#insert python3 style.py < snippets/more-conditionals/nizanje-pravilno.cpp
+%#insert python3 style.py < chapters/more-conditionals/nizanje-pravilno.cpp
 
 Prednost te bližnjice je, da je naša koda krajša in bolj razumljiva.
 Stavke \verb+else if+ lahko tudi verižimo; enemu \verb+if+ stavku lahko sledi
@@ -35,7 +35,7 @@ Kakor nam v osnovnem \verb+if+ stavku ni bilo treba pisati dela z \verb+else+,
 \begin{examples}
 Naslednji program prebere število in pove, če je večje, manjše ali enako 0.
 
-%#insert python3 style.py < snippets/more-conditionals/vecje-manjse-enako.cpp
+%#insert python3 style.py < chapters/more-conditionals/vecje-manjse-enako.cpp
 
 \begin{inout}
 3
@@ -49,7 +49,7 @@ Stevilo je vecje od 0.
 Pogoji se preverjajo po vrsti; izvede se samo koda pri prvem veljavnem pogoju,
 ne glede na to, koliko pogojev za njim je tudi veljavnih.
 
-%#insert python3 style.py < snippets/more-conditionals/nizanje-elseif.cpp
+%#insert python3 style.py < chapters/more-conditionals/nizanje-elseif.cpp
 
 Program izpiše le eno stvar - \verb+a je 7.+, kljub temu, da velja tudi
 \verb+a > 1+.
@@ -109,7 +109,7 @@ predstavimo z resničnostno tabelo.
 Če želimo preveriti, ali je dano število med dvema drugima, uporabimo
 logični veznik \verb+&&+.
 
-%#insert python3 style.py < snippets/more-conditionals/med-steviloma.cpp
+%#insert python3 style.py < chapters/more-conditionals/med-steviloma.cpp
 
 \begin{inout}
 5
@@ -157,7 +157,7 @@ deljivo s 4 in ne sme biti deljivo s 100. Povedano krajše; leto mora biti
 deljivo s 400, ali pa s 4 in ne hkrati s 100. Tak pogoj lahko zapišemo z
 logičnimi vezniki.
 
-%#insert python3 style.py < snippets/more-conditionals/prestopno-leto.cpp
+%#insert python3 style.py < chapters/more-conditionals/prestopno-leto.cpp
 
 \end{examples}
 
