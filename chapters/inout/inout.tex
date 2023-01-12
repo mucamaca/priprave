@@ -1,0 +1,122 @@
+%#template templates/template.tex
+
+%#block title
+Branje in pisanje
+%#endblock
+
+%#block content
+\section{Vhod in izhod}
+Programi za svoje delovanje potrebujejo način za komunikacijo z
+uporabnikom. Kompleksnejši programi v ta namen uporabljajo ekran, miško
+in tipkovnico. Pri tekmovalnem programiranju pa najpogosteje uporabljamo najpreprostejši način za komunikacijo: pisanje in branje s \emph{standardnega vhoda in izhoda}. Običajno to pomeni, da se nam ob zagonu programa odpre okno, kamor lahko pišemo programu in kamor program izpisuje stvari.\\
+Ko želimo, da naš program kaj izpiše, uporabimo \emph{funkcijo} \verb+printf+.
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout/helloworld.cpp
+
+\begin{inout}
+\tcblower
+Hello World!
+\end{inout}
+
+\end{examples}
+
+\verb+printf+ - funkcija, ki ji v dvojnih narekovajih damo besedilo ali števila, ki jih želimo izpisati\\
+\verb+\n+ - znak za novo vrstico
+\\\\
+Stvari, ki jih mora vsebovati (skoraj) vsak program:
+\begin{itemize}
+	\item \verb+stdio.h+ - \emph{knjižnica} (datoteka), ki vsebuje funkcije, ki jih bomo uporabljali v programu (kot npr. \verb+printf+ in \verb+scanf+)
+	\item \verb+#include<>+ - ukaz, s katerim našemu programu povemo, katere knjižnice potrebuje
+	\item \verb+int main(){}+ - telo našega programa - večino kode v programu napišemo med zavite oklepaje
+	\item \verb+return 0+ - zadnja vrstica v programu, ki sporoča računalniku, da se je pravilno zaključil
+\end{itemize}
+
+\noindent V program lahko dodamo \emph{komentarje}. To je takšno besedilo, ki je napisano v kodi, a vsebinsko ne vpliva na program.
+\begin{itemize}
+	\item \verb+//+ - s tem zakomentiramo vse od poševnic do konca vrstice
+	\item \verb+/* */+ - s tem lahko zakomentiramo več vrstic ali del znotraj vrstice
+\end{itemize}
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout/komentarji.cpp
+
+\begin{inout}
+\tcblower
+Zivjo svet!
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+Zadnji znak, ki ga program izpiše, mora biti \verb+\n+.
+\end{errors}
+
+\begin{errors}
+Večina vrstic v programu se konča s podpičjem (\verb+;+) (skoraj vse razen tistih, ki se končajo z oklepaji  ali zavitimi zaklepaji). Brez tega program ne bo delal.
+\end{errors}
+
+\pagebreak
+\section{Branje}
+Program za branje stvari, ki mu jih sporočamo, uporablja funkcijo \verb+scanf+. 
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout/branje.cpp
+
+\begin{inout}
+{\color{blue} \bf output:} Kako ti je ime?\\
+{\color{blue} \bf input:} Tinka \\
+{\color{blue} \bf output:} Zivjo, Tinka! 
+\end{inout}
+
+\end{examples}
+
+
+Če želimo, da program lahko kaj počne s podatki, ki jih je prebral, moramo najprej to shraniti na neko mesto v spominu. Temu mestu rečemo \emph{spremenljivka}, saj lahko s programom spreminjamo, kaj je tam shranjeno. Spremenljivke v svojem programu poimenujemo, v našem primeru ji rečemo \verb+ime+. Vsaki spremenljivki moramo določiti \emph{podatkovni tip}, saj lahko beremo in pišemo več različnih vrst podatkov, npr. besede ali števila. \\\\
+\verb+char+ - s tem povemo, da je naša spremenljivka besedilo oz. \emph{niz} \\\\
+\verb+[...]+ - številka v oglatih oklepajih za besedo pove največjo dolžino niza, ki ga lahko program prebere.
+
+\begin{errors} %CHECK
+Ko določamo največjo dolžino niza, vedno vzamemo večjo številko, kot jo bomo potrebovali. O tem bomo več govorili v kasnejših poglavjih.
+\end{errors}
+
+
+Funkciji \verb+scanf+ podamo dva ali več \emph{parametrov}:
+\begin{itemize}
+	\item kaj naj prebere, torej kakšne tipe spremenljivk. To podamo s \emph{formatnikom} (v našem primeru \verb+%s+, ki pomeni niz (\emph{string}). \verb+%s+ prebere vse znake do prvega presledka ali nove vrstice)
+	\item ostali parametri povejo, kam naj funkcija shrani stvari, ki jih je prebrala (torej v spremenljivke, ki smo jih naredili prej)
+\end{itemize}
+
+
+%CHECK
+Do zdaj smo funkciji \verb+printf+ podali samo točno določeno besedilo, ki smo ga želeli izpisati. Izpisujemo pa lahko tudi spremenljivke, kot smo to naredili v tem zadnjem primeru. Znotraj besedila dodamo formatnike na mesta, kjer želimo, da so spremenljivke, potem pa izven narekovajev naštejemo imena spremenljivk, ki jih želimo izpisati (tako kot pri funkciji \verb+scanf+).
+
+\pagebreak
+\section{Branje števil}
+%CHECK
+Poleg nizov lahko programi delajo tudi s števili. Števila beremo in izpisujemo z istima funkcijama kot nize, vendar moramo uporabiti drug formatnik.
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout/branje_stevil.cpp
+
+\begin{inout}
+{\color{blue} \bf output:} Kateri razred si?\\
+{\color{blue} \bf input :} 7\\
+{\color{blue} \bf output:} 7. razred je najboljši.
+\end{inout}
+
+\end{examples}
+
+%CHECK
+\verb+&+ - znak, ki ga moramo dati pred ime spremenljivke vedno, kadar beremo števila.
+\verb+int+ - podatkovni tip število \\
+Pri številih za imenom spremenljivke ne povemo, kako velika so lahko. \\\\
+Za branje in pisanje števil uporabimo formatnik \verb+%d+.
+
+\begin{errors}
+Ko beremo števila, moramo pred ime spremenljivke dati znak \verb+&+, česar pri branju nizov ne delamo. Prav tako tega ne delamo pri izpisovanju števil.
+\end{errors}
+%#endblock

@@ -1,0 +1,164 @@
+%#template templates/template.tex
+
+%#block title
+Pogojni stavki: 2. del
+%#endblock
+
+%#block content
+
+\section{Nizanje pogojev}
+
+Pogosto se srečamo s problemi, kjer je za rešitev potrebno upoštevati več kot
+en pogoj. V takih primerih želimo združiti več pogojnih stavkov tako, da se
+nek del kode izvede, če velja prvi pogoj, drugi del kode pa, če prvi pogoj
+ne velja, velja pa drugi pogoj. Z gnezdenjem stavkov lahko to v kodo vključimo
+na naslednji način:
+
+%#insert python3 style.py < chapters/more-conditionals/nizanje-narobe.cpp
+
+V takem primeru nam je na voljo bližnjica \verb+else if+. Zgornja koda deluje
+popolnoma enako kot spodnja:
+
+%#insert python3 style.py < chapters/more-conditionals/nizanje-pravilno.cpp
+
+Prednost te bližnjice je, da je naša koda krajša in bolj razumljiva.
+Stavke \verb+else if+ lahko tudi verižimo; enemu \verb+if+ stavku lahko sledi
+poljubno mnogo stavkov \verb+else if+. Pri tem bo računalnik pogoje preverjal po
+vrsti. Pri prvem veljavnem pogoju se bo ustavil in izvedel kodo v pripadajočih
+zavitih oklepajih, za čimer ne bo več preverjal pogojev, temveč bo izvajanje
+nadaljeval za zaključkom vseh nanizanih stavkov.
+
+Kakor nam v osnovnem \verb+if+ stavku ni bilo treba pisati dela z \verb+else+,
+če ga nismo potrebovali, nam ga tudi pri uporabi \verb+else if+ ni treba.
+
+\pagebreak
+\begin{examples}
+Naslednji program prebere število in pove, če je večje, manjše ali enako 0.
+
+%#insert python3 style.py < chapters/more-conditionals/vecje-manjse-enako.cpp
+
+\begin{inout}
+3
+\tcblower
+Stevilo je vecje od 0.
+\end{inout}
+
+\end{examples}
+
+\begin{examples}
+Pogoji se preverjajo po vrsti; izvede se samo koda pri prvem veljavnem pogoju,
+ne glede na to, koliko pogojev za njim je tudi veljavnih.
+
+%#insert python3 style.py < chapters/more-conditionals/nizanje-elseif.cpp
+
+Program izpiše le eno stvar - \verb+a je 7.+, kljub temu, da velja tudi
+\verb+a > 1+.
+
+\end{examples}
+
+\section{Logični vezniki}
+
+Osnovni operatorji za primerjavo pogosto niso dovolj, da izrazimo željen pogoj.
+Če na primer želimo pogledati, ali je neko število med dvema drugima, tega ne
+moramo narediti samo z eno primerjavo.
+
+Pogoje združujemo s t.i. \emph{logičnimi vezniki}, ki jim včasih pravimo tudi
+\emph{logični operatorji}. Poznamo tri osnovne veznike:
+\begin{itemize}
+  \item \verb+and+ oz.~\verb+&&+ združi dva pogoja tako, da združeni pogoj velja
+	samo v primeru, da veljata oba hkrati.
+  \item \verb+or+ oz.~\verb+||+ združi dva pogoja tako, da združeni pogoj velja
+	v primeru, da velja katerikoli od dveh, ali da veljata oba
+  \item \verb+not+ oz.~\verb+!+ sprejme samo en pogoj. Nov pogoj velja samo
+	takrat, ko originalni pogoj ne velja.
+\end{itemize}
+
+Logična veznika \verb+&&+ (\emph{in}) ter \verb+||+ (\emph{ali}) lahko
+predstavimo z resničnostno tabelo.
+
+\begin{table}[h!]
+  \centering
+  \caption{Resničnostna tabela za in}
+  \vspace{0.1cm}
+  \begin{tabular}{c|c|c}
+	Leva vrednost & Desna vrednost & Vrednost veznika \\
+	\hline
+	resnica & resnica & resnica \\
+	resnica & neresnica & neresnica \\
+	neresnica & resnica & neresnica \\
+	neresnica & neresnica & neresnica
+  \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \caption{Resničnostna tabela za ali}
+  \vspace{0.1cm}
+  \begin{tabular}{c|c|c}
+	Leva vrednost & Desna vrednost & Vrednost veznika \\
+	\hline
+	resnica & resnica & resnica \\
+	resnica & neresnica & resnica \\
+	neresnica & resnica & resnica \\
+	neresnica & neresnica & neresnica
+  \end{tabular}
+\end{table}
+
+\begin{examples}
+
+Če želimo preveriti, ali je dano število med dvema drugima, uporabimo
+logični veznik \verb+&&+.
+
+%#insert python3 style.py < chapters/more-conditionals/med-steviloma.cpp
+
+\begin{inout}
+5
+\tcblower
+n je med 3 in 9.
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+  V matematiki pogosto napišemo dvojno primerjavo: \verb+a < b < c+.
+  Če nekaj podobnega napišemo v C++ program, se bo le-ta sicer zagnal, vendar
+  ne bo deloval pravilno. Kaj pričakujemo, da se zgodi, če v tako primerjavo
+  zapišemo \verb+3 < 2 < 1+? Kaj pa se dejansko zgodi?
+\end{errors}
+
+Pri kombiniranju pogojev bodimo previdni glede pravil prednosti. Zanikanje
+(veznik \verb+not+ oz.~\verb+!+) ima namreč prednost pred primerjalnimi
+vezniki (\verb+<+, \verb+==+, \ldots), ter drugima ločnima veznikoma.
+Če v takem primeru uporabljamo zanikanje, moramo zanikan izraz postaviti
+v oklepaje.
+
+\begin{examples}
+  Zanikanje se lahko v večini primerov zapiše tudi na krajši način.
+
+  \begin{tabular}{|c|c|c|}
+	\hline
+	Izraz & Ekvivalenten izraz & Komentar \\
+	\hline
+	\verb+!(a == b)+ & \verb+a != b+ & \\
+	\verb+!(a < b)+ & \verb+a >= b + & Če sta \verb+a+ in \verb+b+ enaka, bo prvi izraz veljaven. \\
+	\verb+!(a <= b)+ & \verb+a > b+ & \\
+	\hline
+  \end{tabular}
+\end{examples}
+
+\begin{examples}
+Napišimo program, ki preveri, ali je uporabnik vpisal prestopno leto.
+Leto je prestopno, če je deljivo s 4; razen, če je hkrati deljivo s 100. Izjema so leta, deljiva
+s 400, ki so prestopna kljub temu, da so deljiva s 100.
+
+Kako te pogoje zapišemo v program? Opazimo, da so leta, deljiva s 400,
+prestopna ne glede na druga pogoja. Če leto ni deljivo s 400, potem mora biti
+deljivo s 4 in ne sme biti deljivo s 100. Povedano krajše; leto mora biti
+deljivo s 400, ali pa s 4 in ne hkrati s 100. Tak pogoj lahko zapišemo z
+logičnimi vezniki.
+
+%#insert python3 style.py < chapters/more-conditionals/prestopno-leto.cpp
+
+\end{examples}
+
+%#endblock

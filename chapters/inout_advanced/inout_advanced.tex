@@ -1,0 +1,212 @@
+%#template templates/template.tex
+
+%#block title
+Branje in pisanje 2
+%#endblock
+
+%#block content
+\section{Scanf}
+
+Funkcija \verb+scanf+ lahko bere različne vrste podatkov:
+\begin{itemize}
+	\item \verb+%s+ - beseda (vsi znaki razen praznih znakov (glej spodaj)) (\verb+char+)
+	\item \verb+%c+ - en (poljuben) znak (\verb+char+)
+	\item \verb+%d+ - število med $-2^{31}$ in $2^{31}-1$ (\verb+int+)
+	\item \verb+%lld+ - število med $-2^{63}$ in $2^{63}-1$ (\verb+long long+)
+	\item ...
+\end{itemize}
+
+\noindent Prazni znaki (whitespace) so znaki, ki jih ne vidimo:
+\begin{itemize}
+	\item \verb+\n+ nova vrstica
+	\item \verb+\t+ zamik
+	\item " " presledek
+\end{itemize}
+
+S formatnikom \verb+%s+ funkcija \verb+scanf+ bere do prvega takšnega znaka. Prebere tudi vse take znake, ki sledijo, a jih ne shrani. Naslednjič, ko jo pokličemo, bere od prvega nepraznega znaka naprej.
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout_advanced/formatnik_s.cpp
+
+\begin{inout}
+Hello \\ \\ World!
+\tcblower
+Hello World!
+\end{inout}
+
+
+\end{examples}
+
+\pagebreak
+\section{Branje do konca vrstice}
+
+Lahko določimo, da se \verb+scanf+ ne bo ustavil pri prvem praznem znaku, temveč šele pri koncu vrstice (ali kje drugje).
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout_advanced/do_konca_vrstice.cpp
+
+\begin{inout}
+Beremo do konca vrstice.
+\tcblower
+Beremo do konca vrstice.
+\end{inout}
+
+\end{examples}
+
+\verb+[...]+ - med oklepaje pišemo navodila, kakšne znake lahko bere
+\begin{itemize}
+	\item \verb+[a-z]+ - beri male črke angleške abecede
+	\item \verb+[a-zA-Z0-9]+ - beri male in velike črke in številke
+\end{itemize}
+
+\verb+[^...]+ - beri vse do znakov, ki sledijo strešici
+\begin{itemize}
+	\item \verb+[^\n]+ - beri vse do \verb+\n+
+\end{itemize}
+
+%CHECK
+\begin{errors}
+Za razliko od \verb+%s+ funkcija \verb+scanf+ s \verb+[^\n]+ prebere vse do \verb+\n+, tega pa ne prebere in se ustavi pred njim. Ko funkcijo pokličemo naslednjič, začne tam, kjer je nazadnje ostala, kar je v tem primeru točno pred znakom \verb+\n+. Če jo torej ponovno pokličemo s parametrom \verb+[^\n]+, se ne bo nikamor premaknila, saj je pred njo znak za novo vrstico. \\
+\end{errors}
+
+%CHECK
+\verb+%c+ - prebere en znak (\verb+char+), ki je lahko karkoli - črka, številka, prazen znak... \\
+\verb+%*c+ - prebere en znak, a ga ne shrani \\
+Funkcija \verb+getchar+ dela podobno, vzame en znak in ga ne shrani. \\
+
+Za razliko od tega s formatnikom \verb+%s+ preberemo vse prazne znake med dvema
+nepraznima nizoma in jih ne shranimo. Tudi, če bodo prazni znaki pred besedo,
+jih bo program ignoriral in poiskal prvi neprazen znak.
+
+\pagebreak
+\section{Branje do konca vhoda}
+
+Če vemo točno, koliko besed/številk/vrstic bomo imeli na vhodu, jih lahko preberemo s for zanko. Kako preberemo neznano količino podatkov na vhodu, tako da preberemo vse? \\
+Če napišemo \verb+while(true)+ ali \verb+while(1)+, bomo sicer prebrali vse, a se program ne bo nikoli ustavil.
+Namesto tega lahko napišemo:
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout_advanced/do_konca_vhoda.cpp
+
+\begin{inout}
+1 2 3 4 5
+\tcblower
+1\\4\\9\\16\\25
+\end{inout}
+\end{examples}
+
+\vskip 0.15in
+%CHECK
+\noindent Funkcija \verb+scanf+ vrne število formatnikov, ki jih je uspešno
+prebrala (če ji kot parameter podamo samo \verb+%d+, bo vrnila $1$, če je
+uspešno prebrala število, sicer pa 0). \verb+EOF+ (End of File) vrne, če na
+vhodu ni ničesar več za prebrati. Tedaj se bo zanka ustavila. Če programu
+vhodne podatke podajamo iz datoteke, se to zgodi avtomatsko ob koncu datoteke,
+če pa mu podatke podajamo na roko, konec vhoda sporočimo s
+\verb-Ctrl+D (Linux in MacOS)- ali \verb-Ctrl+Z- (Windows).
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout_advanced/stevilo_prebranih.cpp
+
+\begin{inout}
+	5 8 100
+	\tcblower
+	3
+\end{inout}
+\begin{inout}
+	5 8 miha
+	\tcblower
+	2
+\end{inout}
+
+
+\end{examples}
+
+\pagebreak
+\section{Branje in pisanje v in iz niza}
+
+\verb+scanf+ uporabljamo za branje s standardnega vhoda, \verb+printf+ pa za pisanje na standardni izhod.
+Namesto tega lahko beremo in pišemo tudi drugače, npr. v in iz nizov.
+Za to uporabljamo funkciji \verb+sscanf+ in \verb+sprintf+, ki delata podobno kot \verb+scanf+ in \verb+printf+.
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout_advanced/sprintf.cpp
+
+\begin{inout}
+
+\tcblower
+a 157 Slovenska
+\end{inout}
+
+\end{examples}
+
+\begin{errors}
+Medtem ko \verb+%s+ praznih znakov ne shrani, jih \verb+%c+ obravnava tako kot
+vse ostale. Če pogeldamo prejšnji primer vidimo, da je v funkciji
+\verb+scanf+ pred \verb+%c+ presledek. Ker so med posameznimi podatki, ki
+jih želimo prebrati, presledki, bi \verb+%c+ pobral presledek, ne pa črke,
+ki mu sledi. Če med posamezne formatnike postavimo presledek, ta načeloma
+pobere prazne znake do naslednjega drugačnega znaka, vendar to v splošnem
+ni dobra praksa.
+\end{errors}
+
+\noindent Funkciji \verb+sscanf+ podamo tri parametre (ali več):
+\begin{enumerate}
+	\item ime niza, iz katerega naj bere
+	\item tip podatka, ki naj ga prebere (niz, število...)
+	\item kam naj ta podatek zapiše (ime spremenljivke)
+\end{enumerate}
+	
+\noindent Funkciji \verb+sprintf+ prav tako podamo tri parametre (ali več):
+\begin{enumerate}
+	\item ime niza, kamor naj piše
+	\item tip podatka, ki naj ga zapiše
+	\item kaj naj zapiše (ime spremenljivke ali podatek sam)
+\end{enumerate}
+
+\pagebreak
+\section{Branje in pisanje v in iz datoteke}
+
+Podobno kot v niz lahko pišemo in beremo tudi v in iz datotek s funkcijama \verb+fscanf+ in \verb+fprintf+.
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/inout_advanced/datoteke.cpp
+
+\begin{inout}
+{\color{blue} \bf in.txt:} \\
+1 2 3 4 5 6 7
+\tcblower
+{\color{blue} \bf out.txt:} \\
+1\\
+4\\
+9\\
+16\\
+25\\
+36\\
+49
+\end{inout}
+
+(Ta program ne bere s standardega vhoda in ne piše ne standardni izhod.)
+\end{examples}
+
+\verb+FILE+ - tip podatka
+\verb+fopen+ - funkcija, s katero odpremo datoteko, podamo ji ime datoteke, ki
+jo želimo odpreti in način \verb+"r"+ (\emph{read} - za branje) ali \verb+"w"+
+(\emph{write} - za pisanje).\\ Datoteke, ki jih odpiramo za branje, morajo že
+prej obstajati, sicer se bo program sesul. \\
+
+Za datoteke, v katere pišemo, ni nujno, da že obstajajo. Če še ne obstajajo, bo
+program ustvaril novo datoteko s tem imenom. Če že obstajajo, program ne bo
+pisal na konec te datoteke, temveč bo pobrisal vso prejšnjo vsebino.
+Če želimo obstoječi datoteki dodajati vsebino, moramo uporabiti način
+\verb+"a"+ (\emph{append} - pripenjanje).
+
+\verb+fclose+ - funkcija, ki zapre odprto datoteko, podamo ji ime datoteke
+
+%#endblock
