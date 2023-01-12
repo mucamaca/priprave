@@ -15,7 +15,7 @@ kakor običajno. Na voljo imaš vse, kar je bilo na voljo v starih
 templatih.
 
 Če želiš vključiti del kode, napiši:
-%#insert python3 style.py < snippets/ime-poglavja/datoteka.cpp
+%#insert python3 style.py < chapters/ime-poglavja/datoteka.cpp
 kjer je to dejansko obstoječa datoteka.
 
 % Na splošno lahko kot argument v %#insert podaš katerokoli shell
