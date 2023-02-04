@@ -1,0 +1,105 @@
+%#template templates/template.tex
+
+%#block title
+Urejanje
+%#endblock
+
+%#block content
+
+\section{Osnovno o urejanju}
+
+V programih pogosto želimo nek seznam števil urediti po vrsti.
+V ta namen lahko napišemo svojo funkcijo, ki implementira enega od znanih
+algoritmov za urejanje; npr.~\textit{bubble sort}, \textit{insertion sort},
+\textit{quick sort}, ipd. Ker pa so učinkovite implementacije pogosto komplicirane
+in se pri pisanju hitro zmotimo, je bolje, da uporabimo funkcije, ravno v ta
+namen vključene v standardno knjižnjico. Za to bomo potrebovali na začetek
+programa dodati še dve vrstici:
+
+%#insert python3 style.py < chapters/urejanje/algorithm.cpp
+
+Ukaz \verb+#include+ že poznamo, opazimo pa, da tokrat za spremembo nima končnice
+\verb+.h+. To je zato, ker funkcije, ki smo jih uporabljali do sedaj, izvirajo
+iz jezika C, tokrat pa potrebujemo funkcijo, napisano posebaj za C++. To razloži
+tudi drugo vrstico; vse funkcije v standardni knjižnjici v C++ so vključene
+v imenski prostor \verb+std+. Če jih želimo klicati, moramo pred ime funkcije
+vedno napisati \verb+std::+, ali pa na začetek programa vključiti vrstico
+\verb+using namespace std+.
+
+Sedaj lahko uporabimo funkcijo \verb+sort+, ki sprejme dva argumenta;
+začetek in konec predela spomina, ki ga želimo urediti. Poglejmo si enostavni
+primer.
+
+%#insert python3 style.py < chapters/urejanje/uporaba.cpp
+
+
+Program prebere število \(n\), za njim pa še \(n\) števil, jih uredi naraščajoče,
+in jih izpiše. Funkcijo \verb+sort+ smo poklicali tako, da smo kot prvi argument
+podali seznam \verb+arr+, kot drugi argument pa konec predela seznama, ki ga
+želimo urediti; to zapišemo kot \verb|arr+n|. Točen pomen tega izraza bomo
+spoznali v prihodnje, za sedaj pa bomo kot drugi argument vedno podali seznam
+plus njegovo dolžino.
+
+Optimalna časovna zahtevnost algoritma za urejanje je \(O(n \log n)\). To v praksi
+pomeni, da bo urejanje delovalo dovolj hitro za \(n \le 10^6\). Če imamo več
+podatkov kot toliko, bo urejaje trajalo predolgo in naša rešitev ne bo sprejeta.
+
+\section{Primerjalna funkcija}
+
+Če želimo urediti seznam padajoče namesto naraščajoče, lahko seznam prvo uredimo
+naraščajoče, in ga nato obrnemo. Ker s tem dobimo veliko dodatnega dela, je
+bolje, da funkciji \verb+sort+ podamo lastno primerjalno funkcijo. Le-ta mora
+sprejeti dva argumenta ter vrniti \verb+bool+, in sicer; če mora biti prvi
+argument v urejenem seznamu levo od drugega, mora funkcija vrniti \verb+true+,
+sicer pa \verb+false+.
+
+Če ne podamo tretjega argumenta, se \verb+sort+ obnaša tako, kot da bi podali
+naslednjo funkcijo:
+
+%#insert python3 style.py < chapters/urejanje/compare.cpp
+
+Če želimo urediti seznam padajoče, moramo le podati nasprotno funkcijo:
+
+%#insert python3 style.py < chapters/urejanje/nasprotno.cpp
+
+\subsection{Urejanje sestavljenih podatkov}
+
+Recimo, da imamo v nalogi dana imena tekmovalcev ter točke, ki so jih ti
+tekmovalci dosegli na tekmovanju, naš cilj pa je, da izpišemo imena tekmovalcev
+po vrsti glede na doseženo število točk. Če bomo prebrali točke in imena v
+različna seznama, ter uredili seznam točk, bo seznam imen ostal nespremenjen in
+ne bomo več vedeli, katero ime pripada katerim točkam.
+
+Kako uredimo oba seznama hkrati? Bolj enostavna možnost je uporaba \verb+struct+,
+ki pa ga še ne poznamo. Namesto tega si lahko pripravimo seznam indeksov, ki
+na začetku na \verb+i+-tem mestu hrani številko \verb+i+. Če sestavimo funkcijo
+\verb+compare+ tako, da sprejme dva indeksa, ter ju uredi glede na vrednosti
+v tabeli s točkami na pripadajočih indeksih. Urejamo pa ne tabele s točkami,
+temveč novo tabelo indeksov.
+Na ta način se tabeli s točkami in z imeni ne bosta spreminjali,
+in bodo točke pripadale imenu na istem indeksu.
+
+\begin{examples}
+
+Primer implementacije opisane rešitve:
+
+%#insert python3 style.py < chapters/urejanje/kombinirani.cpp
+
+\begin{inout}
+  5 \\
+  France 37 \\
+  Gregor 34 \\
+  Julija 38 \\
+  Matija 29 \\
+  Urska 8 \\
+  \tcblower
+  Julija
+  France
+  Gregor
+  Matija
+  Urska
+\end{inout}
+
+\end{examples}
+
+%#endblock
