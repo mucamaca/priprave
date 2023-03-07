@@ -1,0 +1,145 @@
+%#template templates/template.tex
+
+%#block title
+Pogojni stavki
+%#endblock
+
+%#block content
+
+Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali
+večih spremenljivk, npr. da nam pokaže drugačno vsebino, če smo napisali
+pravilno ali napačno geslo, da računalo sešteva, če smo pritisnili gumb za
+seštevanje, oz. odšteva, če smo pritisnili gumb za odštevanje, ipd. Z drugimi
+besedami, želimo upravljati potek programa (torej izbrati, katera koda naj
+se izvede) glede na vrednosti spremenljivk. Angleško takemu upravljanju
+pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i. \emph{pogojnimi}
+ali \emph{if stavki}. Osnovna struktura je sledeča:
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/basic_conditionals/sintaksa.cpp
+
+\end{examples}
+
+\emph{Pogoj} je nov pojem. Označuje neke vrste račun, katerega rezultat ni
+število, vendar \emph{logična vrednost}. Tu sta možni vrednosti le dve:
+pravilno (angl.~\verb+true+) in napačno (angl.~\verb+false+). Če bo rezultat
+računa, navedenega v običajnih oklepajih v zgornjem \verb+if+ stavku,
+\verb+true+,
+se bo izvedla koda znotraj prvih zavitih oklepajev, če pa je rezultat računa
+\verb+false+, pa se bo izvedla koda v drugih zavitih oklepajih (tistih za besedo
+\verb+else+). Drugega dela, t.j. \verb+else+ in oklepaji za njim, ni treba
+pisati, če ga ne želimo.
+
+Kako pa zapišemo pogoj? Za to uporabimo posebne logične operatorje. Pri delu s
+številkami so nam na voljo naslednji:
+\begin{itemize}
+  \item \verb+==+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če sta vrednosti enaki.
+  \item \verb+!=+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če sta vrednosti različni.
+  \item \verb+<+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če je vrednost na levi manjša od vrednosti na desni.
+  \item \verb+>+: deluje podobno kot \verb+<+, le da v drugo smer;
+	rezultat je \verb+true+, če je vrednost na desni manjša od vrednosti na levi.
+  \item \verb+<=+: primerja dve številski vrednosti.
+	Rezultat je \verb+true+, če sta vrednosti enaki, ali če je vrednost
+	na levi manjša od vrednosti na desni.
+  \item \verb+>=+ deluje podobno kot \verb+<=+, le da v drugo smer.
+\end{itemize}
+
+\begin{examples}
+
+Poglejmo si primer uporabe pogojnega stavka.
+
+%#insert python3 style.py < chapters/basic_conditionals/stevila.cpp
+
+\begin{inout}
+12 12
+\tcblower
+Stevili sta enaki.\\
+Prvo stevilo je manjse ali enako drugemu.\\
+Prvo stevilo je vecje ali enako drugemu.
+\end{inout}
+
+\begin{inout}
+3 7
+\tcblower
+Stevili sta razlicni.\\
+Prvo stevilo je manjse od drugega.\\
+Prvo stevilo je majnse ali enako drugemu.
+\end{inout}
+
+\end{examples}
+
+
+\begin{errors}
+  Pri primerjavi moramo uporabiti dva enačaja (\verb+==+). Če uporabimo samo
+  en enačaj, kot v matematiki (torej \verb+=+), se bo program sicer zagnal,
+  vendar ne bo deloval pravilno.
+  Enojnega enačaja nikoli ne uporabljamo v pogoju \verb+if+ stavka.
+\end{errors}
+
+\begin{errors}
+  % Pri predelavi v učbenik: pogovor, če je smiselno že tu omenjati strcmp
+  Taka primerjava deluje samo na številih. Če želimo primerjati dve besedili,
+  za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo
+  podrobneje spoznali, ko bomo govorili o besedilu.
+\end{errors}
+
+\begin{examples}
+
+Primer uporabe stavka \verb+else+. Program bo uporabnika vprašal za PIN,
+in mu napisal, če je bil PIN pravilen oziroma napačen.
+
+%#insert python3 style.py < chapters/basic_conditionals/pin.cpp
+
+\begin{inout}
+42
+\tcblower
+PIN je pravilen!
+\end{inout}
+
+\begin{inout}
+7
+\tcblower
+PIN je napacen!
+\end{inout}
+
+\end{examples}
+
+\begin{examples}
+\verb+if+ stavke lahko tudi gnezdimo; torej vstavimo enega v drugega.
+Spodnji program od uporabnika sprejme naročilo v restavraciji, kjer ponujajo
+dve vrsti hrane; juhe in sendviče. Na voljo sta dve vrsti juhe, in dve vrsti
+sendvičev.
+
+%#insert python3 style.py < chapters/basic_conditionals/nesting.cpp
+
+\begin{inout}
+2\\
+1
+\tcblower
+En sendvic s sunko. Dober tek!
+\end{inout}
+\end{examples}
+
+
+\begin{errors}
+
+Pozorni bodimo tudi na postavitev kode. Običajno kodo znotraj zavitih oklepajev
+\verb+if+ stavka pišemo tako, da je poravnana štiri presledke bolj desno od
+kode zunaj \verb+if+ stavka. V nekaterih programskih jezikih je taka poravnava
+obvezna, v C/C++ pa ne, vendar nezamaknjena koda že v zelo majhnih programih
+postane popolnoma nepregledna. Branje in popravljanje kode je veliko lažje, če
+del kode znotraj zavitih oklepajev zamaknemo za štiri presledke. Za to lahko
+uporabimo tudi tipko Tab, ki se na tipkovnici nahaja levo od tipke Q.
+
+\vspace{0.3cm}
+Tako \textbf{nikoli} ne pišemo:
+
+%#insert python3 style.py < chapters/basic_conditionals/unindented.cpp
+
+\end{errors}
+
+%#endblock
