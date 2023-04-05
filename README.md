@@ -3,7 +3,7 @@
 Nova poglavja dodajaj v podmapo `chapters/`. Datoteka naj izgleda tako:
 
 ```latex
-%#template templates/template.text
+%#template templates/template.tex
 
 %#block title
 Naslov poglavja
