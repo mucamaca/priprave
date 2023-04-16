@@ -6,6 +6,7 @@ int g = 12;
 void funkcija() {
     // v tej funkciji lahko dostopamo do g
     printf("%d\n", g);
+    g += 3;
 }
 
 int main() {

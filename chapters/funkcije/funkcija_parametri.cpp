@@ -9,7 +9,7 @@ void plusi(int n) {
 }
 
 int main() {
-    plusi(12); // pokličemo funkcijo z parametrom 12
+    plusi(12); // pokličemo funkcijo s parametrom 12
 
     return 0;
 }

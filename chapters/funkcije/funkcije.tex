@@ -17,7 +17,7 @@ Funkcijo si lahko predstavljamo kot neko napravo. Napravi podamo nekaj
 \emph{parametrov} (včasih se uporabi tudi beseda \emph{argumentov}), ona nekaj
 melje in nam potem \emph{vrne} neko vrednost. Poleg tega, da samo vrne neko
 vrednost, ima lahko funkcija tudi kakšne stranske učinke. Lahko kaj izpiše z
-uporabo \verb+printf+, ali pa spremeni kakšno kakšno spremenljivko. Včasih so
+uporabo \verb+printf+, ali pa spremeni kakšno spremenljivko. Včasih so
 parametri ali vrnjena vrednost nepotrebni, zato lahko napišemo tudi funkcije
 brez parametrov in funkcije, ki ne vrnejo ničesar.
 
@@ -26,7 +26,7 @@ brez parametrov in funkcije, ki ne vrnejo ničesar.
 
 Najbolj osnovna oblika funkcije je takšna, ki ne sprejme nobenega parametra in
 ne vrne ničesar. Če hočemo, da ta funkcija ni neuporabna, bo morala imeti
-kakšen stranski učinek, spodaj bo izpisala \verb+Zdravo+.
+kakšen stranski učinek, funkcija spodaj bo izpisala \verb+Zdravo+.
 
 \begin{examples}
     %#insert python3 style.py < chapters/funkcije/osnovna_funkcija.cpp
@@ -65,10 +65,10 @@ Zdaj pa še funkcije, ki vrnejo kakšno vrednost:
 \end{examples}
 
 Zdaj smo v funkcijo dodali ukaz \verb+return+, ki pove programu, da želimo
-vrniti spremenljivko, ki se pojavi takoj za njim. Spodaj pa vidimo, kako
-dostopamo do vrednosti, ki jo vrne naša funkcija, nastavimo spremenljivko.
-Izraz \verb+funkcija(3, 4)+ lahko uporabimo kjerkoli, kjer bi lahko uporabili
-neko spremenljivko. Prav tako lahko za return-om seštevamo števila. Zgornji
+vrniti spremenljivko, ki se pojavi takoj za njim. Spodaj pa vidimo, da moramo
+za dostop do vrnjene vrednosti nastaviti spremenljivko. Izraz
+\verb+funkcija(3, 4)+ lahko uporabimo kjerkoli, kjer bi lahko uporabili neko
+spremenljivko. Prav tako lahko za \verb+return+-om seštevamo števila. Zgornji
 program bi lahko krajše napisali kot:
 
 \begin{examples}
@@ -89,29 +89,37 @@ se funkcija konča, ko se izvede prvi \verb+return+.
 
 Tu funkcija vrača logično vrednost \verb+bool+, ki je ena izmed \verb+true+ ali
 \verb+false+, uporablja se jo lahko v if stavku. Deluje torej pravilno, saj če
-bo \verb+crka+ enaka a, e, i, o, u, se bo funkcija končala pri return-u v if
-stavku, sicer se bo pa nadaljevala do \verb+return false;+.
+bo \verb+crka+ enaka a, e, i, o, u, se bo funkcija končala pri \verb+return+-u
+v if stavku, sicer se bo pa nadaljevala do \verb+return false;+.
 
 
 \section{Spremenljivke in funkcije}
 
 \subsection{Globalne in lokalne spremenljivke}
 
-Spomnimo se, da lahko spremenljivke definiramo na dva načina.
-Tistim, ki so definirane na vrhu, izven funkcije rečemo \emph{globalne
-spremenljivke}, tistim, ki so pa definirane v funkciji pa \emph{lokalne
-spremenljivke}. Zdaj, ko vemo, kaj so funkcije, lahko povemo razliko med temi
-tipi spremenljivk.
+Spomnimo se, da lahko spremenljivke definiramo na dva načina. Tistim, ki so
+definirane na vrhu, izven funkcije rečemo \emph{globalne spremenljivke},
+tistim, ki so pa definirane v funkciji, pa \emph{lokalne spremenljivke}. Zdaj,
+ko vemo, kaj so funkcije, lahko povemo razliko med temi tipi spremenljivk.
 
 Globalne spremenljivke so vidne povsod, torej v vseh funkcijah, medtem ko lahko
 lokalne spremenljivke uporabljamo samo v funkciji, v kateri smo jih definirali.
 
 \begin{examples}
     %#insert python3 style.py < chapters/funkcije/globalne_lokalne_spremenljivke.cpp
+
+    \begin{inout}
+        \tcblower
+        12 \\
+        15, 200
+    \end{inout}
+
 \end{examples}
 
 Seveda, če globalno spremenljivko nekje spremenimo, se bo spremenila tudi za
-vse druge funkcije.
+vse druge funkcije. V zgornjem primeru je \verb+funkcija+ najprej izpisala
+\verb+g+ (12) in ga nato povečala na 15. Ko se je g izpisal drugič, je bil zato
+15.
 
 \subsection{Spreminjanje parametrov}
 
@@ -149,9 +157,9 @@ lahko to napišemo takole:
 
 \end{examples}
 
-Da je postopek za obračanje seznamov res pravilen, lahko razmislite sami, named
+Da je postopek za obračanje seznamov res pravilen, lahko razmislite sami, namen
 tega primera je, da vidimo, kako se pri funkcijah dela s seznami. Seznam, ki ga
-želimo obdelati prejmemo kot parameter in ga potem spremenimo, ničesar pa ne
+želimo obdelati, prejmemo kot parameter in ga potem spremenimo, ničesar pa ne
 vrnemo.
 
 
@@ -161,28 +169,25 @@ vrnemo.
 sebe. Pogosto lahko zanko nadomestimo z rekurzijo, če nam je tak način
 programiranja ljubši.
 
-Recimo, da želimo sešteti vsa števila med 1 in nekim $n$. Z zanko bi to
-naredili tako, da si pripravimo neko srpemenljivko $vsota$ in potem napišemo
-for zanko od 1 do n in v $vsota$ seštejemo vsa ta števila. Pri rekurziji je pa
-pristop drugačen.
+Recimo, da želimo sešteti vsa števila med 1 in nekim \verb+n+. Z zanko bi to
+naredili tako, da si pripravimo neko spremenljivko \verb+vsota+ in potem
+napišemo for zanko od 1 do \verb+n+ in v \verb+vsota+ seštejemo vsa ta števila. Pri
+rekurziji je pa pristop drugačen.
 
 \begin{examples}
     %#insert python3 style.py < chapters/funkcije/vsota_rekurzivno.cpp
 \end{examples}
 
 Najprej napišemo \emph{osnovni pogoj}, ki za n-je manjše ali enake 0 vrne 0. Če
-ne bi napisali osnovnega pogoja bi šli rekurzivni klici funkcije v neskončnost,
+ne bi napisali osnovnega pogoja bi, šli rekurzivni klici funkcije v neskončnost,
 \verb+vsota(3)+ bi poklicala \verb+vsota(2)+, ki pokliče \verb+vsota(1)+, potem
 \verb+vsota(0)+, \verb+vsota(-1)+, \verb+vsota(-2)+, \ldots \ Po osnovnem
 pogoju moramo narediti \emph{korak}, ki izračuna \verb+vsota(n)+ s pomočjo
-vrednost funkcije v nekem manjšem številu, v našem primeru kar
+vrednosti funkcije v nekem manjšem številu, v našem primeru kar
 \verb+vsota(n - 1)+.
 
-O rekurziji bi lahko veliko povedali in je za reševanje raznih problemov zelo
-uporabna, a smo se odločili, da se letos o njej ne bomo poglabljali.
 
-
-\section{Funkcije že vključene v C}
+\section{Funkcije v C knjižnici}
 
 \subsection{Funkcije iz <stdio.h>}
 
@@ -201,10 +206,6 @@ uporabna, a smo se odločili, da se letos o njej ne bomo poglabljali.
     %#insert python3 style.py < chapters/funkcije/pretvorba_int_str.cpp
 \end{examples}
 
-Če bi zgornji program združili s funkcijo za obračanje seznamov (niz je seznam
-char-ov) bi dobili precej preprosto rešitev naloge števila v ogledalu
-( https://putka-rtk.acm.si/tasks/t/addrev/ ).
-
 \subsection{Funkcije iz <string.h>}
 
 \begin{itemize}
@@ -214,7 +215,10 @@ char-ov) bi dobili precej preprosto rešitev naloge števila v ogledalu
         niz prepiše na konec prvega tako, da prvi postane oba niza staknjena
         skupaj.
     \item \verb+strcmp+ primerja nize. Sprejme dva niza, če sta niza enaka vrne
-        število 0, če sta pa različna pa vrne število različno od 0.
+        število 0, če sta pa različna pa vrne število različno od 0. Nize lahko
+        tako kot v slovarju ali telefonskem imenuku uredimo po abecedi, če
+        pride prvi niz pred drugim, bo vrnjeno število negativno, v obratnem
+        primeru pa pozitivno.
     \item \verb+strlen+ že poznamo, sprejme en niz in vrne njegovo dolžino.
 \end{itemize}
 
