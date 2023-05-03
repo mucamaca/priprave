@@ -12,7 +12,7 @@ void poisci_prastevila() {
     // Iteriramo samo do korena M
     for (int i = 2; i*i <= M; i++) {
         // Če je na mestu i ničla, do sedaj nismo našli nobenega praštevila,
-        // torej mora biti število 0 nujno praštevilo
+        // torej mora biti število i nujno praštevilo
         if (reseto[i] == 0) {
             printf("Najdeno praštevilo %d!\n", i);
 
