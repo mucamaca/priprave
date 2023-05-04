@@ -84,6 +84,20 @@ Končni odgovor je b.
 Tak opis lahko tudi enostavno zapišemo kot funkcijo v C++:
 %#insert python3 style.py < chapters/teorija-stevil/gcd.cpp
 
+Če nas namesto največjega skupnega delitelja zanima najmanjši skupni večkratnik,
+lahko tega izračunamo po formuli:
+\[
+  D(a, b) \cdot v(a, b) = a \cdot b.
+\]
+V tej formuli smo označili največji skupni delitelj z $D$ in najmanjši skupni
+večkratnik z $v$.
+Za izračun najmanjšega skupnega večkratnika torej prvo izračunamo največji
+skupni delitelj s pomočjo Evklidovega algoritma, nato pa uporabimo formulo:
+\verb+v = a / D * b+.
+Pomembno je, da prvo delimo, sicer bi lahko vmesni rezultat (produkt) postal
+prevelik za naš številski tip (\verb+int+ oziroma \verb+long long+), in
+povzročil napako.
+
 \section{Eratostenovo rešeto}
 
 \emph{Praštevilo} je tako število, ki je deljivo le z $1$ in samo s seboj.
