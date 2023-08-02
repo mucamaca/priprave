@@ -1,0 +1,1 @@
+char crka = 'A';

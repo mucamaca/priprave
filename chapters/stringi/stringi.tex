@@ -1,0 +1,322 @@
+%#template templates/template.tex
+
+%#block title
+Nizi in besedilo
+%#endblock
+
+%#block content
+
+\section{Uvod}
+
+Poleg dela s številkami od računalnika pogosto želimo, da nekaj naredi z nizi
+besedila.
+Primeri takšnih programov so npr.~urejevalniki besedila, ki jih uporabljamo tako
+za pisanje ``enostavnega'' besedila (koda), kot tudi za razna obogatena
+besedila.
+Pravzaprav pa skoraj vsak računalniški program dela z besedilom; kadarkoli
+želimo uporabniku prikazati neke informacije, jih moramo namreč izpisati na
+zaslon.
+Ko smo delali s številkami, smo problem izpisovanja prepustili računalniku, ker
+je kodo za branje in izpisovanje številk k sreči napisal že nekdo drug.
+Za pisanje splošnih programov pa tovrstno znanje ne bo dovolj; zato si poglejmo
+osnove dela z besedili.
+
+Pri slovenščini se naučimo, da je besedilo sestavljeno iz več odstavkov,
+odstavek iz več povedi, poved iz več stavkov, stavek iz več besed, besede pa iz
+več črk.
+Pri tem se moramo zavedati, da stavke ločimo z ločili (vejice, pike, klicaji,
+itd.), besede ločimo s presledki, posamične odstavke pa ločimo z zamikanjem prve
+povedi v desno.
+Za predstavitev v računalniku je tak model preveč zakompliciran, zato vzamemo
+bolj enostavnega.
+Besedila bomo predstavili z \textit{nizi} (angl.~\textit{string}), ki bodo
+zaporedja več \textit{znakov} (angl.~\textit{character}).
+Vse, kar bi si kadarkoli zaželeli izpisati, bomo proglasili za znak.
+Tako si bomo vse črke predstavljali kot znak, kjer bomo ločili tudi velikimi in
+malimi črkami (saj vendar izgledajo drugače, če jih napišemo), prav tako bomo za
+znake proglasili tudi ločila, oklepaje in matematične operacije
+(\verb|+, -, *, /|).
+Poleg tega bomo za znak proglasili tudi števke od 0 do 9, ker tudi njih
+izpišemo.
+
+Nenazadnje bomo ustvarili še nekaj posebnih znakov, ki jih morda nebi
+pričakovali.
+Od teh bomo zdaj spoznali tri: znak za presledek, znak za novo vrstico in znak
+za konec besedila.
+Znak za presledek bomo uporabili, kjerkoli želimo imeti prostor med dvema
+besedama (torej presledek).
+Za razliko od slovenščine tudi presledke obravnavamo, kot da bi bili pravzaprav
+neke posebne črke.
+Znak za novo vrstico bomo uporabili tam, kjer želimo, da izpis našega programa
+skoči vrstico nižje; brez tega znaka nam bo program vse izpisal v eni zelo dolgi
+vrstici besedila.
+Ta znak označimo s posebno kodo \verb+\n+ (ker se v angleščini ta znak imenuje
+\textit{newline}), opazimo pa, da smo ga pravzaprav že srečali čisto na začetku.
+Uporabili bomo tudi znak za konec besedila, ki ga označimo z \verb+\0+,
+pogosto pa mu rečemo tudi \textit{NULL}.
+Več o temu znaku bomo povedali kasneje.
+
+\section{Predstavitev znakov}
+
+Preden si pogledamo nize, moramo razumeti, kako delamo z znaki.
+V C++-u imamo za to poseben tip \verb+char+, ki nam hrani en znak.
+Če želimo spremenljivki tipa \verb+char+ nastaviti vrednost, moramo želeni znak
+dati v enojne narekovaje;
+%#insert python3 style.py < chapters/stringi/basic-char-syntax.cpp
+Ta koda nam ustvari spremenljivko tipa \verb+char+, ki hrani vrednost
+\verb+'A'+, torej znak za veliko črko A.
+Tako kot števila lahko tudi znake pišemo in beremo; pri tem uporabimo
+\verb+printf+, znotraj njega pa poseben formatnik \verb+%c+, narejen za znake.
+%#insert python3 style.py < chapters/stringi/scanf-printf-char.cpp
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}[h!]{|c|c|}
+	\hline
+	Znak & ASCII koda \\
+	\hline
+	NULL (\verb+\0+) & 0 \\
+	Nova vrstica (\verb+\n+) & 10 \\
+	Presledek (\verb+' '+) & 32 \\
+	\hline
+	\verb+0+ & 48 \\
+	\verb+1+ & 49 \\
+	\verb+2+ & 50 \\
+	\vdots & \vdots \\
+	\verb+9+ & 57 \\
+	\hline
+	\verb+A+ & 65 \\
+	\verb+B+ & 66 \\
+	\verb+C+ & 67 \\
+	\vdots & \vdots \\
+	\verb+Z+ & 90 \\
+	\hline
+	\verb+a+ & 97 \\
+	\verb+b+ & 98 \\
+	\verb+c+ & 99 \\
+	\vdots & \vdots \\
+	\verb+z+ & 122 \\
+	\hline
+  \end{tabular}
+  \caption{Del ASCII tabele}
+  \label{tab:ascii}
+\end{table}
+
+Ker so računalniki narejeni za delo s številkami, moramo tudi znake
+predstaviti kot številke.
+To dosežemo s t.i.~\textit{kodnimi tabelami}, ki vsakemu znaku priredijo eno
+številko.
+Najpreprostejša kodna tabela je ASCII, ki lahko zakodira vse črke angleške
+abecede ter vse ostale zgoraj naštete znake, ne zmore pa zakodirati šumnikov.
+Le-teh se pri programiranju izogibamo, kar se le da.
+ASCII kode nekaterih pogostih znakov so prikazane v tabeli~\ref{tab:ascii}.
+Opazimo lahko, da so števke in črke v tabeli zaporedno; števka \verb+0+ ima kodo
+48, števka \verb+1+ 49, \ldots, črka \verb+A+ ima kodo 65, \verb+B+ ima kodo 66,
+itd. 
+Opazimo tudi, da so velike črke od malih ločene, in da imajo male črke večje
+kode.
+
+Ta dejstva lahko uporabimo v programih tako, da črke preprosto obravnavamo, kot
+da bi bile številke.
+Črki \verb+'a'+ lahko npr.~prištejemo neko številko, in tako dobimo črko, ki je
+toliko znakov naprej v abecedi; \verb|'a' + 7| je na primer enako \verb|'h'|.
+Poleg tega lahko znake med sabo primerjamo, kar bomo videli v prvem primeru.
+
+\begin{errors}
+  ASCII koda je bila narejena v Ameriki specifično za angleško uporabo.
+  Ker ne vsebuje šumnikov, le-teh ne moramo predstaviti v naših programih.
+  Za delo s šumniki potrebujemo drugačne kodne tabele, ki jih tukaj ne bomo
+  obravnavali.
+\end{errors}
+
+\begin{examples}
+  Če poznamo kodne tabele, lahko na relativno enostaven način preverimo, če je
+  neka črka velika ali majhna:
+  %#insert python3 style.py < chapters/stringi/is-capital-letter.cpp
+  \begin{inout}
+	p
+	\tcblower
+	To je velika crka
+  \end{inout}
+  Koda sprva prebere eno črko iz vhoda, nato pa preveri, če je vpisana črka med
+  \verb+A+ in \verb+Z+; če ni, potem preverimo še, če je črka med \verb+a+ in
+  \verb+z+.
+\end{examples}
+
+Če dobro pogledamo v tabelo, vidimo, da koda 0 ne pripada števki \verb+0+, pač
+pa znaku za konec besedila.
+To se morda na prvi pogled zdi nepričakovano, ampak ima svoj smisel; če je
+števka del besedila, o njej ne razmišljamo kot o številki, temveč pač o nekem
+znaku, ki ima v drugem kontekstu drugačen pomen.
+Če želimo to števko pretvoriti v številko, s katero lahko brez skrbi računamo,
+lahko uporabimo trik, kjer ``odštejemo nič:''
+%#insert python3 style.py < chapters/stringi/odstevanje-nic.cpp
+Pri tem triku moramo biti previdni, da odštejemo pravilno ničlo; če odštejemo
+številko \verb+0+, se ne bo nič spremenilo; tako kot pri matematiki namreč
+odštevanje ničle številke ne spremeni.
+Če pa odštejemo \emph{znak} \verb+'0'+ (v enojnih narekovajih), pa dejansko
+odštevamo številko 48, t.j.~ASCII kodo znaka \verb+'0'+.
+Praktično uporabo tega trika bomo pokazali v naslednjem delu.
+
+\section{Predstavitev nizov}
+
+Niz predstavimo kot zaporedje znakov.
+Ker o zaporedjih (oziroma natančneje o seznamih) nismo še ničesar povedali,
+moramo uvesti novo sintakso:
+%#insert python3 style.py < chapters/stringi/basic-string-syntax.cpp
+Ta ukaz pove računalniku, naj ustvari spremenljivko z imenom
+\verb+niz_besedila+, ki hrani \emph{največ} 300 znakov.
+V tej spremenljivki bomo hranili naše zaporedje besedila.
+Če želimo nize brati ali pisati, uporabimo funkciji, ki ju že poznamo, ter
+formatnik \verb+%s+, tu pa je ena posebnost; za branje nizov \underline{ne}
+napišemo znaka \verb+&+.
+Če želimo neko spremenljivko nastaviti na niz, ki ga ne bomo prebrali, jo lahko
+nastavimo na običajen način z enačajem, ter z dvojnimi narekovaji.
+Tak način podajanja nizov smo že srečali; namreč vedno, ko uporabimo funkciji
+\verb+scanf+ ali \verb+printf+.
+
+\begin{examples}
+  Da se navadimo nove sintakse, si poglejmo preprost primer.
+  Spodnji program prebere uporabnikovo ime in ga pozdravi.
+  %#insert python3 style.py < chapters/stringi/pozdravljen.cpp
+\end{examples}
+
+Ko ustvarimo niz, računalniku povemo, kolikšna je njegova najdaljša možna
+dolžina.
+Nič pa nam ne preprečuje, da v to spremenljivko shranimo krajši niz.
+Kako pa potem računalnik ve, kje se naš niz dejansko konča?
+Pričakujemo namreč, da bomo za zapis kratkega niza uporabili nekaj mest za znake
+na začetku, potem pa se bo niz nekje končal; kaj je na neuporabljenih mestih
+zaporedja, nas ne zanima.
+Ravno iz tega razloga so nizi zgrajeni tako, da imajo na koncu dodaten znak za
+konec besedila; znak NULL, ki smo ga omenili na začetku.
+Ta znak pove računalniku, da se besedilo tu konča in da naj naprej ne gleda.
+Če vrednost niza nastavimo z enačajem ali niz preberemo s \verb+scanf+, bo
+računalnik sam poskrbel, da bo ta znak napisan na pravo mesto; če pa z nizi
+delamo kaj bolj zapletenega, moramo za ta znak skrbeti sami.
+Zaradi tega znaka je dejansko število vidnih znakov, ki jih lahko shranimo v
+niz, za eno manjše od predpisane največje dolžine.
+Da se tovrstnim problemom izognemo, bomo od sedaj naprej vedno napisali nekaj
+večjo število za dolžino niza; če pričakujemo, da uporabnik vpiše največ 200
+znakov, bomo za velikost niza dejansko napisali 201 (ali celo malo več).
+
+Preden pridemo do primerov, moramo spoznati še indeksiranje.
+Vsako mesto za znak v nizu ima svoj zaporedni \textit{indeks}, s katerim
+lahko enolično dostopamo do tistega mesta.
+Indeksi so zaporedna števila, ki se začnejo z 0; prvi znak v nizu ima indeks 0,
+drugi znak ima indeks 1, tretji ima indeks 2, itd.
+Indeksiranje od 0 se morda sprva zdi nesmiselno, vendar je za tem zelo dober
+razlog, ki ga bomo spoznali pri obravnavi kazalcev (nadaljevalna skupina).
+Poglejmo si na primeru, kako deluje indeksiranje.
+
+\vspace{0.5cm}
+
+\begin{tabular}[h!]{|c|cccccccccccccccc|}
+  Znak & P & r & i & m & i & c & o & v & i & \verb+' '+  & J & u & l & j & i & NULL \\
+  \hline
+  Indeks & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\
+\end{tabular}
+
+\vspace{0.5cm}
+
+V zgornji tabeli je razpisan niz \verb+"Primicovi Julji"+, pod vsakim znakom pa
+je napisan indeks, s katerim lahko dostopamo do tega mesta v nizu.
+Da zares dostopamo do teh znakov, uporabimo oglate oklepaje;
+%#insert python3 style.py < chapters/stringi/indeksiranje.cpp
+Ko zapišemo \verb+niz[indeks]+, dobimo znak, ki ga lahko uporabljamo kot
+katerokoli drugo spremenljivko.
+Pri tem pazimo samo na to, da lahko niz spremenimo le, če ga spremenimo
+``direktno''; če znak prvo shranimo v neko drugo spremenljivko, in potem
+spremenimo to spremenljivko, se niz \underline{ne} bo spremenil.
+%#insert python3 style.py < chapters/stringi/copy-vs-reference.cpp
+
+\begin{examples}
+  Za prvi primer si poglejmo, kako bi lahko izračunali dolžino niza.
+  %#insert python3 style.py < chapters/stringi/dolzina-niza.cpp
+  Ta koda ni težka, vendar jo je pogosto neprijetno pisati, zato imamo boljšo
+  alternativo; če na začetek programa dodamo \verb+#include <string.h>+, lahko
+  uporabljamo funkcijo \verb+strlen+, ki nam ravno tako izračuna dolžino niza:
+  %#insert python3 style.py < chapters/stringi/dolzina-niza-bolje.cpp
+  Funkcijo \verb+strlen+ uporabljamo v skoraj vsakem programu z nizi, zato je
+  dobro, da se je čim prej navadimo.
+  Poleg tega \verb+strlen+ dolžino dejansko izračuna hitreje kakor zgornja koda.
+\end{examples}
+
+\begin{examples}
+  V naslednjem primeru bomo napisali kodo, ki pretvori besedilo v velike črke.
+  Za to uporabimo eno od lastnosti ASCII tabele, ki smo jo omenili prej; namreč,
+  da so črke napisane zaporedno, da so velike črke pred malimi.
+  %#insert python3 style.py < chapters/stringi/upcase.cpp
+\end{examples}
+
+\begin{examples}
+  Za ta primer si poglejmo, kako bi pretvorili številko, zapisano z nizom, v
+  številko, zapisano s številko.
+  Prej omenjen trik z odštevanjem nič ne bo deloval, ker lahko z njim
+  pretvarjamo le znake; lahko pa številko pretvorimo znak po znak.
+  Pri tem pretvarjanju uporabljamo lastnosti desetiškega zapisa števil; namreč,
+  da zaporedna mesta v zapisu predstavljajo vrednosti, ki se razlikujejo za
+  faktor 10.
+  Ko pretvorimo prvi del besedila, in želimo dopisati še eno števko, moramo že
+  zapisani del ``premakniti'' eno mesto v levo, ter premaknjenemu številu
+  prišteti novo števko.
+  Premikanje dosežemo z množenjem z 10.
+  %#insert python3 style.py < chapters/stringi/string-v-stevilo.cpp
+\end{examples}
+
+\section{Standardne funkcije}
+
+Izkaže se, da pri delu z nizi pogosto pišemo zelo podobne kose programa, kakor
+se je zgodilo pri primeru z izračunom dolžine.
+Namesto da večkrat napišemo skoraj enako kodo, so v knjižnici \verb+string.h+
+dostopne razne funkcije, ki nam pogosto olajšajo delo.
+
+\subsection{Primerjava nizov}
+
+Za primerjavo dveh nizov \underline{ne} uporabljamo dvojnega enačaja
+(\verb+==+), temveč funkcijo \verb+strcmp+.
+Funkcijo uporabimo tako, da ji v okrogle oklepaje napišemo dva niza;
+\verb+strcmp(niz1, niz2)+.
+Če sta niza enaka, funkcija vrne rezultat \verb+0+, sicer pa vrne drugačen
+rezultat.
+Spodnja koda preveri, če je uporabniku ime Filip:
+%#insert python3 style.py < chapters/stringi/ali-si-filip.cpp
+
+Funkcija nam pravzaprav poda več informacij.
+Z njo lahko pogledamo, kakšna je \textit{leksikografska ureditev} dveh nizov;
+preprosto povedano, kateri od nizov bi se, če bi bila oba niza besedi, pojavil
+prej v slovarju (leksikonu).
+Če bi se prvi niz pojavil prej, funkcija vrne negativno število.
+Če bi se drugi niz pojavil prej, pa funkcija vrne pozitivno število.
+
+\subsection{Kopiranje nizov}
+
+Če želimo eno spremenljivko prekopirati v drugo, lahko napišemo \verb+b = a+.
+Na žalost pa to ne deluje za nize; namesto \verb+niz2 = niz1+ moramo napisati
+\verb+strcpy(niz2, niz1)+.
+Funkcija \verb+strcpy+ prekopira drugi niz v prvega; na koncu bosta oba niza
+imela enako vsebino.
+
+Če želimo nekemu nizu na konec dodati nek drug niz, lahko za to uporabimo
+funkcijo \verb+strcat+ (\textit{string concatenate}).
+Ta funkcija prav tako sprejme dva niza; ko jo pokličemo, drug niz kopira na
+konec prvega.
+
+\subsection{Operacije na prvih $n$ znakih}
+
+Včasih želimo kopirati ali primerjati le del niza.
+Za to imamo na voljo malce drugačne verzije zgoraj naštetih funkcij; če v imenih
+teh funkcij za \verb+str+ dodamo še \verb+n+ (torej \verb+strncmp+,
+\verb+strncpy+, \ldots), in funkciji kot zadnji argument podamo številko $n$, bo
+funkcija svoje delo opravila le na prvih $n$ znakih;
+\verb+strncmp(niz1, niz2, 3)+ bo primerjal le prve tri znake,
+\verb+strncpy(niz2, niz1, 7)+ bo kopiral le prvih sedem znakov, ipd.
+
+\section{Napredno branje nizov}
+
+Pogosto se v nalogah pojavi, da moramo prebrati niz do konca vrstice, ali pa da
+sploh ne vemo, koliko vrstic vhoda bo do programa prišlo.
+Spopadanje s tovrstnimi problemi je opisano v zapiskih za nadaljevalno skupino
+iz tretje ure (Branje in pisanje 2).
+
+%#endblock
