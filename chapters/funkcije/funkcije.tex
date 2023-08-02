@@ -1,0 +1,230 @@
+%#template templates/template.tex
+
+%#block title
+Funkcije
+%#endblock
+
+%#block content
+Ko pišemo daljše programe, se pogosto zgodi, da večrat uporabimo nek podoben
+kos kode. Da si v takih situacijah olajšamo življenje, imamo \emph{funkcije}.
+Že v zgodnjih sedemdesetih, ko se je začel razvijati jezik C so vedeli, da so
+funkcije zelo uporabne, zato je osnovna oblika tega jezika sestavljena iz njih.
+Res, funckijam se v C-ju ne da izogniti, do zdaj smo brali in pisali podatke s
+funkcijama \verb+scanf+ in \verb+printf+, preverjali dolžino nizov s
+\verb+strlen+ in vse smo napisali v funkciji \verb+main+.
+
+Funkcijo si lahko predstavljamo kot neko napravo. Napravi podamo nekaj
+\emph{parametrov} (včasih se uporabi tudi beseda \emph{argumentov}), ona nekaj
+melje in nam potem \emph{vrne} neko vrednost. Poleg tega, da samo vrne neko
+vrednost, ima lahko funkcija tudi kakšne stranske učinke. Lahko kaj izpiše z
+uporabo \verb+printf+, ali pa spremeni kakšno spremenljivko. Včasih so
+parametri ali vrnjena vrednost nepotrebni, zato lahko napišemo tudi funkcije
+brez parametrov in funkcije, ki ne vrnejo ničesar.
+
+
+\section{Kako napišemo svojo funkcijo}
+
+Najbolj osnovna oblika funkcije je takšna, ki ne sprejme nobenega parametra in
+ne vrne ničesar. Če hočemo, da ta funkcija ni neuporabna, bo morala imeti
+kakšen stranski učinek, funkcija spodaj bo izpisala \verb+Zdravo+.
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/osnovna_funkcija.cpp
+\end{examples}
+
+\begin{itemize}
+    \item \verb+void+ - Posebna beseda, ki pove, da funkcija ne vrne ničesar.
+    \item \verb+funkcija+ - Ime za funkcijo, kot pri spremenljivkah bi lahko tu
+        napisali karkoli.
+    \item \verb+()+ - Ime funkcije se more končati z (), v te oklepaje
+        postavljamo parametre.
+    \item \verb+{ ... }+ - Telo funkcije, v katerem je koda, ki se bo izvedla.
+\end{itemize}
+
+Kot napovedano, imajo lahko funkcije tudi kakšne parametre:
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/funkcija_parametri.cpp
+\end{examples}
+
+Zdaj smo v oklepaje za imenom spremenljivke postavili \verb+int n+. Beseda
+\verb+int+ pove, da je ta parameter celo število, \verb+n+ je pa ime za
+parameter. Ime, ki smo si ga izbrali za parameter, uporabljamo v telesu
+funkcije, da dostopamo do vrednosti v parametru.
+
+Če je naš parameter seznam, to napišemo tako:
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/funkcije_arr_parameter.cpp
+\end{examples}
+
+Zdaj pa še funkcije, ki vrnejo kakšno vrednost:
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/funkcija_return.cpp
+\end{examples}
+
+Zdaj smo v funkcijo dodali ukaz \verb+return+, ki pove programu, da želimo
+vrniti spremenljivko, ki se pojavi takoj za njim. Spodaj pa vidimo, da moramo
+za dostop do vrnjene vrednosti nastaviti spremenljivko. Izraz
+\verb+funkcija(3, 4)+ lahko uporabimo kjerkoli, kjer bi lahko uporabili neko
+spremenljivko. Prav tako lahko za \verb+return+-om seštevamo števila. Zgornji
+program bi lahko krajše napisali kot:
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/funkcija_return_kratko.cpp
+\end{examples}
+
+
+\section{Potek funkcije}
+
+Kot smo navajeni, se ukazi v telesu funkcije izvajajo po vrsti od zgoraj
+navzdol. V njej lahko uporabimo vse, kar smo se do zdaj naučili (lahko
+ustvarjamo nove spremenljivke, if stavke, zanke, \ldots ). Vredno omembe je, da
+se funkcija konča, ko se izvede prvi \verb+return+.
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/return_konca_funkcijo.cpp
+\end{examples}
+
+Tu funkcija vrača logično vrednost \verb+bool+, ki je ena izmed \verb+true+ ali
+\verb+false+, uporablja se jo lahko v if stavku. Deluje torej pravilno, saj če
+bo \verb+crka+ enaka a, e, i, o, u, se bo funkcija končala pri \verb+return+-u
+v if stavku, sicer se bo pa nadaljevala do \verb+return false;+.
+
+
+\section{Spremenljivke in funkcije}
+
+\subsection{Globalne in lokalne spremenljivke}
+
+Spomnimo se, da lahko spremenljivke definiramo na dva načina. Tistim, ki so
+definirane na vrhu, izven funkcije rečemo \emph{globalne spremenljivke},
+tistim, ki so pa definirane v funkciji, pa \emph{lokalne spremenljivke}. Zdaj,
+ko vemo, kaj so funkcije, lahko povemo razliko med temi tipi spremenljivk.
+
+Globalne spremenljivke so vidne povsod, torej v vseh funkcijah, medtem ko lahko
+lokalne spremenljivke uporabljamo samo v funkciji, v kateri smo jih definirali.
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/globalne_lokalne_spremenljivke.cpp
+
+    \begin{inout}
+        \tcblower
+        12 \\
+        15, 200
+    \end{inout}
+
+\end{examples}
+
+Seveda, če globalno spremenljivko nekje spremenimo, se bo spremenila tudi za
+vse druge funkcije. V zgornjem primeru je \verb+funkcija+ najprej izpisala
+\verb+g+ (12) in ga nato povečala na 15. Ko se je g izpisal drugič, je bil zato
+15.
+
+\subsection{Spreminjanje parametrov}
+
+Če funkciji podamo neko spremenljivko kot
+parameter in poskušamo to spremenljivko v funkciji spreminjati, se obnaša na
+dva različna načina, odvisno od tega, če je spremenljivka seznam.
+
+Če spremenljivka ni seznam (npr. \verb+int+, \verb+char+) se za funkcijo
+ustvari kopija te spremenljivke. Če jo v funkciji spremenimo, to ne bo
+spremenilo izvirne spremenljivke, saj v funkciji delamo s kopijo. Če je seznam,
+bodo pa spremembe na seznam v funkciji vplivale na izvirni seznam, saj se ta ne
+bo prekopiral. V spodnjem primeru sta prikazani obe možnosti.
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/seznam_se_ne_kopira.cpp
+\end{examples}
+
+\newpage
+
+Sprva ne vidimo smisla, za drugačno obravnavo seznamov, a se izkaže, da je
+lahko ta lastnost tudi uporabna. Če bi želeli napisati funkcijo, ki sprejeme
+seznam in njegovo dolžino, potem pa obrne vrstni red elementov tega seznama,
+lahko to napišemo takole:
+
+\begin{examples}
+
+    %#insert python3 style.py < chapters/funkcije/obrni_seznam.cpp
+
+    \begin{inout}
+        5 \\
+        10 20 30 -3 7 1
+        \tcblower
+        1 \\ 7 \\ -3 \\ 30 \\ 20 \\ 10 \\
+    \end{inout}
+
+\end{examples}
+
+Da je postopek za obračanje seznamov res pravilen, lahko razmislite sami, namen
+tega primera je, da vidimo, kako se pri funkcijah dela s seznami. Seznam, ki ga
+želimo obdelati, prejmemo kot parameter in ga potem spremenimo, ničesar pa ne
+vrnemo.
+
+
+\section{Rekurzija}
+
+\emph{Rekurzija} je način pisanja programa na način, da funkcija kliče samo
+sebe. Pogosto lahko zanko nadomestimo z rekurzijo, če nam je tak način
+programiranja ljubši.
+
+Recimo, da želimo sešteti vsa števila med 1 in nekim \verb+n+. Z zanko bi to
+naredili tako, da si pripravimo neko spremenljivko \verb+vsota+ in potem
+napišemo for zanko od 1 do \verb+n+ in v \verb+vsota+ seštejemo vsa ta števila. Pri
+rekurziji je pa pristop drugačen.
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/vsota_rekurzivno.cpp
+\end{examples}
+
+Najprej napišemo \emph{osnovni pogoj}, ki za n-je manjše ali enake 0 vrne 0. Če
+ne bi napisali osnovnega pogoja bi, šli rekurzivni klici funkcije v neskončnost,
+\verb+vsota(3)+ bi poklicala \verb+vsota(2)+, ki pokliče \verb+vsota(1)+, potem
+\verb+vsota(0)+, \verb+vsota(-1)+, \verb+vsota(-2)+, \ldots \ Po osnovnem
+pogoju moramo narediti \emph{korak}, ki izračuna \verb+vsota(n)+ s pomočjo
+vrednosti funkcije v nekem manjšem številu, v našem primeru kar
+\verb+vsota(n - 1)+.
+
+
+\section{Funkcije v C knjižnici}
+
+\subsection{Funkcije iz \texttt{<stdio.h>}}
+
+\begin{itemize}
+    \item \verb+sprintf+ deluje podobno kot \verb+printf+, le da sprejme niz
+        kot prvi parameter, naslednji parametri so pa enaki kot v
+        \verb+printf+. Namesto da bi izpisala na standardni izhod, ta funkcija
+        izpiše v niz, ki je bil dan kot prvi parameter.
+    \item \verb+sscanf+ deluje podobno kot \verb+scanf+, le da sprejme niz kot
+        prvi parameter, naslednji parametri so pa enaki kot v \verb+scanf+.
+        Namesto da bi prebrala iz standardnega vhoda, ta funkcija bere iz niza,
+        ki je bil dan kot prvi parameter.
+\end{itemize}
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/pretvorba_int_str.cpp
+\end{examples}
+
+\subsection{Funkcije iz <\texttt{string.h>}}
+
+\begin{itemize}
+    \item \verb+strcpy+ kopira nize. Sprejme dva niza in drugega prepiše v
+        prvega.
+    \item \verb+strcat+ stika nize, enega za drugim. Sprejme dva niza in drugi
+        niz prepiše na konec prvega tako, da prvi postane oba niza staknjena
+        skupaj.
+    \item \verb+strcmp+ primerja nize. Sprejme dva niza, če sta niza enaka vrne
+        število 0, če sta pa različna pa vrne število različno od 0. Nize lahko
+        tako kot v slovarju ali telefonskem imenuku uredimo po abecedi, če
+        pride prvi niz pred drugim, bo vrnjeno število negativno, v obratnem
+        primeru pa pozitivno.
+    \item \verb+strlen+ že poznamo, sprejme en niz in vrne njegovo dolžino.
+\end{itemize}
+
+\begin{examples}
+    %#insert python3 style.py < chapters/funkcije/str_funkcije.cpp
+\end{examples}
+
+%#endblock
+
