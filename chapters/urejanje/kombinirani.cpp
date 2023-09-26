@@ -24,7 +24,7 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         int idx = idxs[i];
-        printf("%s\n", imena[idx]);
+        printf("%s ", imena[idx]);
     }
     return 0;
 }

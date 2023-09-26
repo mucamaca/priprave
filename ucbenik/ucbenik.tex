@@ -6,6 +6,8 @@
 \usepackage[many]{tcolorbox}
 \usepackage[T1]{fontenc}
 \usepackage[slovene]{babel}
+\usepackage{hyperref}
+\usepackage{siunitx}
 
 \usetikzlibrary{calc}
 
@@ -210,19 +212,15 @@
   }
 }
 
-\title{QWB Zbrani zapiski}
-\date{QWB \today}
-\author{QWB Avtorji}
+\title{Zbrani zapiski za priprave na računalniška tekmovanja}
+\date{Šolsko leto 2022/23}
+\author{}
 
 \begin{document}
 \maketitle
 
 \tableofcontents
-\pagebreak
-
-\chapter{Uvod}
-
-QWB
+\newpage
 
 \chapter{Pisanje in branje}
 
@@ -288,9 +286,9 @@ Program za branje stvari, ki mu jih sporočamo, uporablja funkcijo \verb+scanf+.
 %#insert python3 style.py < chapters/inout/branje.cpp
 
 \begin{inout}
-{\color{blue} \bf output:} Kako ti je ime?\\
-{\color{blue} \bf input:} Tinka \\
-{\color{blue} \bf output:} Zivjo, Tinka!
+{\color{blue} \bf izhod:} Kako ti je ime?\\
+{\color{blue} \bf vhod:} Tinka \\
+{\color{blue} \bf izhod:} Zivjo, Tinka!
 \end{inout}
 
 \end{examples}
@@ -324,21 +322,23 @@ Poleg nizov lahko programi delajo tudi s števili. Števila beremo in izpisujemo
 %#insert python3 style.py < chapters/inout/branje_stevil.cpp
 
 \begin{inout}
-{\color{blue} \bf output:} Kateri razred si?\\
-{\color{blue} \bf input :} 7\\
-{\color{blue} \bf output:} 7. razred je najboljši.
+{\color{blue} \bf izhod:} Kateri razred si?\\
+{\color{blue} \bf vhod :} 7\\
+{\color{blue} \bf izhod:} 7. razred je najboljši.
 \end{inout}
 
 \end{examples}
 
 %CHECK
-\verb+&+ - znak, ki ga moramo dati pred ime spremenljivke vedno, kadar beremo števila.
-\verb+int+ - podatkovni tip število \\
+\verb+&+ - znak, ki ga moramo dati pred ime spremenljivke vedno, kadar beremo števila.\\
+\verb+int+ - podatkovni tip števil. \\
 Pri številih za imenom spremenljivke ne povemo, kako velika so lahko. \\\\
 Za branje in pisanje števil uporabimo formatnik \verb+%d+.
 
 \begin{errors}
-Ko beremo števila, moramo pred ime spremenljivke dati znak \verb+&+, česar pri branju nizov ne delamo. Prav tako tega ne delamo pri izpisovanju števil.
+Ko beremo števila, moramo pred ime spremenljivke dati znak \verb+&+, česar pri
+branju nizov ne delamo. Prav tako tega ne delamo pri izpisovanju števil.
+Več o tem bomo povedali v kasnejših poglavjih.
 \end{errors}
 
 \chapter{Računske operacije}
@@ -349,24 +349,11 @@ Računalniki lahko s spremenljivkami počnejo veliko stvari. Najpreprostejše so
 	\item \verb-+- za seštevanje
 	\item \verb+-+ za odštevanje
 	\item \verb+*+ za množenje
+	\item \verb+/+ za celoštevilsko deljenje
+	\item \verb+%+ za ostanek pri deljenju
 \end{itemize}
 
 \begin{examples}
-Rezultat lahko izračunamo kar znotraj funkcije \verb+printf+:
-
-%#insert python3 style.py < chapters/arithm/sestevanje.cpp
-
-\begin{inout}
-
-\tcblower
-12
-\end{inout}
-
-\end{examples}
-
-\begin{examples}
-Rezultat lahko tudi shranimo v novo spremenljivko:
-
 %#insert python3 style.py < chapters/arithm/nova-spremenljivka.cpp
 
 \begin{inout}
@@ -379,44 +366,46 @@ Rezultat lahko tudi shranimo v novo spremenljivko:
 
 \end{examples}
 
-\begin{errors}
-Spremenljivko \emph{inicializiramo} tako, da notri nekaj shranimo, bodisi kot \verb+a=5+, bodisi s tem, da vanjo nekaj napišemo s funkcijo \verb+scanf+.
-Če je ne inicializiramo, pozneje pa jo poskusimo uporabiti za izpisovanje, računanje ali kaj drugega, lahko dobimo zelo čudne rezultate, naš program se lahko celo sesuje.
-\end{errors}
-
 \subsection*{Negativna števila}
-Na meteorološki postaji Kredarica so leta 2014 izmerili povprečno januarsko temperaturo približno -5 °C, povprečno avgustovsko pa približno 6 °C.
-Med tema meritvama je 11 °C razlike. \\
-Pozimi lahko izmerimo temperature manjše od 0. Takšnim številom, kot je -5, rečemo \emph{negativna števila}. Lahko jih uporabimo tudi drugje, ne samo pri merjenju temperature. \\
-S pozitivnimi števili lahko štejemo od 0 do neskončno (1, 2, 3, ...), z negativnimi pa do - neskončno. (-1, -2, -3, ...). Tako kot pozitivna števila jih lahko seštevamo in odštevamo:
+Na meteorološki postaji Kredarica so leta 2014 izmerili povprečno januarsko
+temperaturo približno \qty{-5}{\celsius}, povprečno avgustovsko pa približno \qty{6}{\celsius}.
+Med tema meritvama je \qty{11}{\celsius} razlike.
+
+Pozimi lahko izmerimo temperature, manjše od 0.
+Takšnim številom, kot je -5, rečemo \emph{negativna števila}.
+Lahko jih uporabimo tudi drugje, ne samo pri merjenju temperature.
+
+S pozitivnimi števili lahko štejemo od 0 do $\infty$ (1, 2, 3, ...), z
+negativnimi pa do $-\infty$. (-1, -2, -3, ...). Tako kot pozitivna števila jih
+lahko seštevamo in odštevamo:
 
 \begin{examples}
-5 - 11 = -6 \\
--6 + 11 = 5 \\
-5 -(-6) = 11 \\
--2 - 1 = -3 \\
--2 - (-1) = -1
--2 + (-1) = -3 \\\\
-\emph{Pravila:}\\
--(-6) = +6\\
-+(-1) = -1 \\
--(-(-(-1))) = -(-(+1)) = -(-1) = 1
+  5 - 11 = -6 \\
+  -6 + 11 = 5 \\
+  5 -(-6) = 11 \\
+  -2 - 1 = -3 \\
+  -2 - (-1) = -1
+  -2 + (-1) = -3 \\\\
+  \emph{Pravila:}\\
+  -(-6) = +6\\
+  +(-1) = -1 \\
+  -(-(-(-1))) = -(-(+1)) = -(-1) = 1
 \end{examples}
 
 \begin{examples}
-2 * (-5) = -10 \\
-(-5) * (-5) = 25 \\
+  2 * (-5) = -10 \\
+  (-5) * (-5) = 25 \\
 
-\emph{Pravila:}
-Če množimo dve pozitivni števili, je produkt pozitiven. \\
-Če množimo eno pozitivno in eno negativno število, je produkt negativen. \\
-Če množimo dve negativni števili, je produkt spet negativen. \\
-O negativnih številih lahko razmišljamo kot: -3 = (-1) * 3
+  \emph{Pravila:}
+  Če množimo dve pozitivni števili, je produkt pozitiven. \\
+  Če množimo eno pozitivno in eno negativno število, je produkt negativen. \\
+  Če množimo dve negativni števili, je produkt spet negativen. \\
+  O negativnih številih lahko razmišljamo kot: -3 = (-1) * 3
 \end{examples}
 
-Računalniki z negativnimi števili računajo enako kot s pozitivnimi:
 
 \begin{examples}
+Računalniki z negativnimi števili računajo enako kot s pozitivnimi.
 
 %#insert python3 style.py < chapters/arithm/negativna-stevila.cpp
 
@@ -430,10 +419,8 @@ Produkt: 21
 
 \end{examples}
 
-\newpage
 \section{Deljenje}
 Števila lahko tudi delimo. Za deljenje uporabljamo znak \verb+/+.
-Za razumevanje poglavja si bomo pomagali s formulo $a = k*b + o$, ki ponazarja deljenje z ostankom.
 
 \begin{examples}
 
@@ -448,15 +435,17 @@ Za razumevanje poglavja si bomo pomagali s formulo $a = k*b + o$, ki ponazarja d
 \end{examples}
 
 \begin{errors}
-Deljenje v jezikih C in C++ je celoštevilsko. Deljenje z ostankom lahko zapišemo po formuli: $a = k*b + o$.
+Deljenje v jezikih C in C++ je celoštevilsko. Deljenje z ostankom lahko zapišemo
+po formuli $a = k*b + o$.\\
 
 16/8: 16 = 2*8 + 0 \\
 Ostanek je 0, ker je 16 deljivo z 8. \\\\
 
 16/5: 15 = 3*5 + 1 \\
-1 je ostanek. \\\\
+ostanek je 1. \\\\
 
-Celoštevilsko deljenje pomeni, da nam program vnre samo $k$. Primer vhoda in izhoda za zgornji program, kjer števili nista deljivi:
+Celoštevilsko deljenje pomeni, da nam program vnre samo $k$. Primer vhoda in
+izhoda za zgornji program, kjer števili nista deljivi:
 
 \begin{inout}
 16 3
@@ -470,7 +459,9 @@ Tudi, če bi bil rezultat deljenja 7.9, tega program ne zaokroži na 8, temveč 
 \end{errors}
 
 \newpage
-Operator \verb+/+ nam torej iz pri deljenju \verb+a/b+ vrne \verb+k+. Lahko pa dobimo tudi ostanek \verb+o+. Do njega pridemo z operatorjem \verb+%+ (\emph{modulo}).
+Operator \verb+/+ nam torej iz pri deljenju \verb+a/b+ vrne \verb+k+. Lahko pa
+dobimo tudi ostanek \verb+o+. Do njega pridemo z operatorjem \verb+%+
+(\emph{modulo}).
 
 \begin{examples}
 
@@ -487,20 +478,23 @@ Ostanek: 4
 \end{examples}
 
 \begin{errors}
-Deljenje z 0 v matematiki ni definirano in prav tako ne v programiranju. Če neko število delimo z 0, se nam bo program sesul. Prav tako, če poskušamo izračunati ostanek pri deljenju z 0. \\
-Ta napaka se pogosto zgodi v programih, kjer delimo z več števili, zato moramo biti na to pozorni.
+Deljenje z 0 v matematiki ni definirano in prav tako ne v programiranju. Če neko
+število delimo z 0, se nam bo program sesul. Prav tako, če poskušamo izračunati
+ostanek pri deljenju z 0. \\
+Ta napaka se pogosto zgodi v programih, kjer delimo z več števili, zato moramo
+biti na to pozorni.
 \end{errors}
 
 \chapter{Pogojni stavki}
 
 Pogosto želimo, da računalnik izvaja drugačno kodo glede na vrednost ene ali
-večih spremenljivk, npr. da nam pokaže drugačno vsebino, če smo napisali
+večih spremenljivk, npr.~da nam pokaže drugačno vsebino, če smo napisali
 pravilno ali napačno geslo, da računalo sešteva, če smo pritisnili gumb za
 seštevanje, oz. odšteva, če smo pritisnili gumb za odštevanje, ipd. Z drugimi
 besedami, želimo upravljati potek programa (torej izbrati, katera koda naj
 se izvede) glede na vrednosti spremenljivk. Angleško takemu upravljanju
-pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i. \emph{pogojnimi}
-ali \emph{if stavki}. Osnovna struktura je sledeča:
+pravimo \emph{control flow}, najpogosteje pa ga izvajamo s t.i.~\emph{pogojnimi}
+ali \emph{if} stavki. Osnovna struktura je sledeča:
 
 \begin{examples}
 
@@ -568,10 +562,9 @@ Prvo stevilo je majnse ali enako drugemu.
 \end{errors}
 
 \begin{errors}
-  % Pri predelavi v učbenik: pogovor, če je smiselno že tu omenjati strcmp
   Taka primerjava deluje samo na številih. Če želimo primerjati dve besedili,
   za to potrebujemo posebno funkcijo \verb+strcmp+, ki jo bomo
-  podrobneje spoznali, ko bomo govorili o besedilu.
+  podrobneje spoznali v sledečih poglavjih.
 \end{errors}
 
 \begin{examples}
@@ -667,6 +660,8 @@ Stevilo je vecje od 0.
 
 \end{examples}
 
+\newpage
+
 \begin{examples}
 Pogoji se preverjajo po vrsti; izvede se samo koda pri prvem veljavnem pogoju,
 ne glede na to, koliko pogojev za njim je tudi veljavnih.
@@ -683,7 +678,6 @@ Program izpiše le eno stvar - \verb+a je 7.+, kljub temu, da velja tudi
 Osnovni operatorji za primerjavo pogosto niso dovolj, da izrazimo željen pogoj.
 Če na primer želimo pogledati, ali je neko število med dvema drugima, tega ne
 moramo narediti samo z eno primerjavo.
-
 Pogoje združujemo s t.i. \emph{logičnimi vezniki}, ki jim včasih pravimo tudi
 \emph{logični operatorji}. Poznamo tri osnovne veznike:
 \begin{itemize}
@@ -700,7 +694,7 @@ predstavimo z resničnostno tabelo.
 
 \begin{table}[h!]
   \centering
-  \caption{Resničnostna tabela za in}
+  \caption{Resničnostna tabela za \textit{in}}
   \vspace{0.1cm}
   \begin{tabular}{c|c|c}
 	Leva vrednost & Desna vrednost & Vrednost veznika \\
@@ -714,7 +708,7 @@ predstavimo z resničnostno tabelo.
 
 \begin{table}[h!]
   \centering
-  \caption{Resničnostna tabela za ali}
+  \caption{Resničnostna tabela za \textit{ali}}
   \vspace{0.1cm}
   \begin{tabular}{c|c|c}
 	Leva vrednost & Desna vrednost & Vrednost veznika \\
@@ -791,8 +785,6 @@ V programiranju pogosto želimo nek del kode ponoviti, zato imamo \emph{zanke}.
 Zanka, ki jo bomo najpogosteje uporabljali je \emph{for} zanka,
 ki deluje na princip \textbf{začetka}, \textbf{pogoja} in \textbf{koraka}.
 \begin{examples}
-\verb+Najbolj osnoven program, ki uporablja for zanko.+
-
 %#insert python3 style.py < chapters/for-loop/sintaksa.cpp
 
 \begin{inout}
@@ -839,9 +831,9 @@ okrajšava za \texttt{stevec = stevec + 1}, torej poveča $stevec$ za $1$.
 
 Vidimo, da bo res izpisal \emph{nekaj} trikrat. Vredno je omeniti,
 da je naš števec zavzel vrednosti 0, 1, 2, kar se mogoče zdi čudno, glede na
-to, da bi ponavadi šteli do tri kot 1, 2, 3, a je \emph{štetje od nič} zelo
-pogosto v programiranju, zato smo se odločili, da vas že od začetka poskušamo
-navaditi nanj.
+to, da bi ponavadi šteli do tri kot 1, 2, 3.
+Štetje od nič pa je v programiranju bolj naravno kot štetja od ena, kakor bomo
+videli v sledečih poglavjih.
 
 \section{Razni primeri uporabe for zanke}
 
@@ -852,13 +844,10 @@ Seveda je tudi to mogoče in sicer tako, da vstavimo našo spremenljivko v pogoj
 for zanke. Poglejmo si primer:
 
 \begin{examples}
-\verb+Program, ki dobi število in nariše puščico te dolžine.+
-
-\verb+Še en trik tu je, da printf-ja v for zanki ne končamo z \n, kar doseže+
-
-\verb+to, da so v izhodu pomišljaji eden zraven drugega v isti vrstici in ne+
-
-\verb+vsak v svoji vrstici.+
+Program, ki dobi število in nariše puščico te dolžine.
+Še en trik tu je, da printf-ja v for zanki ne končamo z \verb+\n+, kar doseže
+to, da so v izhodu pomišljaji eden zraven drugega v isti vrstici in ne
+vsak v svoji vrstici.
 
 %#insert python3 style.py < chapters/for-loop/puscica.cpp
 
@@ -878,9 +867,8 @@ precej zamudno. Poglejmo si, kako bi napisali program, ki bi nekaj izračunal z
 več števili.
 
 \begin{examples}
-\verb+Najprej preberemo eno število, recimo mu n.+
-
-\verb+Po njemu moramo prebrati še n števili in jih sešteti.+
+Najprej preberemo eno število, recimo mu \verb+n+.
+Za tem moramo prebrati še \verb+n+ števil in jih sešteti.
 
 %#insert python3 style.py < chapters/for-loop/branje-stevil.cpp
 
@@ -894,83 +882,34 @@ več števili.
 	34
 \end{inout}
 
-\end{examples}
+Najprej preberemo \verb+n+ in naredimo novo spremenljivko z imenom \verb+vsota+,
+v katero bomo sešteli vsa dana števila.
 
-V zgornjem primeru se je zgodilo precej novih stvari, poglejmo si vse po vrsti.
-
-Najprej preberemo n iz navodil. Naredimo novo spremenljivko z imenom $vsota$, v njo
-bomo sešteli vsa dana števila.
-
-Opazimo, da je v for zanki namesto $stevec$ zdaj uporabljen $i$, tradicionalno
-se namreč v for zankah uporablja $i$.
+Opazimo, da je v for zanki namesto \verb+stevec+ zdaj uporabljen \verb+i+.
+To je tradicionalno ime za spremenljivke v zankah.
 V notranjosti zanke so zdaj trije ukazi. Najprej naredimo novo
-spremenljivko, ki jo poimenujemo $sestevanec$ in preberemo naslednje
-število iz vhoda. Nato pa z okrajšavo \texttt{vsota~+=~sestevanec;} prištejemo
-spremenljivki $vsota$ spremenljivko $sestevanec$. Na daljše bi to lahko napisali
-\texttt{vsota~=~vsota~+~sestevanec}.
-
-\subsection{While zanka in branje neznano mnogo števil}
-
-Naučili smo se, kako se prebere nekaj števil, ko nam je podano koliko števil
-moramo prebrati. Kaj pa če tega ne vemo, če hočemo pač prebrati vsa števila,
-ki so na vhodu? Zato lahko uporabimo \emph{while} zanko, ki deluje tako kot
-for zanka, le da ima samo pogoj.
-
-\begin{examples}
-\verb+Preperimo vsa števila in jih zmnožimo.+
-
-%#insert python3 style.py < chapters/for-loop/branje-z-while.cpp
-
-\begin{inout}
-	2  \\
-	3 \\
-	4 \\
-	5
-	\tcblower
-	120
-\end{inout}
+spremenljivko, ki jo poimenujemo \verb+sestevanec+ in preberemo naslednje
+število iz vhoda. Nato pa z okrajšavo \verb-vsota += sestevanec- prištejemo
+spremenljivki \verb+vsota+ spremenljivko \verb+sestevanec+.
+Na daljše bi to lahko napisali kot \verb-vsota = vsota + sestevanec-.
 
 \end{examples}
 
-Kot že povedano, zgoraj napisani stavek while bi enako napisali kot
-\texttt{for~(~;~scanf("\%d")~==~1~;~)}, torej for zanka, ki ima samo pogoj.
-Mogoče se zdi čudno, da ukaz scanf \emph{primerjamo} s številko, a bomo kasneje
-v letu, ko se bomo učili o funkcijah razumeli, kaj to pomeni. Za zdaj pa
-bomo rekli le, da to, da je scanf \emph{enak} ena pomeni, da je uspešno prebral
-in shranil eno številko. Če bi zgornji program prebral v človeških besedah, bi
-bilo:
-\begin{itemize}
-	\item Nastavi $produkt$ na 1
-	\item Naredi novo spremenljivko $clen$
-	\item Preberi eno število in ga shrani v $clen$, dokler tega ne moreš
-	narediti več.
-	\item Nastavi $produkt$ na $produkt * clen$
-	\item Ko končaš s množenjem vseh členov, izpiši rezultat.
-\end{itemize}
 
-\begin{errors}
-\verb+Tu na začetku nastavimo produkt na 0, kar pa je napaka, saj je 0 krat+
-
-\verb+karkoli še vedno 0. Naš program bo veno izpisal 0 ne glede na vhod.+
-
-%#insert python3 style.py < chapters/for-loop/napaka.cpp
-
-\end{errors}
-
+\newpage
 \subsection{For zanka z drugačnim korakom in začetkom}
 
-Do zdaj so vse naše for zanke izgledale nekako tako
-\texttt{for~(int~i=0;~i~<~10;~i++)}, torej so začele na nič in se nekajkrat
-ponovile. Ampak zapis for zanke, ki ga imamo v c++ lahko naredi veliko več.
-Poglejmo kot primer zanko, ki izpiše vsa soda števila med $1$ in $100$.
+Do zdaj so vse naše for zanke imele obliko
+\verb-for (int i = 0; i < 10; i++)-, torej so začele na nič in se nekajkrat
+ponovile. Zapis for zanke, ki ga imamo v C++, pa lahko naredi veliko več.
+Poglejmo si kot primer zanko, ki izpiše vsa soda števila med $1$ in $100$.
 
 Pozorno poglejmo števila, ki jih moramo izpisati. Ker $1$ ni sodo, bo prvo
 izpisano število $2$. Število $3$ prav tako ni sodo, tako da bomo izpisali $4$,
 po tem pa $6$, $8$, $10$ in tako dalje. Vidimo, da vsak korak povečamo izpisano
-število za $2$, napišimo torej program.
+število za $2$.
 
 \begin{examples}
-\verb+Izpišemo vsa soda števila med 1 in 100.+
 
 %#insert python3 style.py < chapters/for-loop/soda-stevila.cpp
 
@@ -991,11 +930,12 @@ po tem pa $6$, $8$, $10$ in tako dalje. Vidimo, da vsak korak povečamo izpisano
 
 Ker se želena števila začnejo z dva, bomo v začetni del for zanke vpisali
 \texttt{int i=2}. Ker hočemo izpisati števila med $1$ in $100$ in ne med $1$ in
-$99$ bomo v pogojnem delu uporabili znak manjše ali enako \texttt{i<=100}
-(pogoj \texttt{i<100} ne bi veljal za število $100$). Ker želimo povečati naše
-število za $2$ vsak korak, smo v polje za korak napisali \texttt{i += 2}.
+$99$, bomo v pogojnem delu uporabili znak manjše ali enako \verb+i <= 100+
+(pogoj \verb+i < 100+ je neresničen v primeru \verb+i = 100+).
+Ker želimo povečati naše število za $2$ v vsakem koraku, smo v polje za korak
+napisali \verb-i += 2-.
 Edina stvar, ki jo naredimo v notranjosti napisane zanke pa je, da izpišemo
-trenutno vrednost spremenljivke $i$.
+trenutno vrednost spremenljivke \verb+i+.
 
 \chapter{Nizi in besedilo}
 
@@ -1054,13 +994,21 @@ Več o temu znaku bomo povedali kasneje.
 Preden si pogledamo nize, moramo razumeti, kako delamo z znaki.
 V C++-u imamo za to poseben tip \verb+char+, ki nam hrani en znak.
 Če želimo spremenljivki tipa \verb+char+ nastaviti vrednost, moramo želeni znak
-dati v enojne narekovaje;
+dati v enojne narekovaje
 %#insert python3 style.py < chapters/stringi/basic-char-syntax.cpp
 Ta koda nam ustvari spremenljivko tipa \verb+char+, ki hrani vrednost
 \verb+'A'+, torej znak za veliko črko A.
 Tako kot števila lahko tudi znake pišemo in beremo; pri tem uporabimo
 \verb+printf+, znotraj njega pa poseben formatnik \verb+%c+, narejen za znake.
 %#insert python3 style.py < chapters/stringi/scanf-printf-char.cpp
+Ker so računalniki narejeni za delo s številkami, moramo tudi znake
+predstaviti kot številke.
+To dosežemo s t.i.~\textit{kodnimi tabelami}, ki vsakemu znaku priredijo eno
+številko.
+Najpreprostejša kodna tabela je ASCII, ki lahko zakodira vse črke angleške
+abecede ter vse ostale zgoraj naštete znake, ne zmore pa zakodirati šumnikov.
+Le-teh se pri programiranju izogibamo, kar se le da.
+ASCII kode nekaterih pogostih znakov so prikazane v tabeli~\ref{tab:ascii}.
 
 \begin{table}[h!]
   \centering
@@ -1095,20 +1043,11 @@ Tako kot števila lahko tudi znake pišemo in beremo; pri tem uporabimo
   \label{tab:ascii}
 \end{table}
 
-Ker so računalniki narejeni za delo s številkami, moramo tudi znake
-predstaviti kot številke.
-To dosežemo s t.i.~\textit{kodnimi tabelami}, ki vsakemu znaku priredijo eno
-številko.
-Najpreprostejša kodna tabela je ASCII, ki lahko zakodira vse črke angleške
-abecede ter vse ostale zgoraj naštete znake, ne zmore pa zakodirati šumnikov.
-Le-teh se pri programiranju izogibamo, kar se le da.
-ASCII kode nekaterih pogostih znakov so prikazane v tabeli~\ref{tab:ascii}.
 Opazimo lahko, da so števke in črke v tabeli zaporedno; števka \verb+0+ ima kodo
 48, števka \verb+1+ 49, \ldots, črka \verb+A+ ima kodo 65, \verb+B+ ima kodo 66,
-itd. 
+itd.
 Opazimo tudi, da so velike črke od malih ločene, in da imajo male črke večje
 kode.
-
 Ta dejstva lahko uporabimo v programih tako, da črke preprosto obravnavamo, kot
 da bi bile številke.
 Črki \verb+'a'+ lahko npr.~prištejemo neko številko, in tako dobimo črko, ki je
@@ -1149,7 +1088,7 @@ Pri tem triku moramo biti previdni, da odštejemo pravilno ničlo; če odštejem
 odštevanje ničle številke ne spremeni.
 Če pa odštejemo \emph{znak} \verb+'0'+ (v enojnih narekovajih), pa dejansko
 odštevamo številko 48, t.j.~ASCII kodo znaka \verb+'0'+.
-Praktično uporabo tega trika bomo pokazali v naslednjem delu.
+Praktično uporabo tega trika bomo pokazali v naslednjem razdelku.
 
 \section{Predstavitev nizov}
 
@@ -1161,7 +1100,7 @@ Ta ukaz pove računalniku, naj ustvari spremenljivko z imenom
 \verb+niz_besedila+, ki hrani \emph{največ} 300 znakov.
 V tej spremenljivki bomo hranili naše zaporedje besedila.
 Če želimo nize brati ali pisati, uporabimo funkciji, ki ju že poznamo, ter
-formatnik \verb+%s+, tu pa je ena posebnost; za branje nizov \underline{ne}
+formatnik \verb+%s+, tu pa je ena posebnost; za branje nizov \emph{ne}
 napišemo znaka \verb+&+.
 Če želimo neko spremenljivko nastaviti na niz, ki ga ne bomo prebrali, jo lahko
 nastavimo na običajen način z enačajem, ter z dvojnimi narekovaji.
@@ -1199,7 +1138,7 @@ lahko enolično dostopamo do tistega mesta.
 Indeksi so zaporedna števila, ki se začnejo z 0; prvi znak v nizu ima indeks 0,
 drugi znak ima indeks 1, tretji ima indeks 2, itd.
 Indeksiranje od 0 se morda sprva zdi nesmiselno, vendar je za tem zelo dober
-razlog, ki ga bomo spoznali pri obravnavi kazalcev (nadaljevalna skupina).
+razlog, ki ga bomo spoznali pri obravnavi kazalcev.
 Poglejmo si na primeru, kako deluje indeksiranje.
 
 \vspace{0.5cm}
@@ -1218,10 +1157,6 @@ Da zares dostopamo do teh znakov, uporabimo oglate oklepaje;
 %#insert python3 style.py < chapters/stringi/indeksiranje.cpp
 Ko zapišemo \verb+niz[indeks]+, dobimo znak, ki ga lahko uporabljamo kot
 katerokoli drugo spremenljivko.
-Pri tem pazimo samo na to, da lahko niz spremenimo le, če ga spremenimo
-``direktno''; če znak prvo shranimo v neko drugo spremenljivko, in potem
-spremenimo to spremenljivko, se niz \underline{ne} bo spremenil.
-%#insert python3 style.py < chapters/stringi/copy-vs-reference.cpp
 
 \begin{examples}
   Za prvi primer si poglejmo, kako bi lahko izračunali dolžino niza.
@@ -1238,7 +1173,7 @@ spremenimo to spremenljivko, se niz \underline{ne} bo spremenil.
 \begin{examples}
   V naslednjem primeru bomo napisali kodo, ki pretvori besedilo v velike črke.
   Za to uporabimo eno od lastnosti ASCII tabele, ki smo jo omenili prej; namreč,
-  da so črke napisane zaporedno, da so velike črke pred malimi.
+  da so črke napisane zaporedno, in da so velike črke pred malimi.
   %#insert python3 style.py < chapters/stringi/upcase.cpp
 \end{examples}
 
@@ -1266,7 +1201,7 @@ dostopne razne funkcije, ki nam pogosto olajšajo delo.
 
 \subsection{Primerjava nizov}
 
-Za primerjavo dveh nizov \underline{ne} uporabljamo dvojnega enačaja
+Za primerjavo dveh nizov ne uporabljamo dvojnega enačaja
 (\verb+==+), temveč funkcijo \verb+strcmp+.
 Funkcijo uporabimo tako, da ji v okrogle oklepaje napišemo dva niza;
 \verb+strcmp(niz1, niz2)+.
@@ -1305,13 +1240,6 @@ funkcija svoje delo opravila le na prvih $n$ znakih;
 \verb+strncmp(niz1, niz2, 3)+ bo primerjal le prve tri znake,
 \verb+strncpy(niz2, niz1, 7)+ bo kopiral le prvih sedem znakov, ipd.
 
-\section{Napredno branje nizov}
-
-Pogosto se v nalogah pojavi, da moramo prebrati niz do konca vrstice, ali pa da
-sploh ne vemo, koliko vrstic vhoda bo do programa prišlo.
-Spopadanje s tovrstnimi problemi je opisano v zapiskih za nadaljevalno skupino
-iz tretje ure (Branje in pisanje 2).
-
 \chapter{Seznami}
 
 Ko si želimo podatke shraniti tako, da jih bomo lahko spreminjali in na koncu
@@ -1349,6 +1277,7 @@ Naloge so običajno narejene tako, da prvo število na vhodu pove, koliko števi
 V večini primerov je to ravno dolžina našega seznama, če pa delamo kakšne
 posebne trike, pa moramo za dolžino skrbeti sami.
 
+\newpage
 \begin{examples}
   Poglejmo si primer preproste naloge:
   Na vhodu je podano število $N$, ki mu sledi $N$ števil.
@@ -1434,24 +1363,20 @@ Najbolj osnovna oblika funkcije je takšna, ki ne sprejme nobenega parametra in
 ne vrne ničesar. Če hočemo, da ta funkcija ni neuporabna, bo morala imeti
 kakšen stranski učinek, funkcija spodaj bo izpisala \verb+Zdravo+.
 
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/osnovna_funkcija.cpp
-\end{examples}
+%#insert python3 style.py < chapters/funkcije/osnovna_funkcija.cpp
 
+Komponente zapisa so naslednje:
 \begin{itemize}
-    \item \verb+void+ - Posebna beseda, ki pove, da funkcija ne vrne ničesar.
-    \item \verb+funkcija+ - Ime za funkcijo, kot pri spremenljivkah bi lahko tu
-        napisali karkoli.
-    \item \verb+()+ - Ime funkcije se more končati z (), v te oklepaje
-        postavljamo parametre.
-    \item \verb+{ ... }+ - Telo funkcije, v katerem je koda, ki se bo izvedla.
+\item \verb+void+ - Posebna beseda, ki pove, da funkcija ne vrne ničesar.
+\item \verb+funkcija+ - Ime za funkcijo, kot pri spremenljivkah bi lahko tu
+  napisali karkoli.
+\item \verb+()+ - Ime funkcije se more končati z (), v te oklepaje
+  postavljamo parametre.
+\item \verb+{ ... }+ - Telo funkcije, v katerem je koda, ki se bo izvedla.
 \end{itemize}
 
-Kot napovedano, imajo lahko funkcije tudi kakšne parametre:
-
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/funkcija_parametri.cpp
-\end{examples}
+Kot napovedano, imajo lahko funkcije tudi kakšne parametre.
+% #insert python3 style.py < chapters/funkcije/funkcija_parametri.cpp
 
 Zdaj smo v oklepaje za imenom spremenljivke postavili \verb+int n+. Beseda
 \verb+int+ pove, da je ta parameter celo število, \verb+n+ je pa ime za
@@ -1459,29 +1384,19 @@ parameter. Ime, ki smo si ga izbrali za parameter, uporabljamo v telesu
 funkcije, da dostopamo do vrednosti v parametru.
 
 Če je naš parameter seznam, to napišemo tako:
-
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/funkcije_arr_parameter.cpp
-\end{examples}
+%#insert python3 style.py < chapters/funkcije/funkcije_arr_parameter.cpp
 
 Zdaj pa še funkcije, ki vrnejo kakšno vrednost:
-
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/funkcija_return.cpp
-\end{examples}
-
+%#insert python3 style.py < chapters/funkcije/funkcija_return.cpp
 Zdaj smo v funkcijo dodali ukaz \verb+return+, ki pove programu, da želimo
 vrniti spremenljivko, ki se pojavi takoj za njim. Spodaj pa vidimo, da moramo
 za dostop do vrnjene vrednosti nastaviti spremenljivko. Izraz
 \verb+funkcija(3, 4)+ lahko uporabimo kjerkoli, kjer bi lahko uporabili neko
 spremenljivko. Prav tako lahko za \verb+return+-om seštevamo števila. Zgornji
 program bi lahko krajše napisali kot:
+%#insert python3 style.py < chapters/funkcije/funkcija_return_kratko.cpp
 
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/funkcija_return_kratko.cpp
-\end{examples}
-
-
+\newpage
 \section{Potek funkcije}
 
 Kot smo navajeni, se ukazi v telesu funkcije izvajajo po vrsti od zgoraj
@@ -1490,14 +1405,12 @@ ustvarjamo nove spremenljivke, if stavke, zanke, \ldots ). Vredno omembe je, da
 se funkcija konča, ko se izvede prvi \verb+return+.
 
 \begin{examples}
-    %#insert python3 style.py < chapters/funkcije/return_konca_funkcijo.cpp
+  %#insert python3 style.py < chapters/funkcije/return_konca_funkcijo.cpp
+  Tu funkcija vrača logično vrednost \verb+bool+, ki je ena izmed \verb+true+ ali
+  \verb+false+, uporablja se jo lahko v if stavku. Deluje torej pravilno, saj če
+  bo \verb+crka+ enaka a, e, i, o, u, se bo funkcija končala pri \verb+return+-u
+  v if stavku, sicer se bo pa nadaljevala do \verb+return false;+.
 \end{examples}
-
-Tu funkcija vrača logično vrednost \verb+bool+, ki je ena izmed \verb+true+ ali
-\verb+false+, uporablja se jo lahko v if stavku. Deluje torej pravilno, saj če
-bo \verb+crka+ enaka a, e, i, o, u, se bo funkcija končala pri \verb+return+-u
-v if stavku, sicer se bo pa nadaljevala do \verb+return false;+.
-
 
 \section{Spremenljivke in funkcije}
 
@@ -1505,12 +1418,11 @@ v if stavku, sicer se bo pa nadaljevala do \verb+return false;+.
 
 Spomnimo se, da lahko spremenljivke definiramo na dva načina. Tistim, ki so
 definirane na vrhu, izven funkcije rečemo \emph{globalne spremenljivke},
-tistim, ki so pa definirane v funkciji, pa \emph{lokalne spremenljivke}. Zdaj,
-ko vemo, kaj so funkcije, lahko povemo razliko med temi tipi spremenljivk.
-
+tistim, ki so pa definirane v funkciji, pa \emph{lokalne spremenljivke}.
 Globalne spremenljivke so vidne povsod, torej v vseh funkcijah, medtem ko lahko
-lokalne spremenljivke uporabljamo samo v funkciji, v kateri smo jih definirali.
+lokalne spremenljivke uporabljamo samo v tisti funkciji, v kateri smo jih definirali.
 
+\newpage
 \begin{examples}
     %#insert python3 style.py < chapters/funkcije/globalne_lokalne_spremenljivke.cpp
 
@@ -1537,44 +1449,31 @@ dva različna načina, odvisno od tega, če je spremenljivka seznam.
 ustvari kopija te spremenljivke. Če jo v funkciji spremenimo, to ne bo
 spremenilo izvirne spremenljivke, saj v funkciji delamo s kopijo. Če je seznam,
 bodo pa spremembe na seznam v funkciji vplivale na izvirni seznam, saj se ta ne
-bo prekopiral. V spodnjem primeru sta prikazani obe možnosti.
-
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/seznam_se_ne_kopira.cpp
-\end{examples}
+bo prekopiral.
 
 \newpage
-
-Sprva ne vidimo smisla, za drugačno obravnavo seznamov, a se izkaže, da je
-lahko ta lastnost tudi uporabna. Če bi želeli napisati funkcijo, ki sprejeme
-seznam in njegovo dolžino, potem pa obrne vrstni red elementov tega seznama,
-lahko to napišemo takole:
-
 \begin{examples}
+  Sprva ne vidimo smisla za drugačno obravnavo seznamov, a se izkaže, da je
+  lahko ta lastnost tudi uporabna. Če bi želeli napisati funkcijo, ki sprejeme
+  seznam in njegovo dolžino, potem pa obrne vrstni red elementov tega seznama,
+  lahko to napišemo takole:
 
-    %#insert python3 style.py < chapters/funkcije/obrni_seznam.cpp
+  %#insert python3 style.py < chapters/funkcije/obrni_seznam.cpp
 
-    \begin{inout}
-        5 \\
-        10 20 30 -3 7 1
-        \tcblower
-        1 \\ 7 \\ -3 \\ 30 \\ 20 \\ 10 \\
-    \end{inout}
+  \begin{inout}
+    5 \\
+    10 20 30 -3 7 1
+    \tcblower
+    1 \\ 7 \\ -3 \\ 30 \\ 20 \\ 10 \\
+  \end{inout}
 
 \end{examples}
-
-Da je postopek za obračanje seznamov res pravilen, lahko razmislite sami, namen
-tega primera je, da vidimo, kako se pri funkcijah dela s seznami. Seznam, ki ga
-želimo obdelati, prejmemo kot parameter in ga potem spremenimo, ničesar pa ne
-vrnemo.
 
 
 \section{Rekurzija}
 
-\emph{Rekurzija} je način pisanja programa na način, da funkcija kliče samo
-sebe. Pogosto lahko zanko nadomestimo z rekurzijo, če nam je tak način
-programiranja ljubši.
-
+\emph{Rekurzija} je način pisanja programa, pri katerem funkcija kliče samo
+sebe.
 Recimo, da želimo sešteti vsa števila med 1 in nekim \verb+n+. Z zanko bi to
 naredili tako, da si pripravimo neko spremenljivko \verb+vsota+ in potem
 napišemo for zanko od 1 do \verb+n+ in v \verb+vsota+ seštejemo vsa ta števila. Pri
@@ -1584,53 +1483,15 @@ rekurziji je pa pristop drugačen.
     %#insert python3 style.py < chapters/funkcije/vsota_rekurzivno.cpp
 \end{examples}
 
-Najprej napišemo \emph{osnovni pogoj}, ki za n-je manjše ali enake 0 vrne 0. Če
-ne bi napisali osnovnega pogoja bi, šli rekurzivni klici funkcije v neskončnost,
+Najprej napišemo \emph{osnovni pogoj}, ki za vrednosti \verb+n+ manjše ali enake
+0 vrne 0.
+Če ne bi napisali osnovnega pogoja, bi šli rekurzivni klici funkcije v
+neskončnost,
 \verb+vsota(3)+ bi poklicala \verb+vsota(2)+, ki pokliče \verb+vsota(1)+, potem
 \verb+vsota(0)+, \verb+vsota(-1)+, \verb+vsota(-2)+, \ldots \ Po osnovnem
 pogoju moramo narediti \emph{korak}, ki izračuna \verb+vsota(n)+ s pomočjo
 vrednosti funkcije v nekem manjšem številu, v našem primeru kar
 \verb+vsota(n - 1)+.
-
-
-\section{Funkcije v C knjižnici}
-
-\subsection{Funkcije iz \texttt{<stdio.h>}}
-
-\begin{itemize}
-    \item \verb+sprintf+ deluje podobno kot \verb+printf+, le da sprejme niz
-        kot prvi parameter, naslednji parametri so pa enaki kot v
-        \verb+printf+. Namesto da bi izpisala na standardni izhod, ta funkcija
-        izpiše v niz, ki je bil dan kot prvi parameter.
-    \item \verb+sscanf+ deluje podobno kot \verb+scanf+, le da sprejme niz kot
-        prvi parameter, naslednji parametri so pa enaki kot v \verb+scanf+.
-        Namesto da bi prebrala iz standardnega vhoda, ta funkcija bere iz niza,
-        ki je bil dan kot prvi parameter.
-\end{itemize}
-
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/pretvorba_int_str.cpp
-\end{examples}
-
-\subsection{Funkcije iz <\texttt{string.h>}}
-
-\begin{itemize}
-    \item \verb+strcpy+ kopira nize. Sprejme dva niza in drugega prepiše v
-        prvega.
-    \item \verb+strcat+ stika nize, enega za drugim. Sprejme dva niza in drugi
-        niz prepiše na konec prvega tako, da prvi postane oba niza staknjena
-        skupaj.
-    \item \verb+strcmp+ primerja nize. Sprejme dva niza, če sta niza enaka vrne
-        število 0, če sta pa različna pa vrne število različno od 0. Nize lahko
-        tako kot v slovarju ali telefonskem imenuku uredimo po abecedi, če
-        pride prvi niz pred drugim, bo vrnjeno število negativno, v obratnem
-        primeru pa pozitivno.
-    \item \verb+strlen+ že poznamo, sprejme en niz in vrne njegovo dolžino.
-\end{itemize}
-
-\begin{examples}
-    %#insert python3 style.py < chapters/funkcije/str_funkcije.cpp
-\end{examples}
 
 \chapter{Teorija števil}
 
@@ -1647,7 +1508,7 @@ Evklidov algoritem je postopek, s katerim lahko hitro poiščemo največji skupn
 delitelj dveh števil.
 Spomnimo se; največji skupni delitelj števil $a$ in $b$ je \emph{največje}
 število $d$, ki deli tako $a$ kot $b$.
-V nadaljevanju ga bomo zapisali kot NSD ali $D(a, b)$.
+V nadaljevanju ga bomo zapisali s krajšavo NSD ali kot $D(a, b)$.
 \begin{examples}
   NSD števil $30$ in $75$ je $15$, ker sta tako $30$ kot
   $75$ deljiva s $15$ (velja namreč $30 = 2 \cdot 15$ in $75 = 5 \cdot 15$),
@@ -1673,6 +1534,8 @@ V pomoč nam priskoči drug algoritem, ki ga je opisal starogrški matematik Evk
 v svoji knjigi \emph{Elementi}.
 Ta algoritem bo prav tako vedno dal pravilni rezultat, za razliko od prejšnjega
 pa bo tudi zelo hiter.
+
+\newpage
 \begin{examples}
   Delovanje algoritma si poglejmo na primeru; izračunajmo, koliko je $D(54,
   42)$.
@@ -1680,7 +1543,7 @@ pa bo tudi zelo hiter.
   \[
 	54 = 42 \cdot 1 + 12
   \]
-  Količnika v nadaljevanju ne bomo potrebovali, tako da ga lahko ignoriramo.
+  Količnika v nadaljevanju ne bomo potrebovali, tako da ga lahko pozabimo.
   V drugem koraku prestavimo delitelja na mesto deljenca, ostanek pa na mesto
   delitelja, ter spet izračunamo količnik in ostanek;
   \[
@@ -1766,7 +1629,7 @@ Sprva si napišemo vsa števila med $2$ in $N$ ($1$ namreč ni praštevilo);
 \includegraphics[width=\linewidth]{chapters/teorija-stevil/slike/reseto1}
 
 Vemo, da je število $2$ praštevilo.
-Večkratniki števila $2$ zato niso praštevila, ker so deljivi z $2$; torej jih
+Večkratniki števila $2$ zato niso praštevila, ker so deljivi z $2$, torej jih
 prečrtamo.
 
 \includegraphics[width=\linewidth]{chapters/teorija-stevil/slike/reseto2}
@@ -1829,23 +1692,22 @@ Funkcija \verb+scanf+ lahko bere različne vrste podatkov:
 
 S formatnikom \verb+%s+ funkcija \verb+scanf+ bere do prvega takšnega znaka. Prebere tudi vse take znake, ki sledijo, a jih ne shrani. Naslednjič, ko jo pokličemo, bere od prvega nepraznega znaka naprej.
 
-\begin{examples}
-
-%#insert python3 style.py < chapters/inout_advanced/formatnik_s.cpp
-
-\begin{inout}
-Hello \\ \\ World!
-\tcblower
-Hello World!
-\end{inout}
-
-
-\end{examples}
-
-\newpage
 \section{Branje do konca vrstice}
 
-Lahko določimo, da se \verb+scanf+ ne bo ustavil pri prvem praznem znaku, temveč šele pri koncu vrstice (ali kje drugje).
+Lahko določimo, da se \verb+scanf+ ne bo ustavil pri prvem praznem znaku, temveč
+šele pri koncu vrstice (ali kje drugje).
+To naredimo s pomočjo naslednjih formatnikov:
+
+\verb+[...]+ - med oklepaje pišemo navodila, kakšne znake lahko bere
+\begin{itemize}
+\item \verb+[a-z]+ - beri male črke angleške abecede
+\item \verb+[a-zA-Z0-9]+ - beri male in velike črke in številke
+\end{itemize}
+
+\verb+[^...]+ - beri vse do znakov, ki sledijo strešici
+\begin{itemize}
+\item \verb+[^\n]+ - beri vse do \verb+\n+
+\end{itemize}
 
 \begin{examples}
 
@@ -1858,17 +1720,6 @@ Beremo do konca vrstice.
 \end{inout}
 
 \end{examples}
-
-\verb+[...]+ - med oklepaje pišemo navodila, kakšne znake lahko bere
-\begin{itemize}
-	\item \verb+[a-z]+ - beri male črke angleške abecede
-	\item \verb+[a-zA-Z0-9]+ - beri male in velike črke in številke
-\end{itemize}
-
-\verb+[^...]+ - beri vse do znakov, ki sledijo strešici
-\begin{itemize}
-	\item \verb+[^\n]+ - beri vse do \verb+\n+
-\end{itemize}
 
 %CHECK
 \begin{errors}
@@ -1884,13 +1735,17 @@ Za razliko od tega s formatnikom \verb+%s+ preberemo vse prazne znake med dvema
 nepraznima nizoma in jih ne shranimo. Tudi, če bodo prazni znaki pred besedo,
 jih bo program ignoriral in poiskal prvi neprazen znak.
 
-\newpage
 \section{Branje do konca vhoda}
 
-Če vemo točno, koliko besed/številk/vrstic bomo imeli na vhodu, jih lahko preberemo s for zanko. Kako preberemo neznano količino podatkov na vhodu, tako da preberemo vse? \\
-Če napišemo \verb+while(true)+ ali \verb+while(1)+, bomo sicer prebrali vse, a se program ne bo nikoli ustavil.
-Namesto tega lahko napišemo:
+Če vemo točno, koliko besed/številk/vrstic bomo imeli na vhodu, jih lahko
+preberemo s for zanko. Kako preberemo neznano količino podatkov na vhodu, tako
+da preberemo vse?
+Če napišemo \verb+while(true)+ ali \verb+while(1)+, bomo sicer prebrali vse, a
+se program ne bo nikoli ustavil.
+Da zanko končamo natanko na koncu podatkov na vhodu, uporabimo kodo iz
+naslednjega primera.
 
+\newpage
 \begin{examples}
 
 %#insert python3 style.py < chapters/inout_advanced/do_konca_vhoda.cpp
@@ -1951,7 +1806,7 @@ a 157 Slovenska
 
 \begin{errors}
 Medtem ko \verb+%s+ praznih znakov ne shrani, jih \verb+%c+ obravnava tako kot
-vse ostale. Če pogeldamo prejšnji primer vidimo, da je v funkciji
+vse ostale. Če pogledamo prejšnji primer vidimo, da je v funkciji
 \verb+scanf+ pred \verb+%c+ presledek. Ker so med posameznimi podatki, ki
 jih želimo prebrati, presledki, bi \verb+%c+ pobral presledek, ne pa črke,
 ki mu sledi. Če med posamezne formatnike postavimo presledek, ta načeloma
@@ -1965,7 +1820,7 @@ ni dobra praksa.
 	\item tip podatka, ki naj ga prebere (niz, število...)
 	\item kam naj ta podatek zapiše (ime spremenljivke)
 \end{enumerate}
-	
+
 \noindent Funkciji \verb+sprintf+ prav tako podamo tri parametre (ali več):
 \begin{enumerate}
 	\item ime niza, kamor naj piše
@@ -1976,7 +1831,8 @@ ni dobra praksa.
 \newpage
 \section{Branje in pisanje v in iz datoteke}
 
-Podobno kot v niz lahko pišemo in beremo tudi v in iz datotek s funkcijama \verb+fscanf+ in \verb+fprintf+.
+Podobno kot v niz lahko pišemo in beremo tudi v in iz datotek s funkcijama
+\verb+fscanf+ in \verb+fprintf+.
 
 \begin{examples}
 
@@ -2101,11 +1957,12 @@ primeru), zunanja zanka pa se izvede \verb|m+1|-krat. Torej je zahtevnost
 primerih manjši od člena \(mn\) ali njemu enako velik, zato ga izpustimo.
 Končna časovna zahtevnost drugega algoritma je torej \(O(mn)\).
 
-\verb+int+ lahko hrani števila, velika do približno dve milijardi -- najslabšem
+\verb+int+ lahko hrani števila, velika do približno dve milijardi --- v najslabšem
 primeru je \(m\) torej približno \(2 \cdot 10^9\). Če prvi algoritem na nekem
 računalniku potrebuje eno sekundo, da se konča, bi drugi algoritem v najslabšem
 primeru na istem računalniku potreboval več kot šestdeset let.
 
+\newpage
 \begin{examples}
 
   Naslednji program za vsako število v seznamu \verb+arr+ poišče število števil desno od njega, ki so večja.
@@ -2171,15 +2028,15 @@ V ta namen lahko napišemo svojo funkcijo, ki implementira enega od znanih
 algoritmov za urejanje; npr.~\textit{bubble sort}, \textit{insertion sort},
 \textit{quick sort}, ipd. Ker pa so učinkovite implementacije pogosto komplicirane
 in se pri pisanju hitro zmotimo, je bolje, da uporabimo funkcije, ravno v ta
-namen vključene v standardno knjižnjico. Za to bomo potrebovali na začetek
+namen vključene v standardno knjižnico. Za to bomo potrebovali na začetek
 programa dodati še dve vrstici:
 
 %#insert python3 style.py < chapters/urejanje/algorithm.cpp
 
 Ukaz \verb+#include+ že poznamo, opazimo pa, da tokrat za spremembo nima končnice
 \verb+.h+. To je zato, ker funkcije, ki smo jih uporabljali do sedaj, izvirajo
-iz jezika C, tokrat pa potrebujemo funkcijo, napisano posebaj za C++. To razloži
-tudi drugo vrstico; vse funkcije v standardni knjižnjici v C++ so vključene
+iz jezika C, tokrat pa potrebujemo funkcijo, napisano posebej za C++. To razloži
+tudi drugo vrstico; vse funkcije v standardni knjižnici v C++ so vključene
 v imenski prostor \verb+std+. Če jih želimo klicati, moramo pred ime funkcije
 vedno napisati \verb+std::+, ali pa na začetek programa vključiti vrstico
 \verb+using namespace std+.
@@ -2230,10 +2087,10 @@ ne bomo več vedeli, katero ime pripada katerim točkam.
 
 Kako uredimo oba seznama hkrati? Bolj enostavna možnost je uporaba \verb+struct+,
 ki pa ga še ne poznamo. Namesto tega si lahko pripravimo seznam indeksov, ki
-na začetku na \verb+i+-tem mestu hrani številko \verb+i+. Če sestavimo funkcijo
-\verb+compare+ tako, da sprejme dva indeksa, ter ju uredi glede na vrednosti
-v tabeli s točkami na pripadajočih indeksih. Urejamo pa ne tabele s točkami,
-temveč novo tabelo indeksov.
+na začetku na \verb+i+-tem mestu hrani številko \verb+i+. Sestavili bomo
+funkcijo \verb+compare+ tako, da sprejme dva indeksa, ter ju uredi glede na
+vrednosti v tabeli s točkami na pripadajočih indeksih.
+Urejamo pa ne tabele s točkami, temveč novo tabelo indeksov.
 Na ta način se tabeli s točkami in z imeni ne bosta spreminjali,
 in bodo točke pripadale imenu na istem indeksu.
 
@@ -2346,14 +2203,15 @@ nato pa pred ime spremenljivke damo zvezdico~\verb+*+.
 Kazalcu lahko nastavimo vrednost tako, da vanj shranimo naslov neke
 spremenljivke, ki smo že ustvarili. Do naslova dostopamo z operatorjem~\verb+&+.
 Da dostopamo do vrednosti, shranjene v celici, na katero kazalec kaže,
-uporabimo operator \verb+*+ (ki ima drugačen pomen, kot zvezdica v deklaraciji
+uporabimo operator \verb+*+ (ki ima drugačen pomen kot zvezdica v deklaraciji
 spremenljivke).
 
+\newpage
 \begin{examples}
   %#insert python3 style.py < chapters/kazalci/sintaksa.cpp
 \end{examples}
 
-Vse, kar smo sedaj delali s kazalci, je bilo možno (in lažje) narediti tudi z
+Vse, kar smo tu delali s kazalci, je bilo možno (in lažje) narediti tudi z
 običajnimi spremenljivkami. Kazalci, ki kažejo na spremenljivke, ki tako in tako
 že obstajajo, so bolj ali manj neuporabni. Kako pa naredimo kazalec, ki kaže
 na del spomina, v katerem ni nobene spremenljivke?
@@ -2415,8 +2273,9 @@ seznam. Poglejmo si, kako ustvarimo seznam samo s kazalci.
 \end{examples}
 
 V zgornjem primeru uporabljamo dva nova operatorja na kazalcih; seštevanje in
-oglate oklepaje. Če kazalcu \verb+seznam+ prištejemo število \verb+i+, dobimo
-nov kazalec, ki kaže na mesto \verb|seznam + (velikost tipa) * i|, torej na
+oglate oklepaje. Če kazalcu \verb+seznam+ prištejemo število v spremenljivki
+\verb+i+, dobimo nov kazalec, ki kaže na mesto v spominu z naslovom
+\verb|seznam + (velikost tipa) * i|, torej na
 idealno mesto, kamor zapišemo \verb+i+-ti element seznama, če jih zapisujemo
 enega za drugega.
 
