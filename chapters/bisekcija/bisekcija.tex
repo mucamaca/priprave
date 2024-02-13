@@ -1,0 +1,72 @@
+%#template templates/template.tex
+
+%#block title
+Bisekcija
+%#endblock
+
+%#block content
+
+Recimo, da imamo dano število \verb+k+, ki ga želimo poiskati v seznamu
+\verb+arr+ dolžine \verb+n+.
+Običajen algoritem za tako iskanje preveri vsako število v seznamu, dokler
+števila \verb+k+ ne najde, oziroma dokler ne pride do konca seznama.
+V najslabšem primeru, če števila \verb+k+ ni v seznamu, ali če je le na zadnjem
+mestu, bo algoritem porabil $O(n)$ operacij za tako iskanje.
+To je najbolje možno, če število iščemo le enkrat, če pa v seznamu iščemo veliko
+različnih števil, lahko uporabimo spodnji postopek, da iskanje pohitrimo.
+
+Najprej bomo seznam uredili od najmanjšega do največjega števila z enim od
+hitrih, t.j.~$O(n \log n)$ algoritmov za urejanje.
+V urejenem seznamu lahko iskanje izvajamo na pametnejši način.
+Prvo bomo pogledali element na sredini seznama.
+Če je ta element večji od \verb+k+, vemo, da se \verb+k+ bodisi nahaja na levi
+polovici seznama, bodisi ga na seznamu sploh ni.
+Podobno, če je element na sredini seznama manjši od \verb+k+, se \verb+k+ nahaja
+v desni polovici seznama, ali pa ga na seznamu ni.
+S tem enim pogledom smo zmanjšali število možnih elementov, ki jih moramo
+pregledati, iz $n$ na $\frac{n}{2}$.
+Če postopek ponovimo na polovičnemu seznamu, ga spet razdelimo na polovico, nato
+dobljeno četrtino še enkrat razdelimo na polovico, itd.
+S tem postopkom smo morali pogledati le $\log n$ elementov, da smo našli število
+\verb+k+, oziroma preverili, da ga v seznamu ni.
+
+Iskanje lahko implementiramo, kot je napisano spodaj:
+%#insert python3 style.py < chapters/bisekcija/bisekcija.cpp
+V postopku definiramo spremenljivki \verb+levo+ in \verb+desno+, ki označujeta
+levi in desni rob dela seznama, ki ga moramo pregledati.
+V vsaki iteraciji izračunamo sredino seznama, in preverimo, če smo element
+\verb+k+ slučajno našli.
+Če smo ga, končamo, sicer pa glede na vrednost \verb+seznam[sredina]+ primerno
+spremenimo levi oziroma desni rob iskanja.
+Če bi si shranili tudi indeks, kjer smo našli element \verb+k+, bi lahko s
+pomočjo tega indeksa izračunali, koliko elementov v seznamu je večjih in koliko
+elementov seznama je manjših od \verb+k+.
+Pri tem moramo paziti, da bisekcija vrne enega od indeksov elementov, ki so
+enaki \verb+k+; če se to število v seznamu pojavi več kot enkrat, ni
+zagotovljeno, da bodo dobili prvo pojavitev (ali zadnjo, ali sredinsko).
+
+Zgornji program ima časovno zahtevnost $O(n \log n + q \log n)$, ker za iskanje
+vsakega elementa potrebujemo $\log n$ korakov.
+Običajen postopek bi za isto delo potreboval $O(qn)$ operacij.
+
+Namesto iskanja števila v seznamu nam bisekcija lahko poda tudi argument
+funkcije, pri katerem funkcija da določeno vrednost.
+Če želimo poiskati \verb+k+, pri katerem je \verb+f(x) == k+, lahko v zgornji
+kodi nadomestimo primerjavo elementa seznama s klicem funkcije, in bo postopek
+deloval enako.
+Paziti moramo, da to deluje le, če je funkcija \verb+f+ naraščajoča, torej če za
+vsaki možni vrednosti \verb+x+ in \verb+y+, kjer je \verb+x <= y+, velja
+\verb+f(x) <= f(y)+.
+
+Za lažjo uporabo bisekcije sta nam v C++ na voljo dve funkciji, obe s časovno
+zahtevnostjo $O(\log n)$:
+\begin{itemize}
+\item \verb|lower_bound(arr, arr+n, k)| vrne kazalec na prvi element seznama,
+  ki je večji ali enak \verb+k+.
+\item \verb|upper_bound(arr, arr+n, k)| vrne kazalec na prvi element seznama, ki
+  je strogo večji kot \verb+k+.
+\end{itemize}
+Za uporabo funkcij potrebujemo \verb+#include <algorithm>+, prav tako obe
+predpostavita, da je seznam že urejen.
+
+%#endblock
