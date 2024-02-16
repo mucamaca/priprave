@@ -1,0 +1,124 @@
+%#template templates/template.tex
+
+%#block title
+Structi - lastni tipi
+%#endblock
+
+%#block content
+
+\section{Structi}
+
+Pri programiranju pogosto želimo definirati nov tip, ki bo zajemal več raličnih
+podatkov. Za to uporabimo t.\ i.\ \verb+struct+.
+
+\v Ce je kdo \v ze slisal za t.\ i.\ \verb+class+-e je to vsaj v {\em C++}-u zelo
+podobno kot \verb+struct+, ampak je za tekmovalno programiranje \verb+struct+
+bolj uporaben in se bomo zato ukvarjali z njimi.
+
+
+\subsection{Osnovni primer}
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/structi/struct_osnovno.cpp
+
+\begin{inout}
+5 4
+\tcblower
+( 5,  4)
+\end{inout}
+
+\end{examples}
+
+V zgornjem primeru definiramo nov tip \verb+Tocka+, ki nam predstavlja to\v cko
+v ravnini (v kartezi\v cnih koordinatah). V funkciji \verb+main+ definiramo novo
+spremenljivko z imenom \verb+tocka+ tipa \verb+Tocka+. Do atributov (torej
+\verb+x+ in \verb+y+ koordinate) dostopamo z znakom pika za spremenljivko
+(\verb+.+).
+
+V tem primeru z definicijo novega tipa razen za razmi\v sljanje nismo pridobili
+\v se ni\v esar.
+
+
+\subsection{Metode}
+
+Na \verb+struct+-ih lahko definiramo tudi metode. Te se od funkcij razlikujejo v
+tem, da se jim implicitno poda spremenljivka sama ter imajo v svojem kontekstu
+(scope) definirane atribute structa.
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/structi/struct_metode.cpp
+
+\begin{inout}
+4 3
+\tcblower
+( 4,  3) je od izhodisca oddaljena 5.000000 enot.
+\end{inout}
+
+\end{examples}
+
+\noindent Vsaka metoda naredi svojo stvar:
+\begin{itemize}
+	\item \verb+kvadrat_razdalje+ - izracuna in vrne kvadrat razdalje to\v cke do
+	izhodi\v s\v ca.
+	\item \verb+razdalja+ - izracuna in vrne razdaljo to\v cke do izhodi\v s\v ca.
+	V metodah lahko seveda kli\v ces drugo metodo, kot to naredimo tukaj.
+	\item \verb+izpisi+ - izpi\v se par \v stevil, ki predstavlja to\v cko.
+	Sprejme en argument tipa \verb+const char*+ (torej {\em C} strng), ki pove, kaj
+	izpisati na koncu (da lahko nadaljujemo izpisovanje v isti vrstici).
+\end{itemize}
+
+
+\subsection{Operatorji}
+
+Poleg navadnih metod poznamo pa \v se operatorje. Ideja operatorjev je, da
+dolo\v cimo obna\v sanje obi\v cajnih operatorjev na na\v sem struct-u.
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/structi/struct_operatorji.cpp
+
+\begin{inout}
+%#insert cat chapters/structi/operatorji.in
+\tcblower
+%#insert cat chapters/structi/operatorji.out
+\end{inout}
+
+\end{examples}
+
+V zgornjem primeru vidimo uporabo operatorja manj\v se. Primerjava dveh
+elementov z manj\v se seveda vrne \verb+bool+, sprejme pa dve to\v cki. Na prvo
+ka\v ze kazalec \verb+this+, druga pa je poimenovana \verb+druga_tocka+. \v Ce
+imamo to\v cki \verb+t1+ in \verb+t2+ in nas zanima vrednost \verb+t1<t2+, bo
+\verb+this+ kazal na \verb+t1+, \verb+druga_tocka+ pa bo enaka t2. 
+
+Funkcija \verb+std::sort+ elemente uredi glede na definiran \verb+operator<+ nara\v s\v cajo\v ce.
+Glede na na\v s operator torej ureja najprej po vrednosti \verb+x+ nara\v s\v
+cajo\v ce, potem pa po \verb+y+ padajo\v ce. Oglej si primer vhoda in izhoda.
+
+Nov je \v se operator pu\v s\v cica (\verb+->+). Ta dostopa do atributa ali
+metode \verb+struct+-a, na katerega ka\v ze kazalec. V zgornjih metodah je
+ekvivalentno (enako), \v ce uporabimo \verb+x+ ali \verb+this->x+, je pa v\v
+casih kazalec \verb+this+ zelo uporaben.
+
+Beseda \verb+const+ pomeni, da se to\v cki ne bosta spreminjali:
+\begin{itemize}
+	\item prvi oz.\ ta pred \verb+Tocka+ - da ta metoda ne bo spremnijala to\v cke
+	\verb+druga_tocka+,
+	\item drugi oz.\ ta med zaklepajem in zavitim oklepajem - metoda ne bo
+	spreminjala trenutne to\v cke (na katero ka\v ze kazalec \verb+this+).
+\end{itemize}
+
+Operator pri urejanju po ve\v c spremenljivkah je smiselno pisati v vrstnem
+redu, kakor ho\v cemo, da se elementi uredijo. \v Ce bi \v zeleli imeti to\v cke
+v prostoru z nekim napisom, urejene najprej po \verb+x+, potem \verb+y+, potem
+\verb+z+ in nato leksikografsko po imenu bi npr.\ napisali tole:
+
+\begin{examples}
+
+%#insert python3 style.py < chapters/structi/struct_napis_v_prostoru.cpp
+
+\end{examples}
+
+%#endblock
